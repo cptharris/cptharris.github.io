@@ -11,12 +11,13 @@
 	<link rel="stylesheet" href="css/links.css">
 </head>
 <style>
-	body {
+	html, body {
 		text-align: center;
 		background-color: rgb(71, 57, 116);
 		color: white;
 		font-size: 120%;
-		margin: 0;
+		margin: 0px;
+		height: 100%;
 	}
 	#favicon {
 		position: fixed;
@@ -24,15 +25,21 @@
 		right: 10px;
 		top: 10px;
 	}
-	.front-header {
-		margin-bottom: 150px;
-		padding: 60px;
-		padding-top: 15%;
-		padding-bottom: 20%;
-		text-align: center;
+	.bg {
+		/* background-image: url("https://github.com/TechieCable/TechieCable.github.io/blob/master/img/Dark%20Purple.png?raw=true"); */
 		background: rgb(28, 24, 42);
+		height: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		margin-bottom: 10%;
+	}
+	.front-header {
+		font-size: 400%;
 		color: white;
-		font-size: 60px;
+		text-align: center;
+		position: relative;
+		top: 50%;
 	}
 	#tc_letter {
 		text-align: left;
@@ -45,8 +52,8 @@
 	<img id="favicon" src="img/favicon.png" alt="Computer screen with faint letters 'TC'" />
 	</a>
 	
-	<div class="front-header">
-		<h1>Techie Cable</h1>
+	<div class="bg">
+		<span class="front-header">Techie Cable</span>
 	</div>
 	<main>
 		<h2>Techie Cable: Letter</h2>
