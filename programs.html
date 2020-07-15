@@ -27,7 +27,6 @@
 		width: 100%;
 		height: 4%;
 		background-color: rgb(28, 24, 42);
-		/* margin-bottom: 10%; */
 	}
 	dl dt {
 		font-size: 200%;
@@ -50,20 +49,28 @@
 	<div id="bar"></div>
 	<main>
 		<dl>
-			<dt>Click Speed Counter</dt>
-				<p>Test your mouse clicking power with this handy JavaScript program!</p>
-				<a href="program\click_counter">Click here for Click Speed Counter</a>
-			<dt>Space Invaders</dt>
-				<p>Aliens are coming to invade your planet! Place your mouse over them to shoot them down!</p>
-				<a href="program\space_invaders">Click here for Space Invaders</a>
-			<dt>Days Since <time>00/00/0000</time></dt>
-				<p>This program calculates the number of days between today and the day <time>00/00/0000</time>.</p>
-				<a href="program\days_since_0">Click here for Days Since <time>00/00/0000</time></a>
-			<dt>Days Since ?</dt>
-				<p>This program is more advanced than 
-					<a href="program\days_since_0">Days Since <time>00/00/0000</time></a>
-				 because it has user input! Select a date and the program calulates the number of days between your date and today!</p>
-				<a href="program\days_since">Click here for Days Since ?</a>
+			<span class="program_list"> <!-- Days Since 0 -->
+				<dt>Days Since <time>00/00/0000</time></dt>
+					<p>This program calculates the number of days between today and the day <time>00/00/0000</time>. Super useful!</p>
+					<a href="program\days_since_0">Click here for Days Since <time>00/00/0000</time></a>
+			</span>
+			<span class="program_list"> <!-- Days Since ? -->
+				<dt>Days Since ?</dt>
+					<p>This program is more advanced than 
+						<a href="program\days_since_0">Days Since <time>00/00/0000</time></a>
+					 because it has user input! Select a date and the program calulates the number of days between your date and today!</p>
+					<a href="program\days_since">Click here for Days Since ?</a>
+			</span>
+			<span class="program_list"> <!-- Space Invaders -->
+				<dt>Space Invaders</dt>
+					<p>Aliens are coming to invade your planet! Place your mouse over them to shoot them down!</p>
+					<a href="program\space_invaders">Click here for Space Invaders</a>
+			</span>
+			<span class="program_list"> <!-- Click Speed Counter -->
+				<dt>Click Speed Counter</dt>
+					<p>Test your mouse clicking power with this handy JavaScript program!</p>
+					<a href="program\click_counter">Click here for Click Speed Counter</a>
+			</span>
 		</dl>
 	</main>
 	<div id="bar"></div><div id="bar"></div>
