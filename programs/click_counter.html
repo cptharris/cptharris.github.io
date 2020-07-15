@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Click Speed Counter</title>
+	<base href="https://techiecable.github.io" target="_self">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<meta name="description" content="TechieCable's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+	<link rel='icon' href='img/favicon.ico' type='image/x-icon'>
+	<link rel="stylesheet" href="css/links.css">
+	<link rel="stylesheet" href="css/badges.css">
+	<link rel="stylesheet" href="css/favicon.css">
+	<link rel="stylesheet" href="css/header.css">
+</head>
+<style>
+	html, body {
+		text-align: center;
+		background-color: rgb(71, 57, 116);
+		color: white;
+		font-size: 120%;
+		margin: 0px;
+		height: 100%;
+		width: 100%;
+	}
+	#bar {
+		width: 100%;
+		height: 4%;
+		background-color: rgb(28, 24, 42);
+	}
+	#progCanvas {
+		margin: 2%;
+		border: 5px inset grey;
+	}
+</style>
+<body>
+	<a href="index" style="cursor:auto;">
+	<img id="favicon" src="img/favicon.png" alt="Computer screen with faint letters 'TC'" />
+	</a>
+	
+	<div class="bg">
+		<span class="front-header">Click Speed Counter</span>
+	</div>
+	<div id="bar"></div>
+	
+	<canvas id="progCanvas"></canvas>
+	
+	<iframe id="last_updated" src="https://img.shields.io/github/last-commit/techiecable/TechieCable.github.io?color=%23584b85&label=Last%20updated%3A&style=flat-square"></iframe>
+</body>
+<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
+<script>
+	var programCode = function(processingInstance) {
+		with (processingInstance) {size(600, 600);frameRate(30);
+			/************************************************************
+			********************     BEGIN CODE
+			************************************************************/
+			/************************************************************
+			********************	  CLICK SPEED
+			************************************************************/
+			
+			/*
+			This program, created by CalebH05, calculates CPS, or clicks per second.
+			
+			It also provides encouragement as your CPS (CPSs?) raise (or lower).
+			
+			Check it out and tell others how you did!
+												|
+												↓
+			
+			*/
+			
+			var clickBoxX = width * 0.375; //change the click box x value
+			var clickBoxY = height * 0.375; //change the click box y value
+			var startTime = 0; //define the variables
+			var endTime = 0; //changing these numbers
+			var elapsedTime = 0; //will not do anything
+			var TimeSec = 0; //not even this one
+			var clickCount = 0; //they get redefined later
+			var CPS = 0; //change them elsewhere, if you want
+			var clickTextColor = [255, 0, 0, 255, 0, 0, 255, 255, 255];
+			
+			draw = function() {
+				background (191, 253, 255);
+				noStroke();
+				
+				TimeSec = hour() * 3600 + minute() * 60 + second(); //provides the current time, in seconds
+				
+				/************************************************************
+				********************	 RESET TIME BOX CONTROLS
+				************************************************************/
+				
+				fill(255, 255, 255); //Reset box color
+				rect(width * 0.875, height * 0.875, 75, 75); //Reset time box
+				fill(0, 34, 255); //Reset label color
+				textSize(12); //Reset label font size
+				text("Reset", width * 0.916, height * 0.95); //Reset time label
+				
+				/************************************************************
+				********************	 CLICK BOX CONTROLS
+				************************************************************/
+				
+				fill(255, 255, 255); //Click box color
+				rect(clickBoxX, clickBoxY, 150, 150); //Click box
+				
+				textSize(20); //Click text font size
+				fill(clickTextColor[0], clickTextColor[1], clickTextColor[2]);
+				text("Press any key to start", clickBoxX * 0.911, clickBoxY * 0.955); //Instruction text
+				
+				fill(clickTextColor[3], clickTextColor[4], clickTextColor[5]);
+				text("Then click here!", clickBoxX * 1.022, clickBoxY * 1.355); // More instruction text
+				
+				fill(clickTextColor[6], clickTextColor[7], clickTextColor[8]);
+				text("CLICK!!", clickBoxX * 1.177, clickBoxY * 1.222); //CLICK
+				
+				/************************************************************
+				********************	  VIEWER INFO DIPSLAY CONTROLS
+				************************************************************/
+				
+				fill(0, 21, 255);
+				text("Start time: " + startTime, 20, 20); //display start time
+				text("End time: " + endTime, 20, 50); //display end time
+				text("Current time: " + hour() + ":" + minute() + ":" + second(), 200, 20); //display current time
+				text("Click count: " + clickCount, 200, 50); //display # clicks
+				text("Elapsed: " + elapsedTime, clickBoxX * 1.12, clickBoxY * 1.755); //display elapsed time
+				text("CPS = " + CPS, clickBoxX * 1.11, clickBoxY * 1.888);
+				
+				/************************************************************
+			********************	  ENCOURAGEMENT
+			************************************************************/
+				
+				if (startTime > 0) {
+					if (CPS <= 3) {
+						fill(0, 0, 255);
+						text("FASTER!!!!", clickBoxX + 25, clickBoxY + 100);
+					} else if (CPS <= 5) {
+						text("KEEP IT UP!", clickBoxX + 25, clickBoxY + 100);
+					} else if (CPS <= 8) {
+						text("YOU CAN DO IT!", clickBoxX - 5, clickBoxY + 100);
+					} else if (CPS > 8) {
+						text("GOOD JOB!!", clickBoxX + 22, clickBoxY + 100);
+					}
+				} //provide encouraging messages
+				
+				/************************************************************
+				********************	  LOGIC
+				************************************************************/
+				
+				mousePressed = function() {
+					if (mouseX > width * 0.875 && mouseY > height * 0.875) {
+						startTime = 0;
+						endTime = 0;
+						clickCount = 0;
+						clickTextColor = [255, 0, 0, 255, 0, 0, 255, 255, 255];
+					} //reset start / end time & click count
+					if (mouseX >= clickBoxX && mouseY >= clickBoxY && mouseY <= clickBoxX + 150 && mouseX <= clickBoxX + 150) {
+						clickCount++; //add to click number when mouse clicked
+						endTime =  TimeSec;
+					}
+				}; //count clicks and update end time
+				keyPressed = function() {
+					startTime = TimeSec;
+					clickCount = 0;
+					clickTextColor = [191, 253, 255, 255, 255, 255, 0, 0, 0];
+				}; //set the start time
+				
+				elapsedTime = endTime - startTime; //calculate elapsed time
+				CPS = round(clickCount / elapsedTime); //calculate cps
+			};
+			/************************************************************
+			********************     END CODE
+			************************************************************/
+		}};
+	var canvas = document.getElementById("progCanvas");
+	var processingInstance = new Processing(canvas, programCode);
+</script>
+</html>
