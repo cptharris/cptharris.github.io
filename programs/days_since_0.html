@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TechieCable - Days Since 0</title>
+	<base href="https://techiecable.github.io" target="_self">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<meta name="description" content="TechieCable's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+	<link rel='icon' href='img/favicon.ico' type='image/x-icon'>
+	<link rel="stylesheet" href="css/links.css">
+	<link rel="stylesheet" href="css/badges.css">
+	<link rel="stylesheet" href="css/favicon+menu.css">
+	<link rel="stylesheet" href="css/header.css">
+</head>
+<style>
+	html, body {
+		text-align: center;
+		background-color: rgb(71, 57, 116);
+		color: white;
+		font-size: 120%;
+		margin: 0px;
+		height: 100%;
+		width: 100%;
+	}
+	#bar {
+		width: 100%;
+		height: 4%;
+		background-color: rgb(28, 24, 42);
+	}
+	#progCanvas {
+		margin: 2%;
+		border: 5px inset grey;
+	}
+</style>
+<body>
+	<a href="index" style="cursor:auto;">
+	<img id="favicon" src="img/favicon.png" alt="Computer screen with faint letters 'TC'" />
+	</a>
+	
+	<div class="menu" id="pageHeader">
+		<a class="button" href="index">Home</a>
+		<a class="button" href="programs">Programs</a>
+	</div>
+	
+	<div class="bg">
+		<span class="front-header">Days Since 0</span>
+	</div>
+	<div id="bar"></div>
+	
+	<canvas id="progCanvas"></canvas>
+	
+	<dl>
+		<dt>V1.2</dt>
+			<dd>Fixed bug. Counter is now up-to-date.</dd>
+		<dt>V1.1</dt>
+			<dd>Increased font size, added message below total days.</dd>
+	</dl>
+	
+	<iframe id="last_updated" src="https://img.shields.io/github/last-commit/techiecable/TechieCable.github.io?color=%23584b85&label=Last%20updated%3A&style=flat-square"></iframe>
+</body>
+
+<script src="js\headerscroll.js" type="text/javascript"></script>
+
+<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
+<script>
+	var programCode = function(processingInstance) {
+		with (processingInstance) {size(600, 600);frameRate(30);
+			/************************************************************
+			********************     BEGIN CODE
+			************************************************************/
+			var globalScaler = width/400;
+			
+			var currentDate = 0;
+			var isLeapYear = false;
+			var daysinYear = 0;
+			var daysinMonth = 0;
+			
+			var leapCheck = function(year) {
+				daysinYear = 0;
+				isLeapYear = false;
+				var yearTest = [year/4, year/100, year/400];
+				if (yearTest[0]===floor(yearTest[0])) {
+					isLeapYear = true;
+				}
+				if (yearTest[1]===floor(yearTest[1])) {
+					isLeapYear = false;
+				}
+				if (yearTest[2]===floor(yearTest[2])) {
+					isLeapYear = true;
+				}
+				
+				if (isLeapYear === true) {
+					daysinYear += 1;
+				}
+				return daysinYear;
+			};
+			var monthCheck = function(month, year) {
+				daysinMonth = 0;
+				if (month>=1) {
+					daysinMonth += 31;
+				}
+				if (month>=2) {
+					daysinMonth += 28 + leapCheck(year);
+				}
+				if (month>=3) {
+					daysinMonth += 31;
+				}
+				if (month>=4) {
+					daysinMonth += 30;
+				}
+				if (month>=5) {
+					daysinMonth += 31;
+				}
+				if (month>=6) {
+					daysinMonth += 30;
+				}
+				if (month>=7) {
+					daysinMonth += 31;
+				}
+				if (month>=8) {
+					daysinMonth += 31;
+				}
+				if (month>=9) {
+					daysinMonth += 30;
+				}
+				if (month>=10) {
+					daysinMonth += 31;
+				}
+				if (month>=11) {
+					daysinMonth += 30;
+				}
+				if (month>=12) {
+					daysinMonth += 31;
+				}
+				return daysinMonth;
+			};
+			
+			var converttoDays = function(month, day, year) {
+				var numberofDays = 0;
+				numberofDays += day;
+				numberofDays += monthCheck(month-1, year);
+				numberofDays += floor(year*365.2425);
+				return numberofDays;
+			};
+			
+			draw = function() {
+				background(0, 0, 0);
+				textAlign(CENTER, CENTER);
+				currentDate = converttoDays(month(),day(),year());
+				textSize(75*globalScaler);
+				text(currentDate, 200*globalScaler, 150*globalScaler);
+				textSize(35*globalScaler);
+				text("Days since 00/00/0000", 200*globalScaler, 250*globalScaler);
+			};
+			/************************************************************
+			********************     END CODE
+			************************************************************/
+		}};
+	var canvas = document.getElementById("progCanvas");
+	var processingInstance = new Processing(canvas, programCode);
+</script>
+</html>
