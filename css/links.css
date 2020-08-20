@@ -3,7 +3,8 @@ a {
 	text-decoration: underline;
 }
 a:visited {
-	color: rgb(176, 128, 16);
+	/* color: rgb(176, 128, 16); */
+	color: rgb(226, 161, 43);
 }
 a:hover {
 	color: rgb(249, 230, 186);
