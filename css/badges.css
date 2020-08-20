@@ -8,6 +8,6 @@ iframe#last_updated {
 	width: auto;
 	height: 20px;
 }
-iframe#last_updated:hover, iframe#last_updated:active, iframe#last_updated:focus {
+/* iframe#last_updated:hover, iframe#last_updated:active, iframe#last_updated:focus {
 	height: 50px;
-}
+} */
