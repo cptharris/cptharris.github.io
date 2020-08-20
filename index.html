@@ -10,7 +10,7 @@
 	<link rel='icon' href='img/favicon.ico' type='image/x-icon'>
 	<link rel="stylesheet" href="css/links.css">
 	<link rel="stylesheet" href="css/badges.css">
-	<link rel="stylesheet" href="css/favicon.css">
+	<link rel="stylesheet" href="css/favicon+menu.css">
 	<link rel="stylesheet" href="css/header.css">
 </head>
 <style>
@@ -30,13 +30,21 @@
 	}
 </style>
 <body>
+	<!-- Favicon in upper-right corner -->
 	<a href="index" style="cursor:auto;">
 	<img id="favicon" src="img/favicon.png" alt="Computer screen with faint letters 'TC'" />
 	</a>
 	
+	<!-- Front page -->
 	<div class="bg" style="background: rgb(28, 24, 42);">
 		<span class="front-header">Techie Cable</span>
 	</div>
+	
+	<div class="menu" id="pageHeader">
+		<a class="button" href="index">Home</a>
+		<a class="button" href="programs">Programs</a>
+	</div>
+	
 	<main>
 		<h2>Techie Cable: Letter</h2>
 		<p id="tc_letter">
@@ -49,6 +57,8 @@
 		July 2020
 		</p>
 	</main>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<iframe id="last_updated" src="https://img.shields.io/github/last-commit/techiecable/TechieCable.github.io?color=%23584b85&label=Last%20updated%3A&style=flat-square"></iframe>
 </body>
+<script src="js\headerscroll.js" type="text/javascript"></script>
 </html>
