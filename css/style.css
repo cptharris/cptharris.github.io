@@ -1,0 +1,51 @@
+/* Front Page Header */
+.bg {
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.front-header {
+	font-size: 400%;
+	color: white;
+	text-align: center;
+	position: relative;
+	top: 50%;
+}
+/* Header Menu */
+.menu {
+	margin-top: 1%;
+	padding: 10px 16px;
+	background: rgb(50, 43, 76);
+	color: #f1f1f1;
+}
+.button {
+	margin: 10px;
+	padding: 5px;
+	background-color: rgb(33, 29, 51);
+}
+.sticky {
+	margin: 0%;
+	position: fixed;
+	top: 0;
+	width: 100%
+}
+/* Favicon */
+#favicon {
+	z-index: 1;
+	position: fixed;
+	height: 10%;
+	right: 10px;
+	top: 10px;
+}
+/* Badges */
+iframe#last_updated {
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+	position: fixed;
+	bottom: 0%;
+	left: 0%;
+	width: auto;
+	height: 20px;
+}
