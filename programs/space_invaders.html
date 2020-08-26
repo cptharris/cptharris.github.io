@@ -10,6 +10,16 @@
 	<link rel='icon' href='img/favicon.ico' type='image/x-icon'>
 	<link rel="stylesheet" href="css/links.css">
 	<link rel="stylesheet" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script>
+		$(document).ready(function(){
+			$("#progCanvas").mouseenter(function(){
+				$("#pageHeader").hide("slow");
+			});
+			$("#progCanvas").mouseleave(function(){
+				$("#pageHeader").show("slow");
+			});
+		});
+	</script>
 </head>
 <style>
 	html, body {
