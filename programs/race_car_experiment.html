@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- <title>TechieCable - TITLE_HERE</title> -->
+	<title>Race Car Experiment</title>
+	<base href="https://techiecable.github.io" target="_self">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<meta name="description" content="TechieCable's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+	<link rel='icon' href='img/favicon.ico' type='image/x-icon'>
+	<link rel="stylesheet" href="css/links.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+	/* html, body {
+		text-align: center;
+		background-color: rgb(71, 57, 116);
+		color: white;
+		font-size: 120%;
+		margin: 0px;
+		height: 100%;
+		width: 100%;
+	}
+	#bar {
+		width: 100%;
+		height: 4%;
+		background-color: rgb(28, 24, 42);
+	}
+	#progCanvas {
+		margin: 2%;
+		border: 5px inset grey;
+	} */
+</style>
+<body>
+	<!-- <a href="index" style="cursor:auto;">
+	<img id="favicon" src="img/favicon.png" alt="Computer screen with faint letters 'TC'" />
+	</a>
+	
+	<div class="menu" id="pageHeader">
+		<a class="button" href="index">Home</a>
+		<a class="button" href="programs">Programs</a>
+	</div>
+	
+	<div class="bg">
+		<span class="front-header">program_name</span>
+	</div>
+	<div id="bar"></div> -->
+	
+	<canvas id="progCanvas"></canvas>
+	
+	<!-- <dl>
+		<dt>V0.0</dt>
+			<dd>INSERT_TEXT</dd>
+	</dl> -->
+	
+	<!-- <iframe id="last_updated" src="https://img.shields.io/github/last-commit/techiecable/TechieCable.github.io?color=%23584b85&label=Last%20updated%3A&style=flat-square"></iframe> -->
+</body>
+<script src="js\headerscroll.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
+<script>
+	var programCode = function(processingInstance) {
+		with (processingInstance) {size(1000, 1000);frameRate(60);
+			/************************************************************
+			********************     BEGIN CODE
+			************************************************************/
+			var gbl = width/400 * 1.0;
+			rectMode(CORNERS);
+			ellipseMode(CENTER);
+			noStroke();
+			textAlign(CENTER, CENTER);
+
+			var carX = 0;
+			var carY = 190;
+			var carVelocity = 1;
+			var carLength = 90*gbl;
+
+			var dots = function() {
+			    stroke(0, 0, 0);
+			    fill(0, 0, 0);
+			    line(0, 150 * gbl, 400 * gbl, 150 * gbl);
+			    line(0, 250 * gbl, 400 * gbl, 250 * gbl);
+			    // line(0, 200 * gbl, 10 * gbl, 200 * gbl);
+			    // line(390, 200 * gbl, 400 * gbl, 200 * gbl);
+			        for (var x=0; x<400*gbl; x+=20) {
+			            text(x/20, x, 220 * gbl);
+			            line(x, 200*gbl, x, 205*gbl);
+			            for (var y=0; y<400*gbl; y+=20) {
+			                // point(x, y);
+			                
+			        }
+			    }
+			    noStroke();
+			};
+
+			var drawCar = function(car_frontX, car_frontY) {
+			    fill(150, 150, 150);
+			    triangle(car_frontX * gbl, car_frontY * gbl, (car_frontX - 40) * gbl, car_frontY * gbl, (car_frontX - 40) * gbl, (car_frontY - 20) * gbl);
+			    rect((car_frontX - 40) * gbl, (car_frontY) * gbl, (car_frontX - 70) * gbl, (car_frontY - 15) * gbl);
+			    fill(220, 0, 0);
+			    rect((car_frontX - 70) * gbl, (car_frontY) * gbl, (car_frontX - 90) * gbl, (car_frontY - 25) * gbl);
+			    
+			    fill(0, 0, 0);
+			    ellipse((car_frontX - 80) * gbl, (car_frontY + 2) * gbl, 18*gbl, 15*gbl); //left wheel
+			    ellipse((car_frontX - 35) * gbl, (car_frontY + 2) * gbl, 18*gbl, 15*gbl); //right wheel
+			    
+			    fill(255, 255, 255);
+			    ellipse((car_frontX - 80) * gbl, (car_frontY + 2) * gbl, 8*gbl, 8*gbl); //left wheel middle
+			    ellipse((car_frontX - 35) * gbl, (car_frontY + 2) * gbl, 8*gbl, 8*gbl); //right wheel middle
+			};
+
+			var carExampleMove = function() {
+			   carX+=carVelocity;
+			   if (carX*gbl > 400 * gbl + carLength) {
+			       carVelocity = 1;
+			       carX = 0;
+			   }
+			   if (carX*gbl < 100 * gbl) {
+			       carVelocity = 1;
+			   } else if (carX*gbl < 200 * gbl) {
+			       carVelocity = 2;
+			   } else if (carX*gbl < 300 * gbl) {
+			       carVelocity = 1/2;
+			   } else if (carX*gbl < 400 * gbl) {
+			       carVelocity = 3;
+			   }
+			};
+
+			draw = function() {
+			    background(255, 255, 255);
+			    dots();
+			    
+			    drawCar(carX, carY);
+			    carExampleMove();
+			};
+
+			// https://previews.123rf.com/images/bruno1998/bruno19981009/bruno1998100900131/7844673-cartoon-illustration-of-a-set-of-different-colored-racing-cars.jpg
+
+			/************************************************************
+			********************     END CODE
+			************************************************************/
+		}};
+	var canvas = document.getElementById("progCanvas");
+	var processingInstance = new Processing(canvas, programCode);
+</script>
+</html>
