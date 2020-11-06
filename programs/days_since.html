@@ -52,6 +52,7 @@
 	<dl>
 		<dt>V1.4</dt>
 			<dd>Fixed bug in the number entry buttons. Now works as expected.</dd>
+			<dd>Improved styling and added some more text</dd>
 		<dt>V1.3</dt>
 			<dd>Click the new "enter number" buttons to view a prompt where you can enter a user defined number more quickly and easily.</dd>
 		<dt>V1.2</dt>
@@ -72,376 +73,376 @@
 			/************************************************************
 			********************     BEGIN CODE
 			************************************************************/
-			var globalScaler = width/400;
+var globalScaler = width/400;
 
-			var isMousePressed = false;
-			mousePressed = function() {
-			    isMousePressed = true;
-			};
+var isMousePressed = false;
+mousePressed = function() {
+    isMousePressed = true;
+};
 
-			/*****IMPORTANT VARIABLES*****/
-			var currentDate = 0;
-			var checkDate = 0;
-			var userMonth = 0;
-			var userDay = 0;
-			var userYear = 0;
+/*****IMPORTANT VARIABLES*****/
+var currentDate = 0;
+var checkDate = 0;
+var userMonth = 0;
+var userDay = 0;
+var userYear = 0;
 
-			var isLeapYear = false;
-			var daysinYear = 0;
-			var daysinMonth = 0;
-			var pageNum = 0;
+var isLeapYear = false;
+var daysinYear = 0;
+var daysinMonth = 0;
+var pageNum = 0;
 
-			var toggle = false;
-			var jump = 1;
-			var sign = 1;
+var toggle = false;
+var jump = 1;
+var sign = 1;
 
-			/*****UP OR DOWN FUNCTIONS*****/
-			var updownNumber = function() {
-			    if (toggle === true) {
-			        if (pageNum === 1) {
-			            userMonth+=jump*sign;
-			        }
-			        if (pageNum === 2) {
-			            userDay+=jump*sign;
-			        }
-			        if (pageNum === 3) {
-			            userYear+=jump*sign;
-			        }
-			    }
-			};
+/*****UP OR DOWN FUNCTIONS*****/
+var updownNumber = function() {
+    if (toggle === true) {
+        if (pageNum === 1) {
+            userMonth+=jump*sign;
+        }
+        if (pageNum === 2) {
+            userDay+=jump*sign;
+        }
+        if (pageNum === 3) {
+            userYear+=jump*sign;
+        }
+    }
+};
 
-			/*****BUTTON CREATOR*****/
-			var button = function(settings) {
-			    this.x = (settings.x)*globalScaler || width/2;
-			    this.y = (settings.y)*globalScaler || height/2;
-			    this.w = (settings.w)*globalScaler || 50*globalScaler;
-			    this.h = (settings.h)*globalScaler || 50*globalScaler;
-			    this.text = settings.text || "click";
-			    this.textSize = settings.textSize*globalScaler || 12*globalScaler;
-			    this.color_r = settings.color_r || 0;
-			    this.color_g = settings.color_g || 0;
-			    this.color_b = settings.color_b || 0;
-			    this.textColor = settings.textColor || color(255, 255, 255);
-			    this.radius = settings.radius || 10;
-			    this.onClick = settings.onClick || function() {println("ERROR: no function defined");};
-			    this.reset = settings.reset || function() {};
-			};
-			button.prototype.go = function() {
-			    //Button formatting
-			    textAlign(CENTER, CENTER);
-			    rectMode(CENTER);
-			    noStroke();
-			    textSize(this.textSize);
-			    fill(this.color_r, this.color_g, this.color_b);
-			    
-			    //What happens when you click inside the button
-			    if (mouseX >= this.x - this.w/2 && mouseY >= this.y - this.h/2 && mouseX <= this.x + this.w/2 && mouseY <= this.y + this.h/2) {
-			        fill(this.color_r + 40, this.color_g + 40, this.color_b + 40);
-			        if (isMousePressed) {
-			            fill(this.color_r + 80, this.color_g + 80, this.color_b + 80);
-			            this.onClick();
-			        }
-			    }
-			    //Draws the button shape
-			    rect(this.x, this.y, this.w, this.h, this.radius);
-			    fill(this.textColor);
-			    text(this.text, this.x, this.y);
-			    
-			    //If defined, this can be used to call actions after the button has happened
-			    this.reset();
-			};
+/*****BUTTON CREATOR*****/
+var button = function(settings) {
+    this.x = (settings.x)*globalScaler || width/2;
+    this.y = (settings.y)*globalScaler || height/2;
+    this.w = (settings.w)*globalScaler || 50*globalScaler;
+    this.h = (settings.h)*globalScaler || 50*globalScaler;
+    this.text = settings.text || "click";
+    this.textSize = settings.textSize*globalScaler || 12*globalScaler;
+    this.color_r = settings.color_r || 0;
+    this.color_g = settings.color_g || 0;
+    this.color_b = settings.color_b || 0;
+    this.textColor = settings.textColor || color(255, 255, 255);
+    this.radius = settings.radius || 10;
+    this.onClick = settings.onClick || function() {println("ERROR: no function defined");};
+    this.reset = settings.reset || function() {};
+};
+button.prototype.go = function() {
+    //Button formatting
+    textAlign(CENTER, CENTER);
+    rectMode(CENTER);
+    noStroke();
+    textSize(this.textSize);
+    fill(this.color_r, this.color_g, this.color_b);
+    
+    //What happens when you click inside the button
+    if (mouseX >= this.x - this.w/2 && mouseY >= this.y - this.h/2 && mouseX <= this.x + this.w/2 && mouseY <= this.y + this.h/2) {
+        fill(this.color_r + 40, this.color_g + 40, this.color_b + 40);
+        if (isMousePressed) {
+            fill(this.color_r + 80, this.color_g + 80, this.color_b + 80);
+            this.onClick();
+        }
+    }
+    //Draws the button shape
+    rect(this.x, this.y, this.w, this.h, this.radius);
+    fill(this.textColor);
+    text(this.text, this.x, this.y);
+    
+    //If defined, this can be used to call actions after the button has happened
+    this.reset();
+};
 
-			/*****DEFINE BUTTONS*****/
-			var up1Button = new button ({
-			    text:"1",
-			    textSize:20,
-			    x:350, y:170,
-			    w:45, h:20,
-			    onClick: function() {
-			        jump = 1;
-			    }
-			});
-			var up10Button = new button ({
-			    text:"10",
-			    textSize:20,
-			    x:350, y:190,
-			    w:45, h:20,
-			    onClick: function() {
-			        jump = 10;
-			    }
-			});
-			var up100Button = new button ({
-			    text:"100",
-			    textSize:20,
-			    x:350, y:210,
-			    w:45, h:20,
-			    onClick: function() {
-			        jump = 100;
-			    }
-			});
-			var up1000Button = new button ({
-			    text:"1000",
-			    textSize:20,
-			    x:350, y:230,
-			    w:45, h:20,
-			    onClick: function() {
-			        jump = 1000;
-			    }
-			});
+/*****DEFINE BUTTONS*****/
+var up1Button = new button ({
+    text:"1",
+    textSize:20,
+    x:350, y:170,
+    w:45, h:20,
+    onClick: function() {
+        jump = 1;
+    }
+});
+var up10Button = new button ({
+    text:"10",
+    textSize:20,
+    x:350, y:190,
+    w:45, h:20,
+    onClick: function() {
+        jump = 10;
+    }
+});
+var up100Button = new button ({
+    text:"100",
+    textSize:20,
+    x:350, y:210,
+    w:45, h:20,
+    onClick: function() {
+        jump = 100;
+    }
+});
+var up1000Button = new button ({
+    text:"1000",
+    textSize:20,
+    x:350, y:230,
+    w:45, h:20,
+    onClick: function() {
+        jump = 1000;
+    }
+});
 
-			var updirButton = new button ({
-			    text:"UP",
-			    textSize:20,
-			    y:150,
-			    w:35, h:20,
-			    onClick: function() {
-			        toggle = true;
-			        sign = 1;
-			    }
-			});
-			var downdirButton = new button ({
-			    text:"DOWN",
-			    textSize:20,
-			    y:250,
-			    w:70, h:20,
-			    onClick: function() {
-			        toggle = true;
-			        sign = -1;
-			    }
-			});
+var updirButton = new button ({
+    text:"UP",
+    textSize:20,
+    y:150,
+    w:35, h:20,
+    onClick: function() {
+        toggle = true;
+        sign = 1;
+    }
+});
+var downdirButton = new button ({
+    text:"DOWN",
+    textSize:20,
+    y:250,
+    w:70, h:20,
+    onClick: function() {
+        toggle = true;
+        sign = -1;
+    }
+});
 
-			var mainPageButton = new button ({
-			    text:"Main Page",
-			    textSize:20,
-			    y:360,
-			    w:100, h:20,
-			    onClick: function() {
-			        pageNum=0;
-			    },
-			});
-			var monthPageButton = new button ({
-			    text:"Month",
-			    textSize:20,
-			    x:365, y:340,
-			    w:65, h:20,
-			    onClick: function() {
-			        pageNum=1;
-			    }
-			});
-			var dayPageButton = new button ({
-			    text:"Day",
-			    textSize:20,
-			    x:365, y:360,
-			    w:65, h:20,
-			    onClick: function() {
-			        pageNum=2;
-			    }
-			});
-			var yearPageButton = new button ({
-			    text:"Year",
-			    textSize:20,
-			    x:365, y:380,
-			    w:65, h:20,
-			    onClick: function() {
-			        pageNum=3;
-			    }
-			});
+var mainPageButton = new button ({
+    text:"Main Page",
+    textSize:20,
+    y:360,
+    w:100, h:20,
+    onClick: function() {
+        pageNum=0;
+    },
+});
+var monthPageButton = new button ({
+    text:"Month",
+    textSize:20,
+    x:365, y:340,
+    w:65, h:20,
+    onClick: function() {
+        pageNum=1;
+    }
+});
+var dayPageButton = new button ({
+    text:"Day",
+    textSize:20,
+    x:365, y:360,
+    w:65, h:20,
+    onClick: function() {
+        pageNum=2;
+    }
+});
+var yearPageButton = new button ({
+    text:"Year",
+    textSize:20,
+    x:365, y:380,
+    w:65, h:20,
+    onClick: function() {
+        pageNum=3;
+    }
+});
 
-			var monthPromptButton = new button ({
-			    text:"Enter number",
-			    y:10,
-			    w:75, h:20,
-			    onClick: function() {
-			        userMonth=round(prompt("What 'month' value do you want to enter?"));
-			    }
-			});
-			var dayPromptButton = new button ({
-			    text:"Enter number",
-			    y:10,
-			    w:75, h:20,
-			    onClick: function() {
-			        userDay=round(prompt("What 'day' value do you want to enter?"));
-			    }
-			});
-			var yearPromptButton = new button ({
-			    text:"Enter number",
-			    y:10,
-			    w:75, h:20,
-			    onClick: function() {
-			        userYear=round(prompt("What 'year' value do you want to enter?"));
-			    }
-			});
+var monthPromptButton = new button ({
+    text:"Enter number",
+    y:10,
+    w:75, h:20,
+    onClick: function() {
+        userMonth=round(prompt("What 'month' value do you want to enter?"));
+    }
+});
+var dayPromptButton = new button ({
+    text:"Enter number",
+    y:10,
+    w:75, h:20,
+    onClick: function() {
+        userDay=round(prompt("What 'day' value do you want to enter?"));
+    }
+});
+var yearPromptButton = new button ({
+    text:"Enter number",
+    y:10,
+    w:75, h:20,
+    onClick: function() {
+        userYear=round(prompt("What 'year' value do you want to enter?"));
+    }
+});
 
-			/*****FINDING POINT IN TIME*****/
-			var leapCheck = function(year) {
-			    daysinYear = 0;
-			    isLeapYear = false;
-			    var yearTest = [year/4, year/100, year/400];
-			    if (yearTest[0]===floor(yearTest[0])) {
-			        isLeapYear = true;
-			    }
-			    if (yearTest[1]===floor(yearTest[1])) {
-			        isLeapYear = false;
-			    }
-			    if (yearTest[2]===floor(yearTest[2])) {
-			        isLeapYear = true;
-			    }
-			    
-			    if (isLeapYear === true) {
-			        daysinYear += 1;
-			    }
-			    return daysinYear;
-			};
-			var monthCheck = function(month, year) {
-			    daysinMonth = 0;
-			    if (month>=1) {
-			        daysinMonth += 31;
-			    }
-			    if (month>=2) {
-			        daysinMonth += 28 + leapCheck(year);
-			    }
-			    if (month>=3) {
-			        daysinMonth += 31;
-			    }
-			    if (month>=4) {
-			        daysinMonth += 30;
-			    }
-			    if (month>=5) {
-			        daysinMonth += 31;
-			    }
-			    if (month>=6) {
-			        daysinMonth += 30;
-			    }
-			    if (month>=7) {
-			        daysinMonth += 31;
-			    }
-			    if (month>=8) {
-			        daysinMonth += 31;
-			    }
-			    if (month>=9) {
-			        daysinMonth += 30;
-			    }
-			    if (month>=10) {
-			        daysinMonth += 31;
-			    }
-			    if (month>=11) {
-			        daysinMonth += 30;
-			    }
-			    if (month>=12) {
-			        daysinMonth += 31;
-			    }
-			    return daysinMonth;
-			};
-			var converttoDays = function(month, day, year) {
-			  var numberofDays = 0;
-			  numberofDays += day;
-			  numberofDays += monthCheck(month-1, year);
-			  numberofDays += floor(year*365.2425);
-			  return numberofDays;
-			};
+/*****FINDING POINT IN TIME*****/
+var leapCheck = function(year) {
+    daysinYear = 0;
+    isLeapYear = false;
+    var yearTest = [year/4, year/100, year/400];
+    if (yearTest[0]===floor(yearTest[0])) {
+        isLeapYear = true;
+    }
+    if (yearTest[1]===floor(yearTest[1])) {
+        isLeapYear = false;
+    }
+    if (yearTest[2]===floor(yearTest[2])) {
+        isLeapYear = true;
+    }
+    
+    if (isLeapYear === true) {
+        daysinYear += 1;
+    }
+    return daysinYear;
+};
+var monthCheck = function(month, year) {
+    daysinMonth = 0;
+    if (month>=1) {
+        daysinMonth += 31;
+    }
+    if (month>=2) {
+        daysinMonth += 28 + leapCheck(year);
+    }
+    if (month>=3) {
+        daysinMonth += 31;
+    }
+    if (month>=4) {
+        daysinMonth += 30;
+    }
+    if (month>=5) {
+        daysinMonth += 31;
+    }
+    if (month>=6) {
+        daysinMonth += 30;
+    }
+    if (month>=7) {
+        daysinMonth += 31;
+    }
+    if (month>=8) {
+        daysinMonth += 31;
+    }
+    if (month>=9) {
+        daysinMonth += 30;
+    }
+    if (month>=10) {
+        daysinMonth += 31;
+    }
+    if (month>=11) {
+        daysinMonth += 30;
+    }
+    if (month>=12) {
+        daysinMonth += 31;
+    }
+    return daysinMonth;
+};
+var converttoDays = function(month, day, year) {
+  var numberofDays = 0;
+  numberofDays += day;
+  numberofDays += monthCheck(month-1, year);
+  numberofDays += floor(year*365.2425);
+  return numberofDays;
+};
 
-			var limits = function() {
-			    while (userMonth > 12) {
-			        userMonth-=1;
-			    }
-			    while (userMonth < 0) {
-			        userMonth +=1;
-			    }
-			    while (userDay > 31) {
-			        userDay-=1;
-			    }
-			    while (userDay < 0) {
-			        userDay+=1;
-			    }
-			};
+var limits = function() {
+    while (userMonth > 12) {
+        userMonth-=1;
+    }
+    while (userMonth < 0) {
+        userMonth +=1;
+    }
+    while (userDay > 31) {
+        userDay-=1;
+    }
+    while (userDay < 0) {
+        userDay+=1;
+    }
+};
 
-			/*****Drawing*****/
-			draw = function() {
-			    textAlign(CENTER, CENTER);
-			    rectMode(CENTER);
-			    fill(0, 0, 0);
-			    
-			    currentDate = converttoDays(month(),day(),year());
-			    checkDate = converttoDays(userMonth,userDay,userYear);
-			    
-			    if (pageNum === 0) {
-			        background(255, 255, 255);
-			        textSize(75*globalScaler);
-			        text(currentDate-checkDate, 200*globalScaler, 150*globalScaler);
-			        textSize(20*globalScaler);
-			        text("Days since " + userMonth + "/" + userDay + "/" + userYear, 200*globalScaler, 250*globalScaler);
-			        
-			        monthPageButton.go();
-			        dayPageButton.go();
-			        yearPageButton.go();
-			    }
-			    if (pageNum === 1) {
-			        background(255, 255, 255);
-			        textSize(75*globalScaler);
-			        text(userMonth, 200*globalScaler, 200*globalScaler);
-			        text("Month", 200*globalScaler, 60*globalScaler);
-			        
-			        mainPageButton.go();
-			        updirButton.go();
-			        downdirButton.go();
-			        up1Button.go();
-			        up10Button.go();
-			        up100Button.go();
-			        up1000Button.go();
-			        
-			        monthPageButton.go();
-			        dayPageButton.go();
-			        yearPageButton.go();
-			        
-			        monthPromptButton.go();
-			    }
-			    if (pageNum === 2) {
-			        background(255, 255, 255);
-			        textSize(75*globalScaler);
-			        text(userDay, 200*globalScaler, 200*globalScaler);
-			        text("Day", 200*globalScaler, 60*globalScaler);
-			        
-			        mainPageButton.go();
-			        updirButton.go();
-			        downdirButton.go();
-			        up1Button.go();
-			        up10Button.go();
-			        up100Button.go();
-			        up1000Button.go();
-			        
-			        monthPageButton.go();
-			        dayPageButton.go();
-			        yearPageButton.go();
-			        
-			        dayPromptButton.go();
-			    }
-			    if (pageNum === 3) {
-			        background(255, 255, 255);
-			        textSize(75*globalScaler);
-			        text(userYear, 200*globalScaler, 200*globalScaler);
-			        text("Year", 200*globalScaler, 60*globalScaler);
-			        
-			        mainPageButton.go();
-			        updirButton.go();
-			        downdirButton.go();
-			        up1Button.go();
-			        up10Button.go();
-			        up100Button.go();
-			        up1000Button.go();
-			        
-			        monthPageButton.go();
-			        dayPageButton.go();
-			        yearPageButton.go();
-			        
-			        yearPromptButton.go();
-			    }
-			    
-			    /*****Reseting Variables*****/
-			    limits();
-			    updownNumber();
-			    toggle = false;
-			    isMousePressed = false;
-			};
+/*****Drawing*****/
+draw = function() {
+    textAlign(CENTER, CENTER);
+    rectMode(CENTER);
+    fill(0, 0, 0);
+    
+    currentDate = converttoDays(month(),day(),year());
+    checkDate = converttoDays(userMonth,userDay,userYear);
+    
+    if (pageNum === 0) {
+        background(255, 255, 255);
+        textSize(75*globalScaler);
+        text(currentDate-checkDate, 200*globalScaler, 150*globalScaler);
+        textSize(20*globalScaler);
+        text("Days between " + userMonth + "/" + userDay + "/" + userYear + " and " + month() + "/" + day() + "/" + year() + ".", 200*globalScaler, 250*globalScaler);
+        
+        monthPageButton.go();
+        dayPageButton.go();
+        yearPageButton.go();
+    }
+    if (pageNum === 1) {
+        background(255, 255, 255);
+        textSize(75*globalScaler);
+        text(userMonth, 200*globalScaler, 200*globalScaler);
+        text("Month", 200*globalScaler, 60*globalScaler);
+        
+        mainPageButton.go();
+        updirButton.go();
+        downdirButton.go();
+        up1Button.go();
+        up10Button.go();
+        up100Button.go();
+        up1000Button.go();
+        
+        monthPageButton.go();
+        dayPageButton.go();
+        yearPageButton.go();
+        
+        monthPromptButton.go();
+    }
+    if (pageNum === 2) {
+        background(255, 255, 255);
+        textSize(75*globalScaler);
+        text(userDay, 200*globalScaler, 200*globalScaler);
+        text("Day", 200*globalScaler, 60*globalScaler);
+        
+        mainPageButton.go();
+        updirButton.go();
+        downdirButton.go();
+        up1Button.go();
+        up10Button.go();
+        up100Button.go();
+        up1000Button.go();
+        
+        monthPageButton.go();
+        dayPageButton.go();
+        yearPageButton.go();
+        
+        dayPromptButton.go();
+    }
+    if (pageNum === 3) {
+        background(255, 255, 255);
+        textSize(75*globalScaler);
+        text(userYear, 200*globalScaler, 200*globalScaler);
+        text("Year", 200*globalScaler, 60*globalScaler);
+        
+        mainPageButton.go();
+        updirButton.go();
+        downdirButton.go();
+        up1Button.go();
+        up10Button.go();
+        up100Button.go();
+        up1000Button.go();
+        
+        monthPageButton.go();
+        dayPageButton.go();
+        yearPageButton.go();
+        
+        yearPromptButton.go();
+    }
+    
+    /*****Reseting Variables*****/
+    limits();
+    updownNumber();
+    toggle = false;
+    isMousePressed = false;
+};
 			/************************************************************
 			********************     END CODE
 			************************************************************/
