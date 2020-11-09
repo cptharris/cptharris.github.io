@@ -1,9 +1,6 @@
 /* Front Page Header */
 .bg {
 	height: 100%;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
 }
 .front-header {
 	font-size: 400%;
@@ -14,7 +11,7 @@
 }
 /* Header Menu */
 .menu {
-	margin-top: 1%;
+	z-index:1;
 	padding: 10px 16px;
 	background: rgb(50, 43, 76);
 	color: #f1f1f1;
@@ -32,7 +29,7 @@
 }
 /* Favicon */
 #favicon {
-	z-index: 1;
+	z-index: 2;
 	position: fixed;
 	height: 10%;
 	right: 10px;
