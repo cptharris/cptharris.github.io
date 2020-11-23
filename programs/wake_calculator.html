@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TechieCable - Wake Calculator</title>
+	<base href="https://techiecable.github.io" target="_self">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<meta name="description" content="TechieCable's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+	<link rel='icon' href='img/favicon.ico' type='image/x-icon'>
+	<link rel="stylesheet" href="css/links.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+	html, body {
+		text-align: center;
+		background-color: rgb(71, 57, 116);
+		color: white;
+		font-size: 120%;
+		margin: 0px;
+		height: 100%;
+		width: 100%;
+	}
+	#bar {
+		width: 100%;
+		height: 4%;
+		background-color: rgb(28, 24, 42);
+	}
+	#progCanvas {
+		margin: 2%;
+		border: 5px inset grey;
+	}
+</style>
+<body>
+	<a href="index" style="cursor:auto;">
+	<img id="favicon" src="img/favicon.svg" alt="Image failed to load" />
+	</a>
+	
+	<div class="menu sticky" id="pageHeader">
+		<a class="button" href="#techieblog">Home</a>
+		<a class="button" href="programs">Programs</a>
+	</div>
+	
+	<div class="bg">
+		<span class="front-header">Wake Calculator</span>
+	</div>
+	<div id="bar"></div>
+	
+	<canvas id="progCanvas"></canvas>
+	
+	<dl>
+		<dt>V1.0</dt>
+			<dd>Created the new Wake Calculator!</dd>
+			<dd>Use now, soon, or a custom time to calculate when you should wake up.</dd>
+			<dd>Enter a custom time with the right panel buttons.</dd>
+			<dd>Uses the JS "prompt" function to ask for input.</dd>
+	</dl>
+	
+	<iframe id="last_updated" src="https://img.shields.io/github/last-commit/techiecable/TechieCable.github.io?color=%23584b85&label=Last%20updated%3A&style=flat-square"></iframe>
+</body>
+<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
+<script>
+	var programCode = function(processingInstance) {
+		with (processingInstance) {size(600, 600);frameRate(60);
+			/************************************************************
+			********************     BEGIN CODE
+			************************************************************/
+var restart = function() {
+	location.reload();
+};
+
+var gblscr = width/400;
+
+var isMousePressed = false;
+mousePressed = function() {
+	isMousePressed = true;
+};
+mouseReleased = function() {
+	isMousePressed = false;
+};
+
+// Define variables
+var blank=0;
+var userHour=hour();
+var userMinute=minute();
+var scene = 0;
+
+var topRightCol = 50;
+
+/**/
+// Button Objects
+var button = function(settings) {
+	this.x = settings.x*gblscr || width/2;
+	this.y = settings.y*gblscr || height/2;
+	this.w = settings.w*gblscr || 50*gblscr;
+	this.h = settings.h*gblscr || 50*gblscr;
+	this.text = settings.text || "click";
+	this.textSize = settings.textSize*gblscr || 12*gblscr;
+	this.color_r = settings.color_r || 0;
+	this.color_g = settings.color_g || 0;
+	this.color_b = settings.color_b || 0;
+	this.textColor = settings.textColor || color(255, 255, 255);
+	this.radius = settings.radius*gblscr || 10*gblscr;
+	this.onClick = settings.onClick || function() {println("ERROR: no function defined");};
+	this.reset = settings.reset || function() {};
+};
+button.prototype.go = function() {
+	//Button formatting
+	textAlign(CENTER, CENTER);
+	rectMode(CENTER);
+	noStroke();
+	textSize(this.textSize);
+	fill(this.color_r, this.color_g, this.color_b);
+	
+	//What happens when you click inside the button
+	if (mouseX >= this.x - this.w/2 && mouseY >= this.y - this.h/2 && mouseX <= this.x + this.w/2 && mouseY <= this.y + this.h/2) {
+		fill(this.color_r + 40, this.color_g + 40, this.color_b + 40);
+		if (isMousePressed) {
+			fill(this.color_r + 80, this.color_g + 80, this.color_b + 80);
+			this.onClick();
+		}
+	}
+	//Draws the button shape
+	rect(this.x, this.y, this.w, this.h, this.radius);
+	fill(this.textColor);
+	text(this.text, this.x, this.y);
+	
+	//If defined, this can be used to call actions after the button has happened
+	this.reset();
+};
+
+// Function to add 0
+var zeroPad = function(input) {
+	if (input<10) {
+		return "0"+input;
+	} else {
+		return input;
+	}
+};
+
+// Sleep time calculator object
+var sleepTime = function(settings) {
+	this.hour = settings.hour || hour();
+	this.minute = settings.minute || minute();
+	this.saveFunc = settings.saveFunc || function() {};
+	this.removeFunc = settings.removeFunc || function() {};
+};
+sleepTime.prototype.go = function() {
+	this.minute=round(this.minute);
+	this.hour=round(this.hour);
+	this.minute += 15;
+	while (this.minute >= 60) {
+		this.minute -= 60;
+		this.hour += 1;
+	}
+	this.OGhour=this.hour;
+	while (this.hour < this.OGhour+6) {
+		this.minute+=90;
+		while (this.minute >= 60) {
+			this.minute -= 60;
+			this.hour += 1;
+		}
+	}
+	for (var i = 0; i < 6; i++) {
+		this.minute += 90;
+		while (this.minute >= 60) {
+			this.minute -= 60;
+			this.hour += 1;
+		}
+		while (this.hour >= 24) {
+			this.hour -= 24;
+		}
+		this.saveFunc(zeroPad(this.minute),zeroPad(this.hour));
+	}
+};
+/**/
+//
+/**/
+// Arrray definitions
+var nowhourArray=[];
+var nowminuteArray=[];
+var soonhourArray=[];
+var soonminuteArray=[];
+var userhourArray=[];
+var userminuteArray=[];
+
+// Sleep times creations
+var nowSleep = new sleepTime({
+	removeFunc:function() {
+		nowhourArray=[];
+		nowminuteArray=[];
+	},
+	saveFunc:function(min,hour) {
+		nowhourArray.push(hour);
+		nowminuteArray.push(min);
+	}
+});
+var soonSleep = new sleepTime({
+	minute:minute()+15,
+	removeFunc:function() {
+		soonhourArray=[];
+		soonminuteArray=[];
+	},
+	saveFunc:function(min,hour) {
+		soonhourArray.push(hour);
+		soonminuteArray.push(min);
+	}
+});
+var userSleep = new sleepTime({
+	hour:userHour,
+	minute:userMinute,
+	removeFunc:function() {
+		userhourArray=[];
+		userminuteArray=[];
+	},
+	saveFunc:function(min,hour) {
+		userhourArray.push(hour);
+		userminuteArray.push(min);
+	}
+});
+
+// Scene buttons
+var nowButton = new button({
+	x:300,
+	y:250,
+	text:"Now",
+	onClick:function() {
+		scene=0;
+	},
+});
+var soonButton = new button({
+	x:300,
+	y:300,
+	text:"Soon",
+	onClick:function() {
+		scene=1;
+	},
+});
+var userButton = new button({
+	x:300,
+	y:350,
+	text:"User",
+	onClick:function() {
+		scene=2;
+	},
+});
+
+// User input buttons
+var upHourButton = new button({
+	x:60,
+	y:60,
+	w:30,
+	h:30,
+	text:"ʌ",
+	textSize:20,
+	onClick:function() {
+		userHour+=1;
+	},
+	reset:function() {
+		textSize(10);
+	}
+});
+var upMinuteButton = new button({
+	x:140,
+	y:60,
+	w:30,
+	h:30,
+	text:"ʌ",
+	textSize:20,
+	onClick:function() {
+		userMinute+=1;
+	},
+	reset:function() {
+		textSize(10);
+	}
+});
+var downHourButton = new button({
+	x:60,
+	y:140,
+	w:30,
+	h:30,
+	text:"v",
+	textSize:20,
+	onClick:function() {
+		userHour-=1;
+	},
+	reset:function() {
+		textSize(10);
+	}
+});
+var downMinuteButton = new button({
+	x:140,
+	y:140,
+	w:30,
+	h:30,
+	text:"v",
+	textSize:20,
+	onClick:function() {
+		userMinute-=1;
+	},
+	reset:function() {
+		textSize(10);
+	}
+});
+
+var promptButton = new button({
+	x:100,
+	y:180,
+	h:20,
+	text:"Enter",
+	onClick:function() {
+		userHour = round(prompt("Enter the hour when you will go to bed",hour()));
+		userMinute = round(prompt("Enter the minute when you will go to bed",minute()));
+		isMousePressed=false;
+	},
+});
+var restartButton = new button({
+	x:355,
+	y:300,
+	text:"Restart",
+	onClick:function() {
+		restart();
+	},
+});
+
+var checkValues = function() {
+	if (round(millis()/1000)===millis()) {
+		round(userHour);
+		round(userMinute);
+	}
+	if (userHour >= 24) {
+		userHour = 0;
+	}
+	if (userMinute >= 60) {
+		userHour+=1;
+		userMinute = 0;
+	}
+	if (userHour <= -1) {
+		userHour = 23;
+	}
+	if (userMinute <= -1) {
+		userMinute = 59;
+	}
+};
+/**/
+
+draw = function() {
+	background(82, 82, 82);
+	
+	// Call buttons
+	nowButton.go();
+	soonButton.go();
+	userButton.go();
+	upHourButton.go();
+	upMinuteButton.go();
+	downHourButton.go();
+	downMinuteButton.go();
+	promptButton.go();
+	restartButton.go();
+	
+	// Set formatting
+	textAlign(CENTER, CENTER);
+	rectMode(CENTER);
+	textSize(10*gblscr);
+	fill(255, 255, 255);
+	noStroke();
+	
+	// User input
+	textSize(30*gblscr);
+	text(zeroPad(userHour)+"  :  "+zeroPad(userMinute), 100*gblscr, 100*gblscr);
+	
+	/***** SCENES *****/
+	// Now
+	if (scene === 0) {
+		textSize(20*gblscr);
+		text("Go to bed now", 300*gblscr, (topRightCol)*gblscr);
+		text("to wake up at:", 300*gblscr, (topRightCol+25)*gblscr);
+		
+		textSize(15*gblscr);
+		nowSleep.go();
+		for (var h = 0; h < 6; h++) {
+			if (h/2 === round(h/2)) {
+				text(nowhourArray[h] + ":" + nowminuteArray[h], 270*gblscr, (topRightCol + 50 + 15*h)*gblscr);
+			} else {
+				text(nowhourArray[h] + ":" + nowminuteArray[h], 330*gblscr, (topRightCol + 50 + 15*(h-1))*gblscr);
+			}
+		}
+	}
+	
+	// Soon
+	if (scene === 1) {
+		textSize(20*gblscr);
+		text("Go to bed in 15 mins", 300*gblscr, (topRightCol)*gblscr);
+		text("to wake up at:", 300*gblscr, (topRightCol+25)*gblscr);
+		
+		textSize(15*gblscr);
+		soonSleep.go();
+		for (var h = 0; h < 6; h++) {
+			if (h/2 === round(h/2)) {
+				text(soonhourArray[h] + ":" + soonminuteArray[h], 270*gblscr, (topRightCol + 50 + 15*h)*gblscr);
+			} else {
+				text(soonhourArray[h] + ":" + soonminuteArray[h], 330*gblscr, (topRightCol + 50 + 15*(h-1))*gblscr);
+			}
+		}
+	}
+	
+	// User
+	if (scene === 2) {
+		textSize(20*gblscr);
+		text("Go to bed at "+zeroPad(userHour)+":"+zeroPad(userMinute), 300*gblscr, (topRightCol)*gblscr);
+		text("to wake up at:", 300*gblscr, (topRightCol+25)*gblscr);
+		
+		textSize(15*gblscr);
+		userSleep.go();
+		for (var h = 0; h < 6; h++) {
+			if (h/2 === round(h/2)) {
+				text(userhourArray[h] + ":" + userminuteArray[h], 270*gblscr, (topRightCol + 50 + 15*h)*gblscr);
+			} else {
+				text(userhourArray[h] + ":" + userminuteArray[h], 330*gblscr, (topRightCol + 50 + 15*(h-1))*gblscr);
+			}
+		}
+	}
+	
+	// Check user-modified values
+	checkValues();
+};
+			/************************************************************
+			********************     END CODE
+			************************************************************/
+		}};
+	var canvas = document.getElementById("progCanvas");
+	var processingInstance = new Processing(canvas, programCode);
+</script>
+</html>
