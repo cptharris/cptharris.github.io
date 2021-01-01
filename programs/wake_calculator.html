@@ -50,6 +50,11 @@
 	<canvas id="progCanvas"></canvas>
 	
 	<dl>
+		<dt>V2.0</dt>
+			<dd>BUG FIX: Support zeros (0) as user values.</dd>
+			<dd>Read the url query.</dd>
+			<dd>Display now updates correctly.</dd>
+			<dd>Add a button to display the current link with query.</dd>
 		<dt>V1.0</dt>
 			<dd>Created the new Wake Calculator!</dd>
 			<dd>Use now, soon, or a custom time to calculate when you should wake up.</dd>
@@ -66,12 +71,31 @@
 			/************************************************************
 			********************     BEGIN CODE
 			************************************************************/
+var checkQuery = function() {
+	var url = window.location.search;
+	url = url.replace("?",'');
+	queryHour = [...url.matchAll(/h=(\d*)/g)];
+	queryMinute = [...url.matchAll(/m=(\d*)/g)];
+	if (queryHour[0]) {
+		if (queryHour[0][1]) {
+			userHour = round(queryHour[0][1]);
+			scene=2;
+		}
+	}
+	if (queryMinute[0]) {
+		if (queryMinute[0][1]) {
+			userMinute = round(queryMinute[0][1]);
+			scene=2;
+		}
+	}
+};
 var restart = function() {
 	location.reload();
 };
 
 var gblscr = width/400;
 
+// Mouse press logic for buttons
 var isMousePressed = false;
 mousePressed = function() {
 	isMousePressed = true;
@@ -85,6 +109,7 @@ var blank=0;
 var userHour=hour();
 var userMinute=minute();
 var scene = 0;
+checkQuery();
 
 var topRightCol = 50;
 
@@ -130,7 +155,7 @@ button.prototype.go = function() {
 	this.reset();
 };
 
-// Function to add 0
+// Function to add 0 in text
 var zeroPad = function(input) {
 	if (input<10) {
 		return "0"+input;
@@ -145,6 +170,12 @@ var sleepTime = function(settings) {
 	this.minute = settings.minute || minute();
 	this.saveFunc = settings.saveFunc || function() {};
 	this.removeFunc = settings.removeFunc || function() {};
+	if (settings.hour === 0) {
+		this.hour=0;
+	}
+	if (settings.minute === 0) {
+		this.minute=0;
+	}
 };
 sleepTime.prototype.go = function() {
 	this.minute=round(this.minute);
@@ -324,6 +355,19 @@ var restartButton = new button({
 	},
 });
 
+// Displays the link to the current user time
+var linkButton = new button({
+	x:100,
+	y:300,
+	h:20,
+	text:"Link",
+	onClick:function() {
+		alert("techiecable.github.io/programs/wake_calculator?h="+userHour+"&m="+userMinute);
+		isMousePressed=false;
+	},
+});
+
+// Calibrate all values
 var checkValues = function() {
 	if (round(millis()/1000)===millis()) {
 		round(userHour);
@@ -340,6 +384,7 @@ var checkValues = function() {
 		userHour = 23;
 	}
 	if (userMinute <= -1) {
+		userHour-=1;
 		userMinute = 59;
 	}
 };
@@ -358,6 +403,54 @@ draw = function() {
 	downMinuteButton.go();
 	promptButton.go();
 	restartButton.go();
+	linkButton.go();
+	
+	// Forces a refresh of the displayed values
+	nowhourArray=[];
+	nowminuteArray=[];
+	soonhourArray=[];
+	soonminuteArray=[];
+	userhourArray=[];
+	userminuteArray=[];
+	
+	// Recalculates values
+	nowSleep = new sleepTime({
+		startFunc:function() {
+			this.hour = hour();
+			this.minute = minute();
+		},
+		removeFunc:function() {
+			nowhourArray=[];
+			nowminuteArray=[];
+		},
+		saveFunc:function(min,hour) {
+			nowhourArray.push(hour);
+			nowminuteArray.push(min);
+		}
+	});
+	soonSleep = new sleepTime({
+		minute:minute()+15,
+		removeFunc:function() {
+			soonhourArray=[];
+			soonminuteArray=[];
+		},
+		saveFunc:function(min,hour) {
+			soonhourArray.push(hour);
+			soonminuteArray.push(min);
+		}
+	});
+	userSleep = new sleepTime({
+		hour:userHour,
+		minute:userMinute,
+		removeFunc:function() {
+			userhourArray=[];
+			userminuteArray=[];
+		},
+		saveFunc:function(min,hour) {
+			userhourArray.push(hour);
+			userminuteArray.push(min);
+		}
+	});
 	
 	// Set formatting
 	textAlign(CENTER, CENTER);
