@@ -1,13 +1,16 @@
 /* Front Page Header */
-.bg {
+.centering {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.full {
+	width: 100%;
 	height: 100%;
 }
 .front-header {
 	font-size: 400%;
 	color: white;
-	text-align: center;
-	position: relative;
-	top: 50%;
 }
 /* Header Menu */
 .menu {
