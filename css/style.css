@@ -18,6 +18,7 @@
 	padding: 10px 16px;
 	background: rgb(50, 43, 76);
 	color: #f1f1f1;
+	width: 100%;
 }
 .button {
 	margin: 10px;
@@ -28,15 +29,14 @@
 	margin: 0%;
 	position: fixed;
 	top: 0;
-	width: 100%
 }
 /* Favicon */
 #favicon {
 	z-index: 2;
 	position: fixed;
-	height: 10%;
-	right: 10px;
-	top: 10px;
+	height: 6%;
+	right: 0.5%;
+	top: 0.1%;
 }
 /* Badges */
 iframe#last_updated {

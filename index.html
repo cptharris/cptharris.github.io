@@ -11,18 +11,15 @@
 	<link rel='icon' href='img/favicon.ico' type='image/x-icon'>
 	<link rel="stylesheet" href="css/links.css">
 	<link rel="stylesheet" href="css/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
 		$(document).ready(function(){
-			// $("#pageHeader").hide();
-			// $("#favicon").hide();
 			$("main").hide();
 			$("main").show(10000);
-			// $(".bg").mouseleave(function(){ //changed from bg - check before implementing
-				// $("#pageHeader").show(2000);
-				// $("#favicon").show(3000);
-			// });
 		});
 	</script>
+	<script src="js/headerload.js"></script>
 </head>
 <style>
 	html, body {
@@ -41,20 +38,12 @@
 	}
 </style>
 <body>
-	<!-- Favicon in upper-right corner -->
-	<a href="index" style="cursor:auto;">
-		<img id="favicon" src="img/favicon.svg" alt="Image failed to load" />
-	</a>
-	
 	<!-- Front page -->
 	<div class="centering full" style="background: rgb(28, 24, 42);">
 		<span class="front-header">Techie Cable</span>
 	</div>
 	
-	<div class="menu sticky" id="pageHeader">
-		<a class="button" href="#techieblog">Home</a>
-		<a class="button" href="programs">Programs</a>
-	</div>
+	<include src="headermenu.html">Loading menus...</include>
 	
 	<main id="techieblog">
 		<h2>The Techie Blog</h2>

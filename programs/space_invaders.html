@@ -11,7 +11,8 @@
 	<link rel='icon' href='img/favicon.ico' type='image/x-icon'>
 	<link rel="stylesheet" href="css/links.css">
 	<link rel="stylesheet" href="css/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
 		$(document).ready(function(){
 			$("#progCanvas").mouseenter(function(){
 				$("#pageHeader").hide("slow");
@@ -21,6 +22,7 @@
 			});
 		});
 	</script>
+	<script src="js/headerload.js"></script>
 </head>
 <style>
 	html, body {
@@ -46,14 +48,7 @@
 	}
 </style>
 <body>
-	<a href="index" style="cursor:auto;">
-	<img id="favicon" src="img/favicon.svg" alt="Image failed to load" />
-	</a>
-	
-	<div class="menu sticky" id="pageHeader">
-		<a class="button" href="#techieblog">Home</a>
-		<a class="button" href="programs">Programs</a>
-	</div>
+	<include src="headermenu.html">Loading menus...</include>
 	
 	<div class="centering full">
 		<span class="front-header">Space Invaders</span>
