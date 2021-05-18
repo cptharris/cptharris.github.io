@@ -18,6 +18,7 @@ html, body {
 .front-header {
 	font-size: 400%;
 	color: white;
+	font-weight: normal;
 }
 /* Header Menu */
 .menu {
