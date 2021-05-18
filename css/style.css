@@ -57,3 +57,14 @@ iframe#last_updated {
 	width: auto;
 	height: 20px;
 }
+/* Blog Text Formatting */
+.tc_letter {
+	text-align: left;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+.tc_letter_header {
+	text-align: center;
+	color: rgb(52, 201, 235);
+	font-size: 200%;
+}

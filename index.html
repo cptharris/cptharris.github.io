@@ -30,11 +30,6 @@
 		height: 100%;
 		width: 100%;
 	}
-	.tc_letter {
-		text-align: left;
-		margin-left: 2%;
-		margin-right: 2%;
-	}
 </style>
 <body>
 	<!-- Front page -->
@@ -46,25 +41,18 @@
 	
 	<main id="techieblog">
 		<h2>The Techie Blog</h2>
-		<p class="tc_letter" style="width:90%;">
-			Hey! I'm Techie Cable, an ever-improving programmer. Welcome to my website!<br><br>
-			Right now, I am writing scripts with <a href="https://www.autohotkey.com/">AutoHotkey</a>, an automation scripting language. I've also recently been working on writing this website.<br><br>
-			I can't announce that I am completely finished yet, but it's coming along quite nicely. To start, I decided that I wanted a full-screen front page. While such a thing may sound simple, it took a lot of trial and mostly error to make it happen. However, after much research and more coding in both HTML and CSS, I now have that front page that I was looking for.<br><br>
-			
-			I've also been rewriting and transfering my programs from my old <a href="https://sites.google.com">Google Sites</a> page. You can view a list of <a href="programs">all my published programs</a> here on this site.<br><br>
-			
-			You might have noticed the header at the top of your page (the bar with links to my <a href="index">home page</a> and <a href="programs">programs page</a>). If you scroll down, it should travel with you. If not, I have more research to do.<br><br>
-			
-			Regardless, more is coming to this site in the near future! Thanks for visiting!<br><br>
-			
-			Click buttons and invent more,<br>
-			Techie Cable<br>
-			Aug 2020
-		</p>
+		
+		<div id="letters">
+			Loading blogs from source...
+		</div>
+		
 		<br><br>
+		
 		<p>View my previous blogs <a href="blog_archive">here</a>.</p>
 	</main>
 	
 	<div id="blankspace"></div>
 </body>
+<script src="js/loadblogs.js"></script>
+<script src="https://spreadsheets.google.com/feeds/cells/1eyWldvly_I5UMHb3bEZDFEkifbCRsgRbDTRNu4NOVRY/od6/public/values?alt=json-in-script&callback=listEntries"></script>
 </html>

@@ -24,14 +24,6 @@
 		height: 100%;
 		width: 100%;
 	}
-	.tc_letter {
-		text-align: left;
-		margin-left: 2%;
-		margin-right: 2%;
-	}
-	main h2 {
-		color: rgb(52, 201, 235);
-	}
 </style>
 <body>
 	<div class="centering full" style="background: rgb(28, 24, 42);">
@@ -40,46 +32,12 @@
 	
 	<include src="headermenu.html">Loading menus...</include>
 	
-	<main>
-		<h2>July 2020</h2>
-		<p class="tc_letter">
-			Hey! I'm Techie Cable, a learning programmer. Welcome to my website!<br><br>
-			Currently, I am writing Processing JavaScript programs, simple HTML web pages, and spicing those web pages up with some CSS styling. I recently wrote a few programs centered around time.<br><br>
-			Have you ever wondered exactly how many days it has been since your last birthday? The start of the year? 00/00/0000? I wrote a program that can calculate all of those, and more. Below you will see a program that I wrote specifically to show how many days have passed since a user-specified date. It basically calculates how many days there are between the user date and 00/00/0000. Then it finds today's date and calculates the number of days between that and 00/00/0000. Finally, it subtracts days since user date from today date and shows the viewer the output. I put it in a nice block of text so the user can see the outcome. To select the user-specified date, I made several buttons for switching between menus and increasing/decreasing the values.<br><br>
-			You can view a list of <a href="programs">all my published programs</a> or see <a href="programs\days_since">my latest release</a> <s>(link just after this letter)</s>.<br><br>
-			
-			Click buttons and invent more,<br>
-			Techie Cable<br>
-			July 2020
-		</p>
-		<h2>May 2020</h2>
-		<p class="tc_letter">
-			Hey! I'm Techie Cable, a learning programmer. Welcome to my website!<br><br>
-			
-			Currently, I am writing Processing JavaScript programs, simple HTML web pages, and spicing those web pages up with some CSS styling. I recently wrote a few programs centered around time. Let me explain:<br><br>
-			
-			Have you ever wondered exactly how many days it has been since your last birthday? The start of the year? <time>00/00/0000</time>? I <a href="programs\days_since">wrote a program that can calculate all of those</a>, and more. <s>Below you will see a program</s> that I wrote specifically to show how many days have passed since March 13, 2020, around when Coronavirus lockdowns started in some areas. It basically calculates how many days there were between <time>3/13/2020</time> and <time>00/00/0000</time>. Then it finds your current day and calculates the number of days between that and <time>00/00/0000</time>. Finally, it subtracts days since 3/13 from today and shows the viewer the output. <abbr title="No longer supported">I put it in a nice block of text for showing on the website.</abbr><br><br>
-			
-			You can view a <a href="programs">list of all my published programs</a> or see my <a href="programs\days_since">latest release</a> <s>(also shown just after this letter)</s>.<br><br>
-			
-			Click buttons and invent more,<br>
-			Techie Cable<br>
-			May 2020
-		</p>
-		<h2>Aug 2019</h2>
-		<p class="tc_letter">
-			Hey! I'm Techie Cable, an actively learning programmer. Welcome to my website! Let me tell you a bit about myself.<br><br>
-			
-			As of now, I can write very basic JavaScript programs, simplistic HTML web pages, and a bit of CSS styling. I created my first program, <a href="program\click_counter">Click Speed Counter</a>, as an experiment to test my learning. While creating it, I developed a system for measuring time inside a JavaScript program. Now I can assign a variable for the start time, current time, remaining time, and elapsed time in a program. With this knowledge, I can make individual objects or text appear on the page after a specified amount of time. For example, in my second program, <a href="programs\space_invaders">Space Invaders</a>, the game has a five-second countdown from when you hit the start button to when you are redirected to play the game.<br><br>
-			
-			I hope to continue to learn more and practice my skills by posting fun games and useful utilities on this site. You can view <a href="programs">list of all my published programs</a> or see <a href="programs\space_invaders">my latest release</a> <s>(also shown just after this letter)</s>.<br><br>
-			
-			Click buttons and invent more,<br>
-			Techie Cable<br>
-			Aug 2019
-		</p>
+	<main id="letters">
+		Loading blogs from source...
 	</main>
 	
 	<div id="blankspace"></div>
 </body>
+<script src="js/loadblogs.js"></script>
+<script src="https://spreadsheets.google.com/feeds/cells/1eyWldvly_I5UMHb3bEZDFEkifbCRsgRbDTRNu4NOVRY/od6/public/values?alt=json-in-script&callback=listEntries"></script>
 </html>
