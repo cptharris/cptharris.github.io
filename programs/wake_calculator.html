@@ -44,7 +44,14 @@
 	
 	<canvas id="progCanvas"></canvas>
 	
+	<input style="display:none;" type="text" value="URL" id="queryURL">
+	
 	<dl>
+		<dt>V3.0</dt>
+			<dd>Make the query function more reliable.</dd>
+			<dd>Copy the query link to clipboard.</dd>
+			<dd>The link button now changes the current page URL.</dd>
+			<dd>Add a scrubber button for finer hour and minute control.</dd>
 		<dt>V2.0</dt>
 			<dd>BUG FIX: Support zeros (0) as user values.</dd>
 			<dd>Read the url query.</dd>
@@ -58,29 +65,29 @@
 	</dl>
 </body>
 <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
+<script src="js/program_library.js" charset="utf-8"></script>
 <script>
 	var programCode = function(processingInstance) {
 		with (processingInstance) {size(600, 600);frameRate(60);
 			/************************************************************
 			********************     BEGIN CODE
 			************************************************************/
+/*
+	Wake Calculator
+Determines when you should wake up, based on your choose of bed time. Select now, soon, or input your own value.
+Use the arrow to adjust the user time, change the view mode with the buttons in the lower right, and use the fine scrubber mode for greater control.
+*/
 var checkQuery = function() {
-	var url = window.location.search;
-	url = url.replace("?",'');
-	queryHour = [...url.matchAll(/h=(\d*)/g)];
-	queryMinute = [...url.matchAll(/m=(\d*)/g)];
-	if (queryHour[0]) {
-		if (queryHour[0][1]) {
-			userHour = round(queryHour[0][1]);
-			scene=2;
-		}
+	var url = new URL(window.location);
+	if (url.searchParams.has("h")) {
+		userHour = url.searchParams.get("h");
+		scene = 2;
 	}
-	if (queryMinute[0]) {
-		if (queryMinute[0][1]) {
-			userMinute = round(queryMinute[0][1]);
-			scene=2;
-		}
+	if (url.searchParams.has("m")) {
+		userMinute = url.searchParams.get("m");
+		scene = 2;
 	}
+	
 };
 var restart = function() {
 	location.reload();
@@ -102,9 +109,13 @@ var blank=0;
 var userHour=hour();
 var userMinute=minute();
 var scene = 0;
+var scrubberOn = 0;
 checkQuery();
 
+var linkNotifyCounter = 0;
+
 var topRightCol = 50;
+var buttonsRightCol = 275;
 
 /**/
 // Button Objects
@@ -154,6 +165,15 @@ var zeroPad = function(input) {
 		return "0"+input;
 	} else {
 		return input;
+	}
+};
+
+// Return scrubber button text
+var scrubberText = function() {
+	if (scrubberOn) {
+		return "ON";
+	} else {
+		return "OFF";
 	}
 };
 
@@ -246,24 +266,24 @@ var userSleep = new sleepTime({
 
 // Scene buttons
 var nowButton = new button({
-	x:300,
-	y:250,
+	x:buttonsRightCol,
+	y:170+topRightCol,
 	text:"Now",
 	onClick:function() {
 		scene=0;
 	},
 });
 var soonButton = new button({
-	x:300,
-	y:300,
+	x:buttonsRightCol,
+	y:225+topRightCol,
 	text:"Soon",
 	onClick:function() {
 		scene=1;
 	},
 });
 var userButton = new button({
-	x:300,
-	y:350,
+	x:buttonsRightCol,
+	y:280+topRightCol,
 	text:"User",
 	onClick:function() {
 		scene=2;
@@ -280,6 +300,9 @@ var upHourButton = new button({
 	textSize:20,
 	onClick:function() {
 		userHour+=1;
+		if (scrubberOn) {
+			isMousePressed = false;
+		}
 	},
 	reset:function() {
 		textSize(10);
@@ -294,6 +317,9 @@ var upMinuteButton = new button({
 	textSize:20,
 	onClick:function() {
 		userMinute+=1;
+		if (scrubberOn) {
+			isMousePressed = false;
+		}
 	},
 	reset:function() {
 		textSize(10);
@@ -308,6 +334,9 @@ var downHourButton = new button({
 	textSize:20,
 	onClick:function() {
 		userHour-=1;
+		if (scrubberOn) {
+			isMousePressed = false;
+		}
 	},
 	reset:function() {
 		textSize(10);
@@ -322,6 +351,9 @@ var downMinuteButton = new button({
 	textSize:20,
 	onClick:function() {
 		userMinute-=1;
+		if (scrubberOn) {
+			isMousePressed = false;
+		}
 	},
 	reset:function() {
 		textSize(10);
@@ -340,22 +372,39 @@ var promptButton = new button({
 	},
 });
 var restartButton = new button({
-	x:355,
-	y:300,
+	x:buttonsRightCol+55,
+	y:225+topRightCol,
 	text:"Restart",
 	onClick:function() {
 		restart();
+	},
+});
+var scrubberButton = new button({
+	x:100,
+	y:300,
+	w:85,
+	h:20,
+	text:"Fine Scrubber",
+	onClick:function() {
+		if (scrubberOn) {
+			scrubberOn = 0;
+		} else {
+			scrubberOn = 1;
+		}
+		isMousePressed = false;
 	},
 });
 
 // Displays the link to the current user time
 var linkButton = new button({
 	x:100,
-	y:300,
+	y:210,
 	h:20,
 	text:"Link",
 	onClick:function() {
-		alert("techiecable.github.io/programs/wake_calculator?h="+userHour+"&m="+userMinute);
+		setURLParams("h",userHour,"m",userMinute);
+		// alert("Copy the link from your address bar, or copy this link:\ntechiecable.github.io/programs/wake_calculator?h="+userHour+"&m="+userMinute);
+		linkNotifyCounter = 1;
 		isMousePressed=false;
 	},
 });
@@ -381,6 +430,7 @@ var checkValues = function() {
 		userMinute = 59;
 	}
 };
+
 /**/
 
 draw = function() {
@@ -397,6 +447,18 @@ draw = function() {
 	promptButton.go();
 	restartButton.go();
 	linkButton.go();
+	scrubberButton.go();
+	
+	// Displays scrubber ON/OFF
+	text(scrubberText(),100*gblscr,320*gblscr);
+	
+	// Displays link help text
+	if (linkNotifyCounter < 200 && linkNotifyCounter > 0) {
+		linkNotifyCounter++;
+		text("Copied the URL",100*gblscr,240*gblscr);
+	} else {
+		linkNotifyCounter = 0;
+	}
 	
 	// Forces a refresh of the displayed values
 	nowhourArray=[];
