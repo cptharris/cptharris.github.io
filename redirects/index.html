@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Redirects</title>
+	<base href="https://techiecable.github.io" target="_self">
+	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+	html, body {
+		text-align: center;
+		background-color: rgb(71, 57, 116);
+		color: white;
+		font-size: 120%;
+		margin: 0px;
+		height: 100%;
+		width: 100%;
+	}
+	input[type="text"] {
+		width: 50%;
+	}
+</style>
+<body>
+	<!-- Front page -->
+	<div class="centering full" style="background: rgb(28, 24, 42);">
+		<h1 class="front-header">Redirecting...</h1>
+	</div>
+	
+	<noscript>
+		<div id="blankspace"></div>
+		
+		For this site to perform its basic functions, it is necessary to enable JavaScript.<br>
+		You can allow JavaScript in your browser settings <a href="https://www.whatismybrowser.com/guides/how-to-enable-javascript/auto">by following these instructions</a>.
+		
+		<div id="blankspace"></div>
+	</noscript>
+	
+	<main>
+		<p>This site uses a simple Google Sheets query to provide a quick redirection link. Enter a complete URL below to try it.<br>Links are deleted from the system automatically.</p>
+	</main>
+	
+	<div id="blankspace"></div>
+	
+	<div>
+		<h1>Create Quicklink</h1>
+		<input type="text" value="" id="URL-input">
+		<br>
+		<input type="number" id="numDays" min="0" max="100" value="0">
+		<br>
+		<input type="button" style="height: 10%;" onclick="formURL(document.getElementById('URL-input').value,document.getElementById('numDays').value)" value="Submit">
+		<br>
+		<input type="text" value="" id="URL-output">
+		<p id="response">Enter a valid URL, including the full protocol and domain.</p>
+		
+		<br>
+		<iframe src="" width="0" height="0" id="submit-iframe"></iframe>
+	</div>
+	
+	<div id="blankspace"></div>
+	
+	<div>
+		<h1>Quick Hasher</h1>
+		<input type="text" value="" id="input"><br><br>
+		<input type="button" onclick="document.getElementById('hash').value = fastHash(document.getElementById('input').value)" value="Hash"><br><br>
+		<input type="text" value="" id="hash">
+	</div>
+	
+	<div id="blankspace"></div>
+	
+</body>
+<script type="text/javascript">
+	var fastHash = function(str, seed = 0) { // returns the hash of the hashes of the halves of the string
+		return cyrb53(cyrb53(str.substring(0, str.length / 2), seed) + cyrb53(str.substring(str.length / 2), seed));
+		// return cyrb53(str, seed) + cyrb53(cyrb53(str, seed), seed)
+	}
+	
+	var cyrb53 = function(str, seed = 0) { // https://stackoverflow.com/a/52171480
+		var h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+		for (var i = 0, ch; i < str.length; i++) {
+			ch = str.charCodeAt(i);
+			h1 = Math.imul(h1 ^ ch, 2654435761);
+			h2 = Math.imul(h2 ^ ch, 1597334677);
+		}
+		h1 = Math.imul(h1 ^ (h1>>>16), 2246822507) ^ Math.imul(h2 ^ (h2>>>13), 3266489909);
+		h2 = Math.imul(h2 ^ (h2>>>16), 2246822507) ^ Math.imul(h1 ^ (h1>>>13), 3266489909);
+		// return 4294967296 * (2097151 & h2) + (h1>>>0);
+		// return [h2>>>0, h1>>>0];
+		return (h2>>>0).toString(16).padStart(8,0)+(h1>>>0).toString(16).padStart(8,0);
+		// return 4294967296n * BigInt(h2) + BigInt(h1);
+	};
+	
+	var sleep = function(milliseconds) {
+		var date = Date.now();
+		var currentDate = null;
+		while (currentDate - date < milliseconds) {
+			currentDate = Date.now();
+		}
+	}
+	
+	var formURL = function(URL,days) {
+		if (!(URL)) {
+			document.getElementById('response').innerHTML += "<br>No URL passed.";
+			return
+		} else if (!(URL.includes("http") || URL.includes("://"))) {
+			document.getElementById('response').innerHTML += "<br>Invalid URL.";
+			return
+		}
+		
+		if (!(days)) {
+			days = 60;
+		} else if (days > 100) {
+			days = 100;
+		}
+		
+		var hash = fastHash(URL + "");
+		
+		for (var i = 0; i < databaseKeys.length; i++) {
+			if (hash == databaseKeys[i][0]) {
+				document.getElementById('response').innerHTML += "<br>Hash already entered."
+				return
+			}
+		}
+		
+		databaseKeys.push([hash,URL]);
+		
+		var submitFormURL = "https://docs.google.com/forms/d/e/"+ "1FAIpQLScD207jnL00K8krRRbyU6-Lm5nw1_QQ6AsGzLccXfpeorLAVw" + "/formResponse?usp=pp_url&entry.147838225=" + encodeURI(URL) + "&entry.1116408077=" + hash + "&entry.747563745=" + days + "&submit=Submit";
+		
+		document.getElementById('submit-iframe').setAttribute("src",submitFormURL);
+		document.getElementById('URL-output').value = location.origin + location.pathname + "?q=" + hash;
+		document.getElementById('response').innerHTML += "<br>Quicklink created. This link will be deleted after approximately " + days + " day(s).";
+	}
+	
+	var url = new URL(window.location);
+	if (url.searchParams.has("q")) {
+		var requestURL = url.searchParams.get("q");
+	}
+	
+	var databaseKeys = [];
+	function processEntries(input) {
+		var entries = input.feed.entry; // get the GS feed
+					
+		for (var i = 0; i < entries.length; i+=2) {
+			var entry_key = entries[i]; // key
+			var entry_URL = entries[i+1]; // URL
+			
+			databaseKeys.push([entry_key.content.$t,entry_URL.content.$t]);
+			
+			if (requestURL) {
+				if (entry_key.content.$t == requestURL) {
+					window.location = entry_URL.content.$t;
+					sleep(2000);
+				}
+			}
+		}
+	}
+</script>
+<script src="https://spreadsheets.google.com/feeds/cells/1XJBOYua9V6WKiwLfE-0Yif0se7XW0nDKwXvxD1lQfD4/od6/public/values?alt=json-in-script&callback=processEntries"></script>
+</html>
