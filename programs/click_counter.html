@@ -44,7 +44,16 @@
 	
 	<canvas id="progCanvas"></canvas>
 	
+	<p>Warning: the FPS is a lot higher now, so it might crash the page/your browser.</p>
+	
 	<dl>
+		<dt>V2.0</dt>
+			<dd>Complete Rewrite</dd>
+			<dd><a href="https://www.khanacademy.org/computer-programming/click-speed-counter/6308245616295936">View the original version here.</a></dd>
+			<dd>Use a more accurate timing system.</dd>
+			<dd>Design a simpler interface.</dd>
+			<dd>Use better buttons.</dd>
+			<dd>Display output neatly.</dd>
 		<dt>V1.3</dt>
 			<dd>Fixed a bug where clicks would not register.</dd>
 	</dl>
@@ -52,122 +61,145 @@
 <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
 <script>
 	var programCode = function(processingInstance) {
-		with (processingInstance) {size(600, 600);frameRate(30);
+		with (processingInstance) {size(600, 600);frameRate(120);
 			/************************************************************
 			********************     BEGIN CODE
 			************************************************************/
-			/************************************************************
-			********************	  CLICK SPEED
-			************************************************************/
-			
-			/*
-			This program, created by CalebH05, calculates CPS, or clicks per second.
-			
-			It also provides encouragement as your CPS (CPSs?) raise (or lower).
-			
-			Check it out and tell others how you did!
-												|
-												↓
-			
-			*/
-			
-			var clickBoxX = width * 0.375; //change the click box x value
-			var clickBoxY = height * 0.375; //change the click box y value
-			var startTime = 0; //define the variables
-			var endTime = 0; //changing these numbers
-			var elapsedTime = 0; //will not do anything
-			var TimeSec = 0; //not even this one
-			var clickCount = 0; //they get redefined later
-			var CPS = 0; //change them elsewhere, if you want
-			var clickTextColor = [255, 0, 0, 255, 0, 0, 255, 255, 255];
-			
-			draw = function() {
-				background (191, 253, 255);
-				noStroke();
-				
-				TimeSec = hour() * 3600 + minute() * 60 + second(); //provides the current time, in seconds
-				
-				/************************************************************
-				********************	 RESET TIME BOX CONTROLS
-				************************************************************/
-				
-				fill(255, 255, 255); //Reset box color
-				rect(width * 0.875, height * 0.875, 75, 75); //Reset time box
-				fill(0, 34, 255); //Reset label color
-				textSize(12); //Reset label font size
-				text("Reset", width * 0.916, height * 0.95); //Reset time label
-				
-				/************************************************************
-				********************	 CLICK BOX CONTROLS
-				************************************************************/
-				
-				fill(255, 255, 255); //Click box color
-				rect(clickBoxX, clickBoxY, 150, 150); //Click box
-				
-				textSize(20); //Click text font size
-				fill(clickTextColor[0], clickTextColor[1], clickTextColor[2]);
-				text("Press any key to start", clickBoxX * 0.911, clickBoxY * 0.955); //Instruction text
-				
-				fill(clickTextColor[3], clickTextColor[4], clickTextColor[5]);
-				text("Then click here!", clickBoxX * 1.022, clickBoxY * 1.355); // More instruction text
-				
-				fill(clickTextColor[6], clickTextColor[7], clickTextColor[8]);
-				text("CLICK!!", clickBoxX * 1.177, clickBoxY * 1.222); //CLICK
-				
-				/************************************************************
-				********************	  VIEWER INFO DIPSLAY CONTROLS
-				************************************************************/
-				
-				fill(0, 21, 255);
-				text("Start time: " + startTime, 20, 20); //display start time
-				text("End time: " + endTime, 20, 50); //display end time
-				text("Current time: " + hour() + ":" + minute() + ":" + second(), 200, 20); //display current time
-				text("Click count: " + clickCount, 200, 50); //display # clicks
-				text("Elapsed: " + elapsedTime, clickBoxX * 1.12, clickBoxY * 1.755); //display elapsed time
-				text("CPS = " + CPS, clickBoxX * 1.11, clickBoxY * 1.888);
-				
-				/************************************************************
-			********************	  ENCOURAGEMENT
-			************************************************************/
-				
-				if (startTime > 0) {
-					if (CPS <= 3) {
-						fill(0, 0, 255);
-						text("FASTER!!!!", clickBoxX + 25, clickBoxY + 100);
-					} else if (CPS <= 5) {
-						text("KEEP IT UP!", clickBoxX + 25, clickBoxY + 100);
-					} else if (CPS <= 8) {
-						text("YOU CAN DO IT!", clickBoxX - 5, clickBoxY + 100);
-					} else if (CPS > 8) {
-						text("GOOD JOB!!", clickBoxX + 22, clickBoxY + 100);
-					}
-				} //provide encouraging messages
-				
-				/************************************************************
-				********************	  LOGIC
-				************************************************************/
-				
-				mousePressed = function() {
-					if (mouseX > width * 0.875 && mouseY > height * 0.875) {
-						startTime = 0;
-						endTime = 0;
-						clickCount = 0;
-						clickTextColor = [255, 0, 0, 255, 0, 0, 255, 255, 255];
-					} //reset start / end time & click count
-					if (mouseX >= clickBoxX && mouseY >= clickBoxY && mouseY <= clickBoxX + 150 && mouseX <= clickBoxX + 150) {
-						clickCount++; //add to click number when mouse clicked
-						endTime =  TimeSec;
-					}
-				}; //count clicks and update end time
-				keyPressed = function() {
-					startTime = TimeSec;
-					clickCount = 0;
-					clickTextColor = [191, 253, 255, 255, 255, 255, 0, 0, 0];
-				}; //set the start time
-				
-				elapsedTime = endTime - startTime; //calculate elapsed time
-				CPS = round(clickCount / elapsedTime); //calculate cps
-			};
+var gblscr = width/400;
+
+var ellapsedTime=0;
+var lastTime=0;
+var clickCount=0;
+var displayText = "";
+var displayTextRounded = "__ cps";
+
+var topY = 150;
+
+/**/
+var isMousePressed = false;
+mousePressed = function() {
+	isMousePressed = false;
+};
+mouseReleased = function() {
+	isMousePressed = true;
+};
+var button = function(settings) {
+	this.x = settings.x*gblscr || width/2;
+	this.y = settings.y*gblscr || height/2;
+	this.w = settings.w*gblscr || 50*gblscr;
+	this.h = settings.h*gblscr || 50*gblscr;
+	this.text = settings.text || "click";
+	this.textSize = settings.textSize*gblscr || 12*gblscr;
+	this.color_r = settings.color_r || 0;
+	this.color_g = settings.color_g || 0;
+	this.color_b = settings.color_b || 0;
+	this.textColor = settings.textColor || color(255, 255, 255);
+	this.radius = settings.radius*gblscr || 10*gblscr;
+	this.onClick = settings.onClick || function() {println("ERROR: no function defined");};
+	this.reset = settings.reset || function() {};
+};
+button.prototype.go = function() {
+	//Button formatting
+	textAlign(CENTER, CENTER);
+	rectMode(CENTER);
+	noStroke();
+	textSize(this.textSize);
+	fill(this.color_r, this.color_g, this.color_b);
+	
+	//What happens when you click inside the button
+	if (mouseX >= this.x - this.w/2 && mouseY >= this.y - this.h/2 && mouseX <= this.x + this.w/2 && mouseY <= this.y + this.h/2) {
+		fill(this.color_r + 40, this.color_g + 40, this.color_b + 40);
+		if (isMousePressed) {
+			fill(this.color_r + 80, this.color_g + 80, this.color_b + 80);
+			this.onClick();
+			// isMousePressed=false;
+		}
+	}
+	//Draws the button shape
+	rect(this.x, this.y, this.w, this.h, this.radius);
+	fill(this.textColor);
+	text(this.text, this.x, this.y);
+	
+	//If defined, this can be used to call actions after the button has happened
+	this.reset();
+};
+/**/
+
+var rightNow = function() {
+	return hour() * 3600 + minute() * 60 + second();
+};
+lastTime = rightNow();
+
+var resetVars = function() {
+	ellapsedTime=0;
+	clickCount=0;
+};
+var underScores = function() {
+	if (clickCount > ellapsedTime) {
+		if (clickCount >= 10000) {
+			return "_____";
+		} else if (clickCount >= 1000) {
+			return "____";
+		} else if (clickCount >= 100) {
+			return "___";
+		} else {
+			return "__";
+		}
+	} else {
+		if (ellapsedTime >= 10000) {
+			return "_____";
+		} else if (ellapsedTime >= 1000) {
+			return "____";
+		} else if (ellapsedTime >= 100) {
+			return "___";
+		} else {
+			return "__";
+		}
+	}
+};
+
+var clickyButton = new button({
+	text:"Click here!",
+	y:topY,
+	w:150,
+	h:100,
+	onClick:function() {
+		clickCount++;
+		ellapsedTime += rightNow() - lastTime;
+		
+		if (rightNow() - lastTime > 2) {
+			resetVars();
+		}
+		lastTime = rightNow();
+		isMousePressed = false;
+	},
+});
+
+draw = function() {
+	background(0, 180, 255);
+	textAlign(CENTER,CENTER);
+	
+	clickyButton.go();
+	
+	textSize(20*gblscr);
+	text(clickCount, 150*gblscr, (topY+90)*gblscr);
+	text(underScores(), 150*gblscr, (topY+90)*gblscr);
+	text(ellapsedTime, 150*gblscr, (topY+114)*gblscr);
+	
+	text("=", 195*gblscr, (topY+100)*gblscr);
+	
+	if (ellapsedTime > 0 && clickCount > 0) {
+		displayTextRounded = round(clickCount/ellapsedTime) + " cps";
+		displayText = clickCount/ellapsedTime;
+	} else {
+		displayTextRounded = "__ cps";
+		displayText = "";
+	}
+	
+	text(displayTextRounded, 250*gblscr, (topY+100)*gblscr);
+	text(displayText, 200*gblscr, (topY+175)*gblscr);
+	
+};
 			/************************************************************
 			********************     END CODE
 			************************************************************/
