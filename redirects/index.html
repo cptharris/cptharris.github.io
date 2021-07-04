@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/links.css">
 </head>
 <script type="text/javascript" src="js/aes.js"></script>
+<script src="js/program_library.js" charset="utf-8"></script>
 <script type="text/javascript">
 	/* Define functions */
 	var fastAES = function(entry, password, method=1) {
@@ -145,10 +146,13 @@
 		text-align: center;
 		background-color: rgb(71, 57, 116);
 		color: white;
-		font-size: 120%;
+		font-size: 150%;
 		margin: 0px;
 		height: 100%;
 		width: 100%;
+	}
+	input {
+		font-size: 50%;
 	}
 	input[type="text"] {
 		width: 40%;
@@ -203,11 +207,19 @@
 		<label for="URL-output">Quick URL: </label>
 		<input type="text" value="" id="URL-output">
 		<input type="button" onclick="document.getElementById('URL-output').value = ''" value="X">
-		<p id="response">Enter a valid URL, including the full protocol and domain.</p>
-		
 		<br>
+		<!-- Copy URL button -->
+		<input type="button" onclick="copyText('queryURL',document.getElementById('URL-output').value); document.getElementById('response').innerHTML += '<br>Copied';" value="Copy">
+		<!-- Clear all button -->
+		<input type="button" onclick="document.getElementById('response').innerHTML = 'Enter a valid URL, including the full protocol and domain.'; document.getElementById('URL-output').value = ''; document.getElementById('numDays').value = 0; document.getElementById('URL-input').value = '';" value="Clear">
+		<br>
+		<p id="response">Enter a valid URL, including the full protocol and domain.</p>
+		<br>
+		
 		<!-- Submission iFrame -->
 		<iframe src="" width="0" height="0" id="submit-iframe" style="border:none; padding:0%; margin:0%;"></iframe>
+		<!-- Copy Box -->
+		<input style="display:none;" type="text" value="URL" id="queryURL">
 	</div>
 	
 	<div id="blankspace"></div>
@@ -217,9 +229,11 @@
 		<!-- Text entry -->
 		<label for="quick-hash-input">Enter text to hash: </label>
 		<input type="text" value="" id="quick-hash-input">
-		<input type="button" onclick="document.getElementById('quick-hash-input').value = ''" value="X"><br><br>
+		<input type="button" onclick="document.getElementById('quick-hash-input').value = ''" value="X">
+		<br>
 		<!-- Submission button -->
-		<input type="button" onclick="document.getElementById('quick-hash-output').value = fastHash(document.getElementById('quick-hash-input').value)" value="Hash"><br><br>
+		<input type="button" onclick="document.getElementById('quick-hash-output').value = fastHash(document.getElementById('quick-hash-input').value)" value="Hash">
+		<br>
 		<!-- Output -->
 		<label for="quick-hash-output">Hash of text: </label>
 		<input type="text" value="" id="quick-hash-output">
@@ -233,25 +247,30 @@
 		<!-- Text input and password input -->
 		<label for="quick-aes-input">Enter text to encrypt/decrypt: </label>
 		<input type="text" value="" id="quick-aes-input">
-		<input type="button" onclick="document.getElementById('quick-aes-input').value = ''" value="X"><br><br>
+		<input type="button" onclick="document.getElementById('quick-aes-input').value = ''" value="X">
+		<br>
 		<label for="quick-aes-password">Enter password: </label>
 		<input type="text" value="password" id="quick-aes-password" style="width:20%;">
 		<input type="button" onclick="document.getElementById('quick-aes-password').value = ''" value="X">
-		<label for="quick-aes-password">Remember this password!</label><br><br>
+		<label for="quick-aes-password">Remember this password!</label>
+		<br>
 		
 		<!-- Encryption button -->
 		<input type="button" onclick="document.getElementById('quick-aes-output').value = fastAES(document.getElementById('quick-aes-input').value,document.getElementById('quick-aes-password').value,1)" value="Encrypt">
 		
 		<!-- Decryption button -->
-		<input type="button" onclick="document.getElementById('quick-aes-output').value = fastAES(document.getElementById('quick-aes-input').value,document.getElementById('quick-aes-password').value,0)" value="Decrypt"><br><br>
+		<input type="button" onclick="document.getElementById('quick-aes-output').value = fastAES(document.getElementById('quick-aes-input').value,document.getElementById('quick-aes-password').value,0)" value="Decrypt">
+		<br>
 		
 		<!-- Output -->
 		<label for="quick-aes-output">Encrypted/Decrypted text: </label>
 		<input type="text" value="" id="quick-aes-output">
-		<input type="button" onclick="document.getElementById('quick-aes-output').value = ''" value="X"><br><br>
+		<input type="button" onclick="document.getElementById('quick-aes-output').value = ''" value="X">
+		<br>
 		
 		<!-- Sends output to input box -->
-		<input type="button" onclick="document.getElementById('quick-aes-input').value = document.getElementById('quick-aes-output').value" value="Output to Input"><br><br>
+		<input type="button" onclick="document.getElementById('quick-aes-input').value = document.getElementById('quick-aes-output').value" value="Output to Input">
+		<br>
 	</div>
 	
 	<div id="blankspace"></div>
