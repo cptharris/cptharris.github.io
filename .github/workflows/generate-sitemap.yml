@@ -1,5 +1,8 @@
 name : Generates Sitemap
-on: [push]
+on:
+    push:
+        paths:
+            - '**.html'
 jobs:
   do_sitemap:
     runs-on: ubuntu-latest
