@@ -6,10 +6,14 @@
 	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/links.css">
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/headerload.js"></script>
 <script type="text/javascript" src="js/aes.js"></script>
 <script src="js/program_library.js" charset="utf-8"></script>
+
+<!-- Redirection Functions, Processing, and Loading : BEGIN -->
+
 <script type="text/javascript">
 	/* Define functions */
 	var fastAES = function(entry, password, method=1) {
@@ -141,15 +145,12 @@
 	}
 </script>
 <script src="https://spreadsheets.google.com/feeds/cells/1XJBOYua9V6WKiwLfE-0Yif0se7XW0nDKwXvxD1lQfD4/od6/public/values?alt=json-in-script&callback=processEntries"></script>
+
+<!-- Redirection Functions, Processing, and Loading : END -->
+
 <style>
 	html, body {
-		text-align: center;
-		background-color: rgb(71, 57, 116);
-		color: white;
 		font-size: 150%;
-		margin: 0px;
-		height: 100%;
-		width: 100%;
 	}
 	input {
 		font-size: 50%;
@@ -173,6 +174,7 @@
 		<h1 class="front-header">Redirecting...</h1>
 	</div>
 	
+	<!-- No JS announcement -->
 	<noscript>
 		<div id="blankspace"></div>
 		
@@ -181,6 +183,9 @@
 		
 		<div id="blankspace"></div>
 	</noscript>
+	
+	<!-- Load header menu -->
+	<include src="headermenu.html">Loading menus...</include>
 	
 	<main>
 		<p>This site uses a simple Google Sheets query to provide a quick redirection link. Enter a complete URL below to try it.<br>Links are encrypted to ensure data security and are deleted from the system automatically.</p>

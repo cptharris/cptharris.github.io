@@ -9,27 +9,11 @@
 	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
 	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
-	<link rel="stylesheet" href="css/links.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			$("main").hide();
-			$("main").show(2000);
-		});
-	</script>
 	<script src="js/headerload.js"></script>
 </head>
 <style>
-	html, body {
-		text-align: center;
-		background-color: rgb(71, 57, 116);
-		color: white;
-		font-size: 120%;
-		margin: 0px;
-		height: 100%;
-		width: 100%;
-	}
 </style>
 <body>
 	<!-- Front page -->
@@ -37,6 +21,7 @@
 		<h1 class="front-header">Techie Cable</h1>
 	</div>
 	
+	<!-- No JS announcement -->
 	<noscript>
 		<div id="blankspace"></div>
 		
@@ -46,8 +31,10 @@
 		<div id="blankspace"></div>
 	</noscript>
 	
+	<!-- Load header menu -->
 	<include src="headermenu.html">Loading menus...</include>
 	
+	<!-- Main element with most recent blog published -->
 	<main id="techieblog">
 		<h2>The Techie Blog</h2>
 		<div id="letters">
