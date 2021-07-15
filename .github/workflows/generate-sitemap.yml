@@ -29,14 +29,12 @@ jobs:
     
     - name: Git Commit and Push
       id: commit
-      uses: github-actions-x/commit@v2.8
-      with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          # push-branch: 
-          commit-message: "actions: generate-sitemap"
-          # force-add: 
-          # force-push: 
-          # rebase: 
-          files: ${{ steps.sitemap.outputs.sitemap-path }}
-          email: "actions@github.com"
-          name: "github-actions[bot]"
+      run: |
+        git config --local user.name "github-actions[bot]"
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add ${{ steps.sitemap.outputs.sitemap-path }}
+        git commit "actions: generate-sitemap"
+        git push https:://$USERNAME:$REPO_KEY@github.com/TechieCable/techiecable.github.io.git
+      env:
+        REPO_KEY: ${{ secrets.GITHUB_TOKEN }}
+        USERNAME: github-actions[bot]
