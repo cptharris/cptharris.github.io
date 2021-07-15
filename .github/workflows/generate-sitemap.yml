@@ -26,4 +26,17 @@ jobs:
         echo "sitemap-path = ${{ steps.sitemap.outputs.sitemap-path }}"
         echo "url-count = ${{ steps.sitemap.outputs.url-count }}"
         echo "excluded-count = ${{ steps.sitemap.outputs.excluded-count }}"
-      
+    
+    - name: Git Commit and Push
+      id: commit
+      uses: github-actions-x/commit@v2.8
+      with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # push-branch: 
+          commit-message: "Automatic Generate Sitemap"
+          # force-add: 
+          # force-push: 
+          # rebase: 
+          files: ${{ steps.sitemap.outputs.sitemap-path }}
+          email: "actions@github.com"
+          name: "Github Actions"
