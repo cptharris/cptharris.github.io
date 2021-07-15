@@ -33,7 +33,7 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git add ${{ steps.sitemap.outputs.sitemap-path }}
-        git commit "actions: generate-sitemap"
+        git commit -m "actions: generate-sitemap"
         git push https:://$USERNAME:$REPO_KEY@github.com/TechieCable/techiecable.github.io.git
       env:
         REPO_KEY: ${{ secrets.GITHUB_TOKEN }}
