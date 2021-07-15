@@ -33,10 +33,10 @@ jobs:
       with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # push-branch: 
-          commit-message: "Automatic Generate Sitemap"
+          commit-message: "actions: generate-sitemap"
           # force-add: 
           # force-push: 
           # rebase: 
           files: ${{ steps.sitemap.outputs.sitemap-path }}
           email: "actions@github.com"
-          name: "Github Actions"
+          name: "github-actions[bot]"
