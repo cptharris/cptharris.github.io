@@ -1,0 +1,26 @@
+name : Generates Sitemap
+on: [push]
+jobs:
+  do_sitemap:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+      
+    - name: generate sitemap
+      id: sitemap
+      uses: cicirello/generate-sitemap@v1
+      with:
+        base-url-path: https://techiecable.github.io
+        include-pdf: false
+        drop-html-extension: true
+    
+    - name: output stats
+      run: |
+        echo "sitemap-path = ${{ steps.sitemap.outputs.sitemap-path }}"
+        echo "url-count = ${{ steps.sitemap.outputs.url-count }}"
+        echo "excluded-count = ${{ steps.sitemap.outputs.excluded-count }}"
+      
