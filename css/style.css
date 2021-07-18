@@ -68,6 +68,10 @@ a:active {
 	color: rgb(249, 230, 186);
 }
 
+a.hash {
+	font-size: 25%;
+}
+
 /* Programs */
 #progCanvas {
 	margin: 2% 0% 2% 0%;
