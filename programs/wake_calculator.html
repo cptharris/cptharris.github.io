@@ -1,67 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
 	<title>TechieCable - Wake Calculator</title>
 	<base href="https://techiecable.github.io" target="_self">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<meta name="description" content="TechieCable's Coding Website">
 	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
-	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/programs.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="js/headerload.js"></script>
 	
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="js/includes.js"></script>
+	
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
 	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-QW9ZGL7K7W');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		
+		gtag('config', 'G-QW9ZGL7K7W');
 	</script>
 	<!-- End Site Tag - Google Analytics -->
 </head>
-<style>
-</style>
-<body>
-	<include src="headermenu.html">Loading menus...</include>
-	
-	<div class="centering full">
-		<h1 class="front-header">Wake Calculator</h1>
+<body class="h-100">
+	<div class="container-fluid h-100">
+		<div class="row mb-auto">
+			<include src="headermenu.html">Loading menus...</include>
+		</div>
+		
+		<div class="row align-items-center h-100 mb-5" style="background: rgb(28, 24, 42);">
+			<div class="col d-flex flex-column justify-content-center">
+				<main>
+					<h1 class="display-1 text-center">Wake Calculator</h1>
+				</main>
+			</div>
+		</div>
+		
+		<div class="row text-center">
+			<div class="col mx-0 px-0">
+				<canvas id="progCanvas"></canvas>
+				<dl>
+					<dt>V3.0</dt>
+						<dd>Make the query function more reliable.</dd>
+						<dd>Copy the query link to clipboard.</dd>
+						<dd>The link button now changes the current page URL.</dd>
+						<dd>Add a scrubber button for finer hour and minute control.</dd>
+					<dt>V2.0</dt>
+						<dd>BUG FIX: Support zeros (0) as user values.</dd>
+						<dd>Read the url query.</dd>
+						<dd>Display now updates correctly.</dd>
+						<dd>Add a button to display the current link with query.</dd>
+					<dt>V1.0</dt>
+						<dd>Created the new Wake Calculator!</dd>
+						<dd>Use now, soon, or a custom time to calculate when you should wake up.</dd>
+						<dd>Enter a custom time with the right panel buttons.</dd>
+						<dd>Uses the JS "prompt" function to ask for input.</dd>
+				</dl>
+				<input style="display:none;" type="text" value="URL" id="queryURL">
+			</div>
+		</div>
+		<div class="blankspace"></div>
 	</div>
-	<div id="bar"></div>
 	
-	<canvas id="progCanvas"></canvas>
+	<include src="footermenu.html">Loading footer...</include>
 	
-	<input style="display:none;" type="text" value="URL" id="queryURL">
-	
-	<dl>
-		<dt>V3.0</dt>
-			<dd>Make the query function more reliable.</dd>
-			<dd>Copy the query link to clipboard.</dd>
-			<dd>The link button now changes the current page URL.</dd>
-			<dd>Add a scrubber button for finer hour and minute control.</dd>
-		<dt>V2.0</dt>
-			<dd>BUG FIX: Support zeros (0) as user values.</dd>
-			<dd>Read the url query.</dd>
-			<dd>Display now updates correctly.</dd>
-			<dd>Add a button to display the current link with query.</dd>
-		<dt>V1.0</dt>
-			<dd>Created the new Wake Calculator!</dd>
-			<dd>Use now, soon, or a custom time to calculate when you should wake up.</dd>
-			<dd>Enter a custom time with the right panel buttons.</dd>
-			<dd>Uses the JS "prompt" function to ask for input.</dd>
-	</dl>
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
 <script src="js/program_library.js" charset="utf-8"></script>
 <script>
+	var screenSizeAvail = Math.min(window.screen.availWidth, window.screen.availHeight) * 0.95;
+	
 	var programCode = function(processingInstance) {
-		with (processingInstance) {size(600, 600);frameRate(60);
+		with (processingInstance) {size(screenSizeAvail, screenSizeAvail);frameRate(60);
 			/************************************************************
 			********************     BEGIN CODE
 			************************************************************/

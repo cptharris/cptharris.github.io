@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>TechieCable</title>
+	<base href="https://techiecable.github.io" target="_self">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="TechieCable's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+	
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		
+		gtag('config', 'G-QW9ZGL7K7W');
+	</script>
+	<!-- End Site Tag - Google Analytics -->
+</head>
+<script type="text/javascript" src="js/aes.js"></script>
+<script src="js/program_library.js" charset="utf-8"></script>
+<script type="text/javascript">
+	var formURL = function(url,days) {
+		if (!(validURL(url))) {
+			return "Invalid<br>";
+		}
+		
+		if (!(days)) {
+			days = 60;
+		} else if (days > 100) {
+			days = 100;
+		}
+		
+		var hpswd = fastHash(url + "");
+		var hash = fastHash(hpswd);
+		var shortURL = parent.origin + "/redirects/?q=" + hpswd + "&e";
+		
+		for (var i = 0; i < parent.databaseKeys.length; i++) {
+			if (hash == parent.databaseKeys[i][0]) {
+				return "Hash already entered.<br><a href='" + shortURL + "'>" + shortURL + "</a><br>";
+			}
+		}
+		
+		parent.databaseKeys.push([hash,url]);
+		
+		var submitFormURL = "https://docs.google.com/forms/d/e/"+ "1FAIpQLScD207jnL00K8krRRbyU6-Lm5nw1_QQ6AsGzLccXfpeorLAVw" + "/formResponse?usp=pp_url&entry.147838225=" + encodeURIComponent(fastAES(url,hpswd)) + "&entry.1116408077=" + hash + "&entry.747563745=" + days + "&submit=Submit";
+		
+		document.getElementById('submit-iframe').setAttribute("src",submitFormURL);
+		
+		return "Quicklink created. This link will be deleted after approximately " + days + " day(s).<br><a href='" + shortURL + "'>" + shortURL + "</a><br>";
+	};
+</script>
+<body>
+	<div id="action-result"></div>
+	
+	<iframe src="" id="submit-iframe" width="0" height="0" style="border: none;"></iframe>
+</body>
+<script type="text/javascript">
+	var thisURL = new URL(window.location);
+	var actionResult = document.getElementById('action-result');
+	
+	if (thisURL.searchParams.has("link")) {
+		actionResult.innerHTML = formURL(
+			thisURL.searchParams.get("quick-link-input"),
+			thisURL.searchParams.get("quick-link-days")
+		);
+	} else if (thisURL.searchParams.has("hash")) {
+		actionResult.innerHTML = fastHash(
+			thisURL.searchParams.get("quick-hash-input")
+		);
+	} else if (thisURL.searchParams.has("aes")) {
+		actionResult.innerHTML = fastAES(
+			decodeURIComponent(thisURL.searchParams.get("quick-aes-input")),
+			decodeURIComponent(thisURL.searchParams.get("quick-aes-password")),
+			Number(thisURL.searchParams.get("aes-radio"))
+		);
+	}
+</script>
+</html>

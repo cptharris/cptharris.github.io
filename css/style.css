@@ -1,98 +1,75 @@
 html, body {
-	font-family: "Times New Roman", Times, serif;
-	text-align: center;
-	background-color: rgb(71, 57, 116);
+	background: rgb(71, 57, 116);
 	color: white;
+	font-family: "Times New Roman", Times, serif;
 	font-size: 120%;
 	margin: 0px;
-	height: 100%;
-	width: 100%;
 }
-#bar {
+
+html {
+	/* IE and Edge */
+	-ms-overflow-style: none;
+	/* Firefox */
+	scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+	/* Chrome, Safari and Opera */
+	display: none;
+}
+
+#headermenuNav {
+	background: rgb(50, 43, 76);
+}
+
+#tc-footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
 	width: 100%;
+	background: rgb(50, 43, 76);
+	color: #6c757d;
+	text-align: center;
+	font-size: 50%;
+}
+
+.bar {
 	height: 4%;
 	background-color: rgb(28, 24, 42);
 }
-#blankspace {
-	width: 100%;
+
+.blankspace {
 	height: 40%;
 }
+
+.tc_letter_header {
+	text-align: center;
+	color: rgb(52, 201, 235);
+	font-size: 200%;
+}
+
 /* Links */
 a {
 	color: rgb(236, 181, 53);
 	text-decoration: underline;
 }
+
 a:visited {
 	/* color: rgb(176, 128, 16); */
 	color: rgb(226, 161, 43);
 }
+
 a:hover {
 	color: rgb(249, 230, 186);
 	cursor: pointer;
 }
+
 a:active {
 	color: rgb(249, 230, 186);
 }
-/* Front Page Header */
-.centering {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.full {
-	width: 100%;
-	height: 100%;
-}
-.front-header {
-	font-size: 400%;
-	color: white;
-	font-weight: normal;
-}
-/* Header Menu */
-.menu {
-	z-index:1;
-	padding: 10px 16px;
-	background: rgb(50, 43, 76);
-	color: #f1f1f1;
-	width: 100%;
-}
-.button {
-	margin: 10px;
-	padding: 5px;
-	background-color: rgb(33, 29, 51);
-}
-.sticky {
-	margin: 0%;
-	position: fixed;
-	top: 0;
-}
-/* Favicon */
-#favicon {
-	z-index: 2;
-	position: fixed;
-	height: 6%;
-	right: 0.5%;
-	top: 0.1%;
-}
-/* Badges */
-iframe#last_updated {
-	border: 0px;
-	margin: 0px;
-	padding: 0px;
-	position: fixed;
-	bottom: 0%;
-	left: 0%;
-	width: auto;
-	height: 20px;
-}
-/* Blog Text Formatting */
-.tc_letter {
-	text-align: left;
-	margin-left: 2%;
-	margin-right: 2%;
-}
-.tc_letter_header {
-	text-align: center;
-	color: rgb(52, 201, 235);
-	font-size: 200%;
+
+/* Programs */
+#progCanvas {
+	margin: 2% 0% 2% 0%;
+	border: 5px inset grey;
 }

@@ -1,494 +1,502 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
-	<title>TechieCable - Space Invaders</title>
+<title>TechieCable - Space Invaders</title>
 	<base href="https://techiecable.github.io" target="_self">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<meta name="description" content="TechieCable's Coding Website">
 	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
-	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/programs.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			$("#progCanvas").mouseenter(function(){
-				$("#pageHeader").hide("slow");
-			});
-			$("#progCanvas").mouseleave(function(){
-				$("#pageHeader").show("slow");
-			});
-		});
-	</script>
-	<script src="js/headerload.js"></script>
 	
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="js/includes.js"></script>
+	
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
 	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-QW9ZGL7K7W');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		
+		gtag('config', 'G-QW9ZGL7K7W');
 	</script>
 	<!-- End Site Tag - Google Analytics -->
 </head>
-<style>
-	p span {
-		font-weight: bold;
-	}
-</style>
-<body>
-	<include src="headermenu.html">Loading menus...</include>
-	
-	<div class="centering full">
-		<h1 class="front-header">Space Invaders</h1>
-	</div>
-	<div id="bar"></div>
-	
-	<div>
-		<p><span class="big">Aliens</span> are coming to invade your planet! Place your mouse over them to shoot them down.<br><br>
-		
-		Oh no! As you shoot down more aliens, they get angry and <span class="big">start sending in more aliens</span> to attack your planet. On top of that, their ships seem to get faster! Watch out at <span id="big">higher levels!</span><br><br>
-		
-		Unfortunately, your planet can only hold out for so long. You have <span class="big">40 lives</span> (2 per each red ball). When you have no more lives, your planet falls.<br><br>
-		
-		<span class="big">Defend your planet!</span><br><br></p>
-	</div>
-	
-	<canvas id="progCanvas"></canvas>
-	
-	<dl>
-		<dt>V1.1</dt>
-			<dd>NEW FEATURE ADDED: TURRET ROTATION!</dd>
-			<dd>NEW VISUAL EFFECT: PLANET AND STARS</dd>
-			<dd>NOTE: Clicks are now required when interacting with the program.</dd>
-	</dl>
-	
-	<div id="blankspace"></div>
-</body>
-
-<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
 <script>
-	var screenWidth = window.screen.availWidth;
-	var screenHeight = window.screen.availHeight;
+	function fullScreen(elem) {
+		// https://www.w3schools.com/howto/howto_js_fullscreen.asp
+		if (elem.requestFullscreen) {
+			elem.requestFullscreen();
+		} else if (elem.webkitRequestFullscreen) { /* Safari */
+			elem.webkitRequestFullscreen();
+		} else if (elem.msRequestFullscreen) { /* IE11 */
+			elem.msRequestFullscreen();
+		}
+	}
+</script>
+<body class="h-100">
+	<div class="container-fluid h-100">
+		<div class="row mb-auto">
+			<include src="headermenu.html">Loading menus...</include>
+		</div>
+		
+		<div class="row align-items-center h-100 mb-5" style="background: rgb(28, 24, 42);">
+			<div class="col d-flex flex-column justify-content-center">
+				<main>
+				<h1 class="display-1 text-center">Space Invaders</h1>
+				</main>
+			</div>
+		</div>
+		
+		<div class="row text-center">
+			<div class="col mx-0 px-0">
+				<canvas id="progCanvas"></canvas>
+				
+				<br><button class="btn btn-outline-primary" onclick="fullScreen(document.getElementById('progCanvas'));">Go Fullscreen (WIP)</button>
+				<dl>
+				<dt>V1.1</dt>
+					<dd>NEW FEATURE ADDED: TURRET ROTATION!</dd>
+					<dd>NEW VISUAL EFFECT: PLANET AND STARS</dd>
+					<dd>NOTE: Clicks are now required when interacting with the program.</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="blankspace"></div>
+	</div>
+	
+	<include src="footermenu.html">Loading footer...</include>
+	
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
+<script src="js/program_library.js" charset="utf-8"></script>
+<script>
+	// document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight
+	var screenSizeAvail = Math.min(window.screen.availWidth, window.screen.availHeight) * 0.95;
 	
 	var programCode = function(processingInstance) {
-		with (processingInstance) {size(screenHeight, screenHeight);frameRate(90);
+		with (processingInstance) {size(screenSizeAvail, screenSizeAvail);frameRate(30);
 			/************************************************************
 			********************     BEGIN CODE
 			************************************************************/
-			var globalScaler = 1;
-			globalScaler = width/400;
-			var sFactor = {
-				txt:globalScaler,
-				obj:globalScaler,
-				cor:globalScaler,
-				spd:globalScaler,
-			};
+var globalScaler = 1;
+globalScaler = width/400;
+var sFactor = {
+	txt:globalScaler,
+	obj:globalScaler,
+	cor:globalScaler,
+	spd:globalScaler,
+};
+
+/** Mouse/Keyboard Pressed **/
+
+var isShooting = false; //defines whether the player is shooting
+var isMousePressed = false; //defines whether the mouse is pressed
+var isKeyClicked = false; //defines whether the mouse is pressed
+mousePressed = function() {
+	isShooting = true;
+	isMousePressed = true;
+}; //isShooting is true when the player presses the mouse
+keyPressed = function() {
+	isShooting = true;
+	isKeyClicked = true;
+}; //isShooting is true when the player is pressing a key
+
+/** BUTTON OBJECTS **/
+var pageNum = 0; //sets the starting page number
+var Button = function(text, x, y, w, h, pageNum) {
+	this.text = text;
+	this.x = x*sFactor.cor;
+	this.y = y*sFactor.cor;
+	this.w = w*sFactor.obj;
+	this.h = h*sFactor.obj;
+	this.pageNum = pageNum;
+}; //button constructor function
+Button.prototype.draw = function() {
+	fill (0, 0, 0); //button fill color
+	rect(this.x, this.y, this.w, this.h, 10); //button shape
+	fill(255, 255, 255); //button text fill color
+	textSize(12*sFactor.txt); //button text size
+	textAlign(CENTER, CENTER); //button text align
+	text(this.text, this.w / 2 + this.x, this.h / 2 + this.y); //button text
+}; //draws buttons
+Button.prototype.click = function() {
+	if (mouseX >= this.x && mouseY >= this.y && mouseX <= this.x + this.w && mouseY <= this.y + this.h && isMousePressed === true) {
+			pageNum = this.pageNum; //redirects the page number to the button setting
+	}
+}; //defines what happens when a button is pressed
+Button.prototype.function = function(funcName) {
+	if (mouseX >= this.x && mouseY >= this.y && mouseX <= this.x + this.w && mouseY <= this.y + this.h && isMousePressed === true) {
+		funcName();
+	}
+}; //call a function when a button is pressed
+
+/** DEFINE BUTTONS **/
+var startButton = new Button("Start!", 162.5, 190, 75, 40, 2);
+var infoButton = new Button("Information", 160, 350, 80, 30, 1);
+var backButton = new Button("Back", 350, 350, 50, 50, 0);
+var restartButton = new Button("Press to restart", 125, 300, 150, 25, 0);
+var resetInfo = new Button("Press to read again.", 137.5, 300, 125, 25, 1.5);
+
+/** PAGE TIMERS **/
+var currentTime = 0; //creates the variable that stores time since start
+var timer1 = {startTime:0, remainingTime:0}; //used on page 1 to initiate actions
+var timer2 = {startTime:0, remainingTime:0}; //used on page 2 to initiate actions
+
+/** OTHER PRETTY IMPORTANT STUFF **/
+var alienNumbers = 20; //set the number of aliens that spawn originally
+var travelSpeed = 1*sFactor.spd; //set the original travel speed of the invaders
+var alienSpeed = 2*sFactor.spd; //set the speed at which aliens fall
+var starSpeed = 1*sFactor.spd; //set the speed at which the stars move
+var stats = {lives:20, level:0, aliensKilled:0, bonusSpeed:0}; //defines stats used in game
+
+var turret = {x:0, y:0, r:30*sFactor.cor, t:0}; //defines variables used to draw the turret
+var planet = {
+	x:-200,
+	y:-200,
+	distance:0
+};
+var planetSize = 100*sFactor.obj;
+var planetDestroyed = false;
+var modeCode = 0;
+var currentKeyCode = 32;
+
+var Invader = []; //creates the array that stores the invader x and y values (x, y)
+var Alien = []; //creates the array that stores the alien x and y values (x, y)
+var shootingStar = []; //creates the array that stores the star x and y values (x, y)
+var backupLevel = []; //creates the array that backs up the player's level
+
+/** DRAW FUNCTIONS **/
+var drawInvader = function(x, y) {
+	noFill();
+	stroke(0, 0, 0);
+	ellipse(x, y - 5*sFactor.cor, 30*sFactor.obj, 15*sFactor.obj);
+	strokeWeight(3*sFactor.txt);
+	stroke(0, 0, 0);
+	line(x - 10*sFactor.cor, y, x - 20*sFactor.cor, y + 15*sFactor.cor);
+	line(x, y, x, y + 15*sFactor.cor);
+	line(x + 10*sFactor.cor, y, x + 20*sFactor.cor, y + 15*sFactor.cor);
+	strokeWeight(1*sFactor.txt);
+	noStroke();
+	fill(255, 234, 0);
+	ellipse(x, y, 50*sFactor.obj, 14*sFactor.obj);
+}; //invader draw function
+var drawAlien = function(x, y) {
+	stroke(0, 0, 0);
+	strokeWeight(2*sFactor.txt);
+	line(x, y - 8*sFactor.cor, x - 3*sFactor.cor, y + 5*sFactor.cor);
+	line(x, y - 8*sFactor.cor, x + 3*sFactor.cor, y + 5*sFactor.cor);
+	noStroke();
+	strokeWeight(1*sFactor.txt);
+	fill(21, 255, 0);
+	ellipse(x, y - 8*sFactor.cor, 8*sFactor.obj, 8*sFactor.obj);
+	fill(0, 0, 0);
+	ellipse(x - 2*sFactor.cor, y - 8*sFactor.cor, 2*sFactor.obj, 2*sFactor.obj);
+	ellipse(x + 2*sFactor.cor, y - 8*sFactor.cor, 2*sFactor.obj, 2*sFactor.obj);
+}; //alien draw function
+var drawTurret = function() {
+	angleMode = "degrees";
+	turret.t = atan( (400*sFactor.cor - mouseY) / abs(mouseX - 200*sFactor.cor));
+	turret.y = 400*sFactor.cor - (turret.r * sin(turret.t));
+	if (mouseX > 200*sFactor.cor) {
+		turret.x = turret.r * cos(-turret.t) + 200*sFactor.cor;
+	} else {
+		turret.x = 200*sFactor.cor - turret.r * cos(-turret.t);
+	}
+	
+	stroke(0, 0, 0);
+	strokeWeight(2*sFactor.txt);
+	line(200*sFactor.cor, 400*sFactor.cor, turret.x, turret.y);
+	noStroke();
+	fill(166, 166, 166);
+	if (stats.lives <= 0) {fill(0, 0, 0);}
+	ellipse(200*sFactor.cor, 400*sFactor.cor, 20*sFactor.obj, 20*sFactor.obj);
+}; //turret draw function
+var drawBrackets = function() {
+	stroke(240, 17, 62);
+	strokeWeight(2.5*sFactor.txt);
+	line(mouseX-10*sFactor.cor, mouseY, mouseX+10*sFactor.cor, mouseY);
+	line(mouseX, mouseY-10*sFactor.cor, mouseX, mouseY+10*sFactor.cor);
+	cursor("none");
+}; //mouse bracket draw function
+
+var drawPlanet = function(x, y) {
+	fill(0, 102, 133);
+	ellipse(x*sFactor.cor, y*sFactor.cor, planetSize, planetSize); //planet
+	fill(22, 171, 22);
+	ellipse((x + 10)*sFactor.cor, (y - 10)*sFactor.cor, planetSize/4, planetSize/5);
+	fill(37, 156, 37);
+	ellipse((x + 30)*sFactor.cor, (y + 15)*sFactor.cor, planetSize*0.18, planetSize/5);
+	fill(16, 207, 16);
+	ellipse((x - 20)*sFactor.cor, (y - 25)*sFactor.cor, planetSize*0.14, planetSize*0.15);
+	fill(62, 194, 62);
+	ellipse((x - 25)*sFactor.cor, (y + 20)*sFactor.cor, planetSize*0.12, planetSize*0.15);
+	fill(27, 181, 50);
+	ellipse((x - 15)*sFactor.cor, (y + 0)*sFactor.cor, planetSize*0.12, planetSize/10);
+	ellipse((x - 5)*sFactor.cor, (y - 35)*sFactor.cor, planetSize/10, planetSize/10);
+	ellipse((x + 2)*sFactor.cor, (y + 25)*sFactor.cor, planetSize*0.15, planetSize*0.12);
+	fill(230, 230, 230);
+	ellipse((x)*sFactor.cor, (y - 45)*sFactor.cor, planetSize/2, planetSize/10);
+	ellipse((x)*sFactor.cor, (y + 45)*sFactor.cor, planetSize/2, planetSize/10);
+}; //planet draw function
+var drawPlanetAura = function() {
+	noFill();
+	stroke(99, 178, 230);
+	strokeWeight(2*sFactor.txt);
+	ellipse(planet.x*sFactor.cor, planet.y*sFactor.cor, planetSize*1.03, planetSize*1.03);
+	noStroke();
+};
+
+/** REPEATED FUNCTIONS **/
+var restartCode = function() {
+	timer2 = {startTime:0, remainingTime:0};
+	alienNumbers = 20;
+	travelSpeed = 1*sFactor.spd;
+	alienSpeed = 2*sFactor.spd;
+	planetDestroyed = false;
+	stats = {lives:20, level:0, aliensKilled:0, bonusSpeed:0};
+	Invader.splice(0);
+	Alien.splice(0);
+	shootingStar.splice(0);
+	backupLevel.splice(0);
+	cursor(ARROW);
+	keyCode = 32;
+	pageNum = 0;
+}; //restarts necessary variables
+var InvaderCode = function() {
+	for (var i = 0; i < Invader.length; i += 2) {
+		drawAlien(Invader[i], Invader[i+1]);
+		drawInvader(Invader[i], Invader[i+1]); //draws invaders
+		Invader[i+1] += travelSpeed + stats.bonusSpeed; //makes invaders go down
+		
+		if (Invader[i + 1] > 410*sFactor.cor) {
+			stats.lives -= 0.5;
+			Invader.splice([i + 1], 1);
+			Invader.splice([i], 1);
+		} //what happens when invaders go out the bottom
+		
+		if (mouseX > Invader[i] - 25*sFactor.obj && mouseY > Invader[i+1] - 15*sFactor.obj && mouseX < Invader[i] + 25*sFactor.obj && mouseY < Invader[i+1] + 15*sFactor.obj && isShooting === true) {
+			stats.aliensKilled++;
+			Invader.splice([i + 1], 1);
+			Invader.splice([i], 1);
 			
-			/** Mouse/Keyboard Pressed **/
-			
-			var isShooting = false; //defines whether the player is shooting
-			var isMousePressed = false; //defines whether the mouse is pressed
-			var isKeyClicked = false; //defines whether the mouse is pressed
-			mousePressed = function() {
-				isShooting = true;
-				isMousePressed = true;
-			}; //isShooting is true when the player presses the mouse
-			keyPressed = function() {
-				isShooting = true;
-				isKeyClicked = true;
-			}; //isShooting is true when the player is pressing a key
-			
-			/** BUTTON OBJECTS **/
-			var pageNum = 0; //sets the starting page number
-			var Button = function(text, x, y, w, h, pageNum) {
-				this.text = text;
-				this.x = x*sFactor.cor;
-				this.y = y*sFactor.cor;
-				this.w = w*sFactor.obj;
-				this.h = h*sFactor.obj;
-				this.pageNum = pageNum;
-			}; //button constructor function
-			Button.prototype.draw = function() {
-				fill (0, 0, 0); //button fill color
-				rect(this.x, this.y, this.w, this.h, 10); //button shape
-				fill(255, 255, 255); //button text fill color
-				textSize(12*sFactor.txt); //button text size
-				textAlign(CENTER, CENTER); //button text align
-				text(this.text, this.w / 2 + this.x, this.h / 2 + this.y); //button text
-			}; //draws buttons
-			Button.prototype.click = function() {
-				if (mouseX >= this.x && mouseY >= this.y && mouseX <= this.x + this.w && mouseY <= this.y + this.h && isMousePressed === true) {
-						pageNum = this.pageNum; //redirects the page number to the button setting
-				}
-			}; //defines what happens when a button is pressed
-			Button.prototype.function = function(funcName) {
-				if (mouseX >= this.x && mouseY >= this.y && mouseX <= this.x + this.w && mouseY <= this.y + this.h && isMousePressed === true) {
-					funcName();
-				}
-			}; //call a function when a button is pressed
-			
-			/** DEFINE BUTTONS **/
-			var startButton = new Button("Start!", 162.5, 190, 75, 40, 2);
-			var infoButton = new Button("Information", 160, 350, 80, 30, 1);
-			var backButton = new Button("Back", 350, 350, 50, 50, 0);
-			var restartButton = new Button("Press to restart", 125, 300, 150, 25, 0);
-			var resetInfo = new Button("Press to read again.", 137.5, 300, 125, 25, 1.5);
-			
-			/** PAGE TIMERS **/
-			var currentTime = 0; //creates the variable that stores time since start
-			var timer1 = {startTime:0, remainingTime:0}; //used on page 1 to initiate actions
-			var timer2 = {startTime:0, remainingTime:0}; //used on page 2 to initiate actions
-			
-			/** OTHER PRETTY IMPORTANT STUFF **/
-			var alienNumbers = 20; //set the number of aliens that spawn originally
-			var travelSpeed = 1*sFactor.spd; //set the original travel speed of the invaders
-			var alienSpeed = 2*sFactor.spd; //set the speed at which aliens fall
-			var starSpeed = 1*sFactor.spd; //set the speed at which the stars move
-			var stats = {lives:20, level:0, aliensKilled:0, bonusSpeed:0}; //defines stats used in game
-			
-			var turret = {x:0, y:0, r:30*sFactor.cor, t:0}; //defines variables used to draw the turret
-			var planet = {
-				x:-200,
-				y:-200,
-				distance:0
-			};
-			var planetSize = 100*sFactor.obj;
-			var planetDestroyed = false;
-			var modeCode = 0;
-			var currentKeyCode = 32;
-			
-			var Invader = []; //creates the array that stores the invader x and y values (x, y)
-			var Alien = []; //creates the array that stores the alien x and y values (x, y)
-			var shootingStar = []; //creates the array that stores the star x and y values (x, y)
-			var backupLevel = []; //creates the array that backs up the player's level
-			
-			/** DRAW FUNCTIONS **/
-			var drawInvader = function(x, y) {
-				noFill();
-				stroke(0, 0, 0);
-				ellipse(x, y - 5*sFactor.cor, 30*sFactor.obj, 15*sFactor.obj);
-				strokeWeight(3*sFactor.txt);
-				stroke(0, 0, 0);
-				line(x - 10*sFactor.cor, y, x - 20*sFactor.cor, y + 15*sFactor.cor);
-				line(x, y, x, y + 15*sFactor.cor);
-				line(x + 10*sFactor.cor, y, x + 20*sFactor.cor, y + 15*sFactor.cor);
-				strokeWeight(1*sFactor.txt);
-				noStroke();
-				fill(255, 234, 0);
-				ellipse(x, y, 50*sFactor.obj, 14*sFactor.obj);
-			}; //invader draw function
-			var drawAlien = function(x, y) {
-				stroke(0, 0, 0);
-				strokeWeight(2*sFactor.txt);
-				line(x, y - 8*sFactor.cor, x - 3*sFactor.cor, y + 5*sFactor.cor);
-				line(x, y - 8*sFactor.cor, x + 3*sFactor.cor, y + 5*sFactor.cor);
-				noStroke();
-				strokeWeight(1*sFactor.txt);
-				fill(21, 255, 0);
-				ellipse(x, y - 8*sFactor.cor, 8*sFactor.obj, 8*sFactor.obj);
-				fill(0, 0, 0);
-				ellipse(x - 2*sFactor.cor, y - 8*sFactor.cor, 2*sFactor.obj, 2*sFactor.obj);
-				ellipse(x + 2*sFactor.cor, y - 8*sFactor.cor, 2*sFactor.obj, 2*sFactor.obj);
-			}; //alien draw function
-			var drawTurret = function() {
-				angleMode = "degrees";
-				turret.t = atan( (400*sFactor.cor - mouseY) / abs(mouseX - 200*sFactor.cor));
-				turret.y = 400*sFactor.cor - (turret.r * sin(turret.t));
-				if (mouseX > 200*sFactor.cor) {
-					turret.x = turret.r * cos(-turret.t) + 200*sFactor.cor;
-				} else {
-					turret.x = 200*sFactor.cor - turret.r * cos(-turret.t);
-				}
-				
-				stroke(0, 0, 0);
-				strokeWeight(2*sFactor.txt);
-				line(200*sFactor.cor, 400*sFactor.cor, turret.x, turret.y);
-				noStroke();
-				fill(166, 166, 166);
-				if (stats.lives <= 0) {fill(0, 0, 0);}
-				ellipse(200*sFactor.cor, 400*sFactor.cor, 20*sFactor.obj, 20*sFactor.obj);
-			}; //turret draw function
-			var drawBrackets = function() {
-				stroke(240, 17, 62);
-				strokeWeight(2.5*sFactor.txt);
-				line(mouseX-10*sFactor.cor, mouseY, mouseX+10*sFactor.cor, mouseY);
-				line(mouseX, mouseY-10*sFactor.cor, mouseX, mouseY+10*sFactor.cor);
-				cursor("none");
-			}; //mouse bracket draw function
-			
-			var drawPlanet = function(x, y) {
-				fill(0, 102, 133);
-				ellipse(x*sFactor.cor, y*sFactor.cor, planetSize, planetSize); //planet
-				fill(22, 171, 22);
-				ellipse((x + 10)*sFactor.cor, (y - 10)*sFactor.cor, planetSize/4, planetSize/5);
-				fill(37, 156, 37);
-				ellipse((x + 30)*sFactor.cor, (y + 15)*sFactor.cor, planetSize*0.18, planetSize/5);
-				fill(16, 207, 16);
-				ellipse((x - 20)*sFactor.cor, (y - 25)*sFactor.cor, planetSize*0.14, planetSize*0.15);
-				fill(62, 194, 62);
-				ellipse((x - 25)*sFactor.cor, (y + 20)*sFactor.cor, planetSize*0.12, planetSize*0.15);
-				fill(27, 181, 50);
-				ellipse((x - 15)*sFactor.cor, (y + 0)*sFactor.cor, planetSize*0.12, planetSize/10);
-				ellipse((x - 5)*sFactor.cor, (y - 35)*sFactor.cor, planetSize/10, planetSize/10);
-				ellipse((x + 2)*sFactor.cor, (y + 25)*sFactor.cor, planetSize*0.15, planetSize*0.12);
-				fill(230, 230, 230);
-				ellipse((x)*sFactor.cor, (y - 45)*sFactor.cor, planetSize/2, planetSize/10);
-				ellipse((x)*sFactor.cor, (y + 45)*sFactor.cor, planetSize/2, planetSize/10);
-			}; //planet draw function
-			var drawPlanetAura = function() {
-				noFill();
-				stroke(99, 178, 230);
-				strokeWeight(2*sFactor.txt);
-				ellipse(planet.x*sFactor.cor, planet.y*sFactor.cor, planetSize*1.03, planetSize*1.03);
-				noStroke();
-			};
-			
-			/** REPEATED FUNCTIONS **/
-			var restartCode = function() {
-				timer2 = {startTime:0, remainingTime:0};
-				alienNumbers = 20;
-				travelSpeed = 1*sFactor.spd;
-				alienSpeed = 2*sFactor.spd;
-				planetDestroyed = false;
-				stats = {lives:20, level:0, aliensKilled:0, bonusSpeed:0};
-				Invader.splice(0);
-				Alien.splice(0);
-				shootingStar.splice(0);
-				backupLevel.splice(0);
-				cursor(ARROW);
-				keyCode = 32;
-				pageNum = 0;
-			}; //restarts necessary variables
-			var InvaderCode = function() {
-				for (var i = 0; i < Invader.length; i += 2) {
-					drawAlien(Invader[i], Invader[i+1]);
-					drawInvader(Invader[i], Invader[i+1]); //draws invaders
-					Invader[i+1] += travelSpeed + stats.bonusSpeed; //makes invaders go down
-					
-					if (Invader[i + 1] > 410*sFactor.cor) {
-						stats.lives -= 0.5;
-						Invader.splice([i + 1], 1);
-						Invader.splice([i], 1);
-					} //what happens when invaders go out the bottom
-					
-					if (mouseX > Invader[i] - 25*sFactor.obj && mouseY > Invader[i+1] - 15*sFactor.obj && mouseX < Invader[i] + 25*sFactor.obj && mouseY < Invader[i+1] + 15*sFactor.obj && isShooting === true) {
-						stats.aliensKilled++;
-						Invader.splice([i + 1], 1);
-						Invader.splice([i], 1);
-						
-						Alien.push(mouseX, mouseY);
-					} //despawns invaders when tapped
-				}
-				
-				while (Invader.length < round(alienNumbers + stats.aliensKilled/50)) {
-					Invader.push((round(random(20, 380)))*sFactor.cor, (round(random(0, -1000)))*sFactor.cor);
-				} //randomly spawns invaders
-			}; //calculates invaders
-			var AlienCode = function() {
-				for (var a = 0; a < Alien.length; a += 2) {
-					drawAlien(Alien[a], Alien[a+1]);
-					Alien[a+1] += alienSpeed + stats.level * 0.3;
-					
-					if(Alien[a + 1] > 410*sFactor.cor) {
-						Alien.splice([a + 1], 1);
-						Alien.splice([a], 1);
-					}
-				}
-			}; //calculates aliens
-			var PlanetCode = function() {
-				//planet.x = 200; planet.y = 80;
-				planet.x += 0.29*sFactor.spd;
-				planet.y += 0.3*sFactor.spd;
-				
-				if (planet.x > 500*sFactor.cor && planet.y > 500*sFactor.cor) {
-					planet.x = -200;
-					planet.y = -200;
-				}
-				drawPlanet(planet.x, planet.y);
-				drawPlanetAura();
-			}; //calulates planet rotation
-			var StatsCode = function() {
-				stats.level = floor(stats.aliensKilled / 25); //calculate level
-				
-				fill(0, 0, 0);
-				textSize(10*sFactor.txt);
-				text("Level: " + stats.level, 370*sFactor.cor, 390*sFactor.cor); //display the level
-				
-				stats.bonusSpeed = stats.level * 0.25;
-				
-				for(var l = 0; l < stats.lives; l++) {
-					fill(255, 0, 0);
-					ellipse((10 + l * 8)*sFactor.cor, 390*sFactor.cor, 5*sFactor.obj, 5*sFactor.obj);
-				} //draw number of lives remaining
-				
-				if (stats.lives <= 0) {
-					backupLevel.push(stats.level);
-					pageNum = 4;
-				} //game over
-			}; //calculates stats
-			var StarCode = function() {
-				for (var s = 0; s < shootingStar.length; s += 2) {
-					fill(255, 255, 255);
-					textSize(10*sFactor.txt);
-					text("*", shootingStar[s], shootingStar[s+1]);
-					
-					shootingStar[s] += starSpeed;
-					shootingStar[s+1] += starSpeed/3;
-					
-					if(shootingStar[s] > 400*sFactor.cor) {
-						shootingStar.splice([s + 1], 1);
-						shootingStar.splice([s], 1);
-					}
-				}
-				
-				while (shootingStar.length < 80) {
-					shootingStar.push((round(random(0, -400))*sFactor.cor), (round(random(-100, 350)))*sFactor.cor);
-				}
-			}; //calculates stars
-			var ModeCode = function() {
-				if (keyCode === 32) {
-					currentKeyCode = 32;
-					cursor("none");
-					travelSpeed = 1;
-					stats.bonusSpeed = stats.level * 0.25;
-				} //normal mode
-				if (keyCode === RIGHT) {
-					currentKeyCode = RIGHT;
-					travelSpeed = 1;
-					stats.lives = 20;
-					fill(0, 0, 255, 80);
-					textSize(15*sFactor.txt);
-					text("DEVELOPER MODE\nPress the spacebar to exit.", 200*sFactor.cor, 200*sFactor.cor);
-					textSize(10*sFactor.txt);
-					text(mouseX + ", " + mouseY, mouseX, mouseY - 20*sFactor.cor);
-				} //developer mode
-				if (keyCode === LEFT) {
-					currentKeyCode = LEFT;
-					background(99, 178, 230);
-					cursor(ARROW);
-					fill(0, 0, 0);
-					textSize(40*sFactor.txt);
-					text("PAUSED", 200*sFactor.cor, 185*sFactor.cor);
-					textSize(25*sFactor.txt);
-					text("Press the space bar to resume.", 200*sFactor.txt, 220*sFactor.txt);
-					textSize(10*sFactor.txt);
-					stats.bonusSpeed = 0;
-					travelSpeed = 0;
-					restartButton.draw();
-					restartButton.function(restartCode);
-				} //pause mode
-				else {keyCode = currentKeyCode;}
-			};
-			
-			/** OPERATION CODE **/
-			noStroke();
-			textAlign(CENTER, CENTER); //align the text
-			cursor(ARROW); //set the cursor display
-			
-			draw = function() {
-				currentTime = millis()/1000; //update the time since start
-				if (pageNum === 0) {
-					background(99, 178, 230); //set the background
-					StarCode(); //draw the stars
-					PlanetCode();
-					
-					textSize(45*sFactor.txt); //title text size
-					fill(0, 0, 0);
-					text("SPACE INVADERS", 200*sFactor.cor, 150*sFactor.cor); //title text
-					
-					startButton.draw(); //draw the start button
-					startButton.click(); //start button click
-					infoButton.draw(); //draw the info button
-					infoButton.click(); //info button click
-					timer1.startTime = millis()/1000; //set the startTime for page 1
-					timer2.startTime = round(millis()/1000);//set the startTime for page 2
-				} //main page
-				
-				if (pageNum === 1) {
-					background(99, 178, 230); //set the background
-					
-					StarCode(); //draw the stars
-					PlanetCode();
-					
-					timer1.remainingTime = timer1.startTime + 22 - currentTime; //calculate remaining display time
-					
-					var infoText = ["Destroy invaders by placing\nyour mouse over them\nand clicking.", 0,
-					"Pause the game by pressing\nthe left arrow key.", 155,
-					"Unpause the game by\npressing the space bar.", 260,
-					"Contact me if you find any", 365, "problems or have a\nsuggestion.", 400,
-					"Have fun!", 520];
-					
-					textSize(40*sFactor.txt); //information title text size
-					textAlign(CENTER, TOP); //information text align
-					text("INFORMATION", 200*sFactor.cor, 0*sFactor.cor); //information title
-					for (var t = 0; t < infoText.length; t+=2) {
-						textSize(30*sFactor.txt); //information text size
-						text(infoText[t], 200*sFactor.cor, 400*sFactor.cor + infoText[t+1]*sFactor.cor + (timer1.remainingTime - 22) * (45*sFactor.spd)); //display information text
-					}
-					
-					if (timer1.remainingTime < 7) {
-						resetInfo.draw(); //draw info reset button
-						resetInfo.click(); //info reset button click
-					}
-					textAlign(CENTER, CENTER); //reset text align
-					
-					backButton.draw(); //draw back button
-					backButton.click(); //back button click
-			
-				} //info page
-				if(pageNum === 1.5) {
-					timer1 = {startTime:millis()/1000, remainingTime:0}; //resets page 1 timer
-					pageNum = 1; //redirects to page 1
-				} //reset info page
-				
-				if (pageNum === 2) {
-					background(99, 178, 230); //draw the background
-					StarCode(); //draw the stars
-					PlanetCode();
-					drawTurret(); //draw the turret
-					timer2.remainingTime = timer2.startTime + 5 - round(currentTime); //calculate time until game start
-					textSize(100*sFactor.txt); //countdown text size
-					fill(0, 0, 0); //text color
-					text(timer2.remainingTime, 200*sFactor.cor, 200*sFactor.cor); //countdown text
-					if (timer2.remainingTime <= 0) {
-						pageNum = 3; //redirects to page 3 at end of countdown
-					}
-				} //countdown page
-				
-				if (pageNum === 3) {
-					background(99, 178, 230); //draw the background
-					StarCode(); //draw the stars
-					PlanetCode();
-					InvaderCode(); //draw the invaders
-					AlienCode(); //draw the aliens
-					StatsCode(); //draw/calculate the stats
-					drawBrackets(); //draw mouse brackets
-					drawTurret(); //draw the turret
-					ModeCode();
-				} //game page
-				
-				if (pageNum === 4) {
-					background(99, 178, 230); //draw the background
-					cursor(ARROW); //set the cursor status
-					fill(17, 0, 255); //game over title color
-					textSize(50*sFactor.txt); //game over title size
-					text("GAME OVER", 200*sFactor.cor, 200*sFactor.cor); //game over title
-					textSize(18*sFactor.txt); //level display size
-					text("You finished on level: " + backupLevel, 200*sFactor.cor, 280*sFactor.cor); //level display
-					restartButton.draw(); //draw the restart button
-					restartButton.click(); //restart button click
-					restartButton.function(restartCode); //run restart code when button is pressed
-				} //end screen page
-				
-				isShooting = false; //resets isShooting to false
-				isMousePressed = false; //resets isMousePressed to false
-				isKeyClicked = false; //resets isKeyClicked to false
-			};
+			Alien.push(mouseX, mouseY);
+		} //despawns invaders when tapped
+	}
+	
+	while (Invader.length < round(alienNumbers + stats.aliensKilled/50)) {
+		Invader.push((round(random(20, 380)))*sFactor.cor, (round(random(0, -1000)))*sFactor.cor);
+	} //randomly spawns invaders
+}; //calculates invaders
+var AlienCode = function() {
+	for (var a = 0; a < Alien.length; a += 2) {
+		drawAlien(Alien[a], Alien[a+1]);
+		Alien[a+1] += alienSpeed + stats.level * 0.3;
+		
+		if(Alien[a + 1] > 410*sFactor.cor) {
+			Alien.splice([a + 1], 1);
+			Alien.splice([a], 1);
+		}
+	}
+}; //calculates aliens
+var PlanetCode = function() {
+	//planet.x = 200; planet.y = 80;
+	planet.x += 0.29*sFactor.spd;
+	planet.y += 0.3*sFactor.spd;
+	
+	if (planet.x > 500*sFactor.cor && planet.y > 500*sFactor.cor) {
+		planet.x = -200;
+		planet.y = -200;
+	}
+	drawPlanet(planet.x, planet.y);
+	drawPlanetAura();
+}; //calulates planet rotation
+var StatsCode = function() {
+	stats.level = floor(stats.aliensKilled / 25); //calculate level
+	
+	fill(0, 0, 0);
+	textSize(10*sFactor.txt);
+	text("Level: " + stats.level, 370*sFactor.cor, 390*sFactor.cor); //display the level
+	
+	stats.bonusSpeed = stats.level * 0.25;
+	
+	for(var l = 0; l < stats.lives; l++) {
+		fill(255, 0, 0);
+		ellipse((10 + l * 8)*sFactor.cor, 390*sFactor.cor, 5*sFactor.obj, 5*sFactor.obj);
+	} //draw number of lives remaining
+	
+	if (stats.lives <= 0) {
+		backupLevel.push(stats.level);
+		pageNum = 4;
+	} //game over
+}; //calculates stats
+var StarCode = function() {
+	for (var s = 0; s < shootingStar.length; s += 2) {
+		fill(255, 255, 255);
+		textSize(10*sFactor.txt);
+		text("*", shootingStar[s], shootingStar[s+1]);
+		
+		shootingStar[s] += starSpeed;
+		shootingStar[s+1] += starSpeed/3;
+		
+		if(shootingStar[s] > 400*sFactor.cor) {
+			shootingStar.splice([s + 1], 1);
+			shootingStar.splice([s], 1);
+		}
+	}
+	
+	while (shootingStar.length < 80) {
+		shootingStar.push((round(random(0, -400))*sFactor.cor), (round(random(-100, 350)))*sFactor.cor);
+	}
+}; //calculates stars
+var ModeCode = function() {
+	if (keyCode === 32) {
+		currentKeyCode = 32;
+		cursor("none");
+		travelSpeed = 1;
+		stats.bonusSpeed = stats.level * 0.25;
+	} //normal mode
+	if (keyCode === RIGHT) {
+		currentKeyCode = RIGHT;
+		travelSpeed = 1;
+		stats.lives = 20;
+		fill(0, 0, 255, 80);
+		textSize(15*sFactor.txt);
+		text("DEVELOPER MODE\nPress the spacebar to exit.", 200*sFactor.cor, 200*sFactor.cor);
+		textSize(10*sFactor.txt);
+		text(mouseX + ", " + mouseY, mouseX, mouseY - 20*sFactor.cor);
+	} //developer mode
+	if (keyCode === LEFT) {
+		currentKeyCode = LEFT;
+		background(99, 178, 230);
+		cursor(ARROW);
+		fill(0, 0, 0);
+		textSize(40*sFactor.txt);
+		text("PAUSED", 200*sFactor.cor, 185*sFactor.cor);
+		textSize(25*sFactor.txt);
+		text("Press the space bar to resume.", 200*sFactor.txt, 220*sFactor.txt);
+		textSize(10*sFactor.txt);
+		stats.bonusSpeed = 0;
+		travelSpeed = 0;
+		restartButton.draw();
+		restartButton.function(restartCode);
+	} //pause mode
+	else {keyCode = currentKeyCode;}
+};
+
+/** OPERATION CODE **/
+noStroke();
+textAlign(CENTER, CENTER); //align the text
+cursor(ARROW); //set the cursor display
+
+draw = function() {
+	currentTime = millis()/1000; //update the time since start
+	if (pageNum === 0) {
+		background(99, 178, 230); //set the background
+		StarCode(); //draw the stars
+		PlanetCode();
+		
+		textSize(45*sFactor.txt); //title text size
+		fill(0, 0, 0);
+		text("SPACE INVADERS", 200*sFactor.cor, 150*sFactor.cor); //title text
+		
+		startButton.draw(); //draw the start button
+		startButton.click(); //start button click
+		infoButton.draw(); //draw the info button
+		infoButton.click(); //info button click
+		timer1.startTime = millis()/1000; //set the startTime for page 1
+		timer2.startTime = round(millis()/1000);//set the startTime for page 2
+	} //main page
+	
+	if (pageNum === 1) {
+		background(99, 178, 230); //set the background
+		
+		StarCode(); //draw the stars
+		PlanetCode();
+		
+		timer1.remainingTime = timer1.startTime + 22 - currentTime; //calculate remaining display time
+		
+		var infoText = ["Destroy invaders by placing\nyour mouse over them\nand clicking.", 0,
+		"Pause the game by pressing\nthe left arrow key.", 155,
+		"Unpause the game by\npressing the space bar.", 260,
+		"Contact me if you find any", 365, "problems or have a\nsuggestion.", 400,
+		"Have fun!", 520];
+		
+		textSize(40*sFactor.txt); //information title text size
+		textAlign(CENTER, TOP); //information text align
+		text("INFORMATION", 200*sFactor.cor, 0*sFactor.cor); //information title
+		for (var t = 0; t < infoText.length; t+=2) {
+			textSize(30*sFactor.txt); //information text size
+			text(infoText[t], 200*sFactor.cor, 400*sFactor.cor + infoText[t+1]*sFactor.cor + (timer1.remainingTime - 22) * (45*sFactor.spd)); //display information text
+		}
+		
+		if (timer1.remainingTime < 7) {
+			resetInfo.draw(); //draw info reset button
+			resetInfo.click(); //info reset button click
+		}
+		textAlign(CENTER, CENTER); //reset text align
+		
+		backButton.draw(); //draw back button
+		backButton.click(); //back button click
+
+	} //info page
+	if(pageNum === 1.5) {
+		timer1 = {startTime:millis()/1000, remainingTime:0}; //resets page 1 timer
+		pageNum = 1; //redirects to page 1
+	} //reset info page
+	
+	if (pageNum === 2) {
+		background(99, 178, 230); //draw the background
+		StarCode(); //draw the stars
+		PlanetCode();
+		drawTurret(); //draw the turret
+		timer2.remainingTime = timer2.startTime + 5 - round(currentTime); //calculate time until game start
+		textSize(100*sFactor.txt); //countdown text size
+		fill(0, 0, 0); //text color
+		text(timer2.remainingTime, 200*sFactor.cor, 200*sFactor.cor); //countdown text
+		if (timer2.remainingTime <= 0) {
+			pageNum = 3; //redirects to page 3 at end of countdown
+		}
+	} //countdown page
+	
+	if (pageNum === 3) {
+		background(99, 178, 230); //draw the background
+		StarCode(); //draw the stars
+		PlanetCode();
+		InvaderCode(); //draw the invaders
+		AlienCode(); //draw the aliens
+		StatsCode(); //draw/calculate the stats
+		drawBrackets(); //draw mouse brackets
+		drawTurret(); //draw the turret
+		ModeCode();
+	} //game page
+	
+	if (pageNum === 4) {
+		background(99, 178, 230); //draw the background
+		cursor(ARROW); //set the cursor status
+		fill(17, 0, 255); //game over title color
+		textSize(50*sFactor.txt); //game over title size
+		text("GAME OVER", 200*sFactor.cor, 200*sFactor.cor); //game over title
+		textSize(18*sFactor.txt); //level display size
+		text("You finished on level: " + backupLevel, 200*sFactor.cor, 280*sFactor.cor); //level display
+		restartButton.draw(); //draw the restart button
+		restartButton.click(); //restart button click
+		restartButton.function(restartCode); //run restart code when button is pressed
+	} //end screen page
+	
+	isShooting = false; //resets isShooting to false
+	isMousePressed = false; //resets isMousePressed to false
+	isKeyClicked = false; //resets isKeyClicked to false
+};
 			/************************************************************
 			********************     END CODE
 			************************************************************/

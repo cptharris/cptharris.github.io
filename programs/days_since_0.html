@@ -1,141 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
-	<title>TechieCable - Days Since 0</title>
+<title>TechieCable - Days Since 0</title>
 	<base href="https://techiecable.github.io" target="_self">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<meta name="description" content="TechieCable's Coding Website">
 	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
-	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/programs.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="js/headerload.js"></script>
 	
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="js/includes.js"></script>
+	
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
 	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-QW9ZGL7K7W');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		
+		gtag('config', 'G-QW9ZGL7K7W');
 	</script>
 	<!-- End Site Tag - Google Analytics -->
 </head>
-<style>
-</style>
-<body>
-	<include src="headermenu.html">Loading menus...</include>
-	
-	<div class="centering full">
-		<h1 class="front-header">Days Since 0</h1>
+<body class="h-100">
+	<div class="container-fluid h-100">
+		<div class="row mb-auto">
+			<include src="headermenu.html">Loading menus...</include>
+		</div>
+		
+		<div class="row align-items-center h-100 mb-5" style="background: rgb(28, 24, 42);">
+			<div class="col d-flex flex-column justify-content-center">
+				<main>
+				<h1 class="display-1 text-center">Days Since 0</h1>
+				</main>
+			</div>
+		</div>
+		
+		<div class="row text-center">
+			<div class="col mx-0 px-0">
+				<canvas id="progCanvas"></canvas>
+				<dl>
+				<dt>V1.2</dt>
+					<dd>Fixed bug. Counter is now up-to-date.</dd>
+				<dt>V1.1</dt>
+					<dd>Increased font size, added message below total days.</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="blankspace"></div>
 	</div>
-	<div id="bar"></div>
 	
-	<canvas id="progCanvas"></canvas>
+	<include src="footermenu.html">Loading footer...</include>
 	
-	<dl>
-		<dt>V1.2</dt>
-			<dd>Fixed bug. Counter is now up-to-date.</dd>
-		<dt>V1.1</dt>
-			<dd>Increased font size, added message below total days.</dd>
-	</dl>
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-
 <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" charset="utf-8"></script>
+<script src="js/program_library.js" charset="utf-8"></script>
 <script>
+	var screenSizeAvail = Math.min(window.screen.availWidth, window.screen.availHeight) * 0.95;
+	
 	var programCode = function(processingInstance) {
-		with (processingInstance) {size(600, 600);frameRate(30);
+		with (processingInstance) {size(screenSizeAvail, screenSizeAvail);frameRate(30);
 			/************************************************************
 			********************     BEGIN CODE
 			************************************************************/
-			var globalScaler = width/400;
-			
-			var currentDate = 0;
-			var isLeapYear = false;
-			var daysinYear = 0;
-			var daysinMonth = 0;
-			
-			var leapCheck = function(year) {
-				daysinYear = 0;
-				isLeapYear = false;
-				var yearTest = [year/4, year/100, year/400];
-				if (yearTest[0]===floor(yearTest[0])) {
-					isLeapYear = true;
-				}
-				if (yearTest[1]===floor(yearTest[1])) {
-					isLeapYear = false;
-				}
-				if (yearTest[2]===floor(yearTest[2])) {
-					isLeapYear = true;
-				}
-				
-				if (isLeapYear === true) {
-					daysinYear += 1;
-				}
-				return daysinYear;
-			};
-			var monthCheck = function(month, year) {
-				daysinMonth = 0;
-				if (month>=1) {
-					daysinMonth += 31;
-				}
-				if (month>=2) {
-					daysinMonth += 28 + leapCheck(year);
-				}
-				if (month>=3) {
-					daysinMonth += 31;
-				}
-				if (month>=4) {
-					daysinMonth += 30;
-				}
-				if (month>=5) {
-					daysinMonth += 31;
-				}
-				if (month>=6) {
-					daysinMonth += 30;
-				}
-				if (month>=7) {
-					daysinMonth += 31;
-				}
-				if (month>=8) {
-					daysinMonth += 31;
-				}
-				if (month>=9) {
-					daysinMonth += 30;
-				}
-				if (month>=10) {
-					daysinMonth += 31;
-				}
-				if (month>=11) {
-					daysinMonth += 30;
-				}
-				if (month>=12) {
-					daysinMonth += 31;
-				}
-				return daysinMonth;
-			};
-			
-			var converttoDays = function(month, day, year) {
-				var numberofDays = 0;
-				numberofDays += day;
-				numberofDays += monthCheck(month-1, year);
-				numberofDays += floor(year*365.2425);
-				return numberofDays;
-			};
-			
-			draw = function() {
-				background(0, 0, 0);
-				textAlign(CENTER, CENTER);
-				currentDate = converttoDays(month(),day(),year());
-				textSize(75*globalScaler);
-				text(currentDate, 200*globalScaler, 150*globalScaler);
-				textSize(35*globalScaler);
-				text("Days since 00/00/0000", 200*globalScaler, 250*globalScaler);
-			};
+var globalScaler = width/400;
+
+var currentDate = 0;
+var isLeapYear = false;
+var daysinYear = 0;
+var daysinMonth = 0;
+
+var leapCheck = function(year) {
+	daysinYear = 0;
+	isLeapYear = false;
+	var yearTest = [year/4, year/100, year/400];
+	if (yearTest[0]===floor(yearTest[0])) {
+		isLeapYear = true;
+	}
+	if (yearTest[1]===floor(yearTest[1])) {
+		isLeapYear = false;
+	}
+	if (yearTest[2]===floor(yearTest[2])) {
+		isLeapYear = true;
+	}
+	
+	if (isLeapYear === true) {
+		daysinYear += 1;
+	}
+	return daysinYear;
+};
+var monthCheck = function(month, year) {
+	daysinMonth = 0;
+	if (month>=1) {
+		daysinMonth += 31;
+	}
+	if (month>=2) {
+		daysinMonth += 28 + leapCheck(year);
+	}
+	if (month>=3) {
+		daysinMonth += 31;
+	}
+	if (month>=4) {
+		daysinMonth += 30;
+	}
+	if (month>=5) {
+		daysinMonth += 31;
+	}
+	if (month>=6) {
+		daysinMonth += 30;
+	}
+	if (month>=7) {
+		daysinMonth += 31;
+	}
+	if (month>=8) {
+		daysinMonth += 31;
+	}
+	if (month>=9) {
+		daysinMonth += 30;
+	}
+	if (month>=10) {
+		daysinMonth += 31;
+	}
+	if (month>=11) {
+		daysinMonth += 30;
+	}
+	if (month>=12) {
+		daysinMonth += 31;
+	}
+	return daysinMonth;
+};
+
+var converttoDays = function(month, day, year) {
+	var numberofDays = 0;
+	numberofDays += day;
+	numberofDays += monthCheck(month-1, year);
+	numberofDays += floor(year*365.2425);
+	return numberofDays;
+};
+
+draw = function() {
+	background(0, 0, 0);
+	textAlign(CENTER, CENTER);
+	currentDate = converttoDays(month(),day(),year());
+	textSize(75*globalScaler);
+	text(currentDate, 200*globalScaler, 150*globalScaler);
+	textSize(35*globalScaler);
+	text("Days since 00/00/0000", 200*globalScaler, 250*globalScaler);
+};
 			/************************************************************
 			********************     END CODE
 			************************************************************/

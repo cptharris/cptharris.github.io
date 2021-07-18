@@ -1,62 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
-	<title>Techie Cable</title>
+	<title>TechieCable</title>
 	<base href="https://techiecable.github.io" target="_self">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<meta name="description" content="TechieCable's Coding Website">
 	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
 	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
-	<link rel="stylesheet" href="css/style.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="js/headerload.js"></script>
 	
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="js/includes.js"></script>
+	
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
 	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	
-	  gtag('config', 'G-QW9ZGL7K7W');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		
+		gtag('config', 'G-QW9ZGL7K7W');
 	</script>
 	<!-- End Site Tag - Google Analytics -->
 </head>
-<body>
-	<!-- Front page -->
-	<div class="centering full" style="background: rgb(28, 24, 42);">
-		<h1 class="front-header">Techie Cable</h1>
-	</div>
-	
-	<!-- No JS announcement -->
-	<noscript>
-		<div id="blankspace"></div>
-		
-		For this site to perform its basic functions, it is necessary to enable JavaScript.<br>
-		You can allow JavaScript in your browser settings <a href="https://www.whatismybrowser.com/guides/how-to-enable-javascript/auto">by following these instructions</a>.
-		
-		<div id="blankspace"></div>
-	</noscript>
-	
-	<!-- Load header menu -->
-	<include src="headermenu.html">Loading menus...</include>
-	
-	<!-- Main element with most recent blog published -->
-	<main id="techieblog">
-		<h2>The Techie Blog</h2>
-		<div id="letters">
-			Loading blogs from source...
+<body class="h-100">
+	<div class="container-fluid h-100">
+		<div class="row mb-auto">
+			<include src="headermenu.html">Loading menus...</include>
 		</div>
 		
-		<br><br>
-		<p>View my previous blogs <a href="blog_archive">here</a>.</p>
-	</main>
+		<div class="row align-items-center h-100 mb-5" style="background: rgb(28, 24, 42);">
+			<div class="col d-flex flex-column justify-content-center">
+				<main>
+					<h1 class="display-1 text-center">TechieCable</h1>
+				</main>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col">
+				<div id="site-notice"></div>
+				<main id="techieblog" class="px-md-5 px-sm-4 px-xs-3">
+					<h2 class="display-6 text-center">The Techie Blog</h2>
+					<div id="letters">
+						Loading blogs from source...
+					</div>
+					
+					<br><br>
+					<p>View my previous blogs <a href="blog_archive">here</a>.</p>
+				</main>
+			</div>
+		</div>
+		<div class="blankspace"></div>
+	</div>
 	
-	<div id="blankspace"></div>
+	<include src="footermenu.html">Loading footer...</include>
+	
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 <!-- Loads blogs -->
 <script src="js/loadblogs.js"></script>
 <script src="https://spreadsheets.google.com/feeds/cells/1eyWldvly_I5UMHb3bEZDFEkifbCRsgRbDTRNu4NOVRY/od6/public/values?alt=json-in-script&callback=listEntries"></script>
+<!-- Loads site notice -->
+<script type="text/javascript">
+	function displayNotice(input) {
+		document.getElementById("site-notice").innerHTML = input.feed.entry[0].content.$t;
+	}
+</script>
+<script src="https://spreadsheets.google.com/feeds/cells/1LIFrZXjK03kqhnMu81GFLI6xdj9S1RUOMyCBtx23AXI/od6/public/values?alt=json-in-script&callback=displayNotice"></script>
 </html>

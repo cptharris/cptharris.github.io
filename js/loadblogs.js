@@ -16,10 +16,10 @@ function listEntries(input) {
 		if (patt.test(entry_title.content.$t)) { // title must have numbers to appear
 			if (window.location.pathname == "/") { // on the main page, show only the last entry
 				// set the array to the text content, to get the last entry
-				html = ['<p class="tc_letter">', entry_text.content.$t, '</p>']
+				html = ['<p>', entry_text.content.$t, '</p>']
 			} else { // on the blog page, add each entry to the array
 				// last entry is the most recent, so add to the start of the array to display correctly
-				html.unshift('<p class="tc_letter">', entry_text.content.$t, '</p>'); // add text to start of array
+				html.unshift('<p>', entry_text.content.$t, '</p>'); // add text to start of array
 				html.unshift('<h2 class="tc_letter_header">', entry_title.content.$t, '</h2>'); //add title to start of array
 			}
 		}

@@ -1,0 +1,68 @@
+<!-- https://www.w3schools.com/howto/howto_html_include.asp    https://stackoverflow.com/questions/8988855/include-another-html-file-in-a-html-file -->
+
+<!-- ***** Redirect ***** -->
+<script type="text/javascript">
+	if (location.pathname.includes("includes")) {
+		location.href = "/";
+	}
+</script>
+
+<!-- ***** Header Menu ***** -->
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top justify-content-center" id="headermenuNav">
+	<div class="container-fluid">
+		<!-- Image and Site Name -->
+		<a class="navbar-brand" href="/">
+			<img class="img-fluid d-inline-block align-text-top" src="img/favicon.svg" alt="TechieCable Computer Logo" width="32" height="32"/>
+			TechieCable
+		</a>
+		
+		<!-- Toggle Button -->
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#headermenuNavBar" aria-controls="headermenuNavBar" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<!-- Navigation Bar -->
+		<div class="collapse navbar-collapse" id="headermenuNavBar">
+			<ul class="navbar-nav navbar-nav-scroll">
+				<li class="nav-item">
+					<a class="nav-link" href="/">Home</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="programsDropdown" href="programs/" data-bs-toggle="dropdown" aria-expanded="false">Programs</a>
+					<ul class="dropdown-menu" aria-labelledby="programsDropdown">
+						<!-- <li><a class="dropdown-item" href="XXXXXX">XXXXXXX</a></li> -->
+						<li><a class="dropdown-item" href="/programs/wake_calculator">Wake Calculator</a></li>
+						<li><a class="dropdown-item" href="/programs/days_since_0">Days Since 0</a></li>
+						<li><a class="dropdown-item" href="/programs/days_since">Days Since ?</a></li>
+						<li><a class="dropdown-item" href="/programs/space_invaders">Space Invaders</a></li>
+						<li><a class="dropdown-item" href="/programs/click_counter">Click Speed Counter</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="programs/">Programs Index</a></li>
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="TechieCableUtilities/">TechieCableUtilities</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="redirects/">Redirects</a>
+				</li>
+			</ul>
+		</div>
+		<!-- End Navigation Bar -->
+	</div>
+</nav>
+
+<script type="text/javascript">
+	var navItems = document.getElementsByClassName("nav-link");
+	var navItemsA = Array.from(navItems);
+	var dropdownItems = document.getElementsByClassName("dropdown-item");
+	var dropdownItemsA = Array.from(dropdownItems);
+	var linkItems = navItemsA.concat(dropdownItemsA);
+	
+	for (var i = 0; i < linkItems.length; i++) {
+		if (location.pathname === (linkItems[i].pathname)) {
+			linkItems[i].classList.add("active");
+			linkItems[i].setAttribute("aria-current", "active");
+		}
+	}
+</script>
