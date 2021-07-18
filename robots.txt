@@ -1,6 +1,8 @@
-User-agent: *
+User-Agent: *
+Allow: /
 Disallow: /includes/
 Disallow: /404.html
 Disallow: /google90a6c2630c8e62ad.html
+Disallow: /redirects/action.html
 
 Sitemap: https://techiecable.github.io/sitemap.xml
