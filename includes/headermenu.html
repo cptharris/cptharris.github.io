@@ -61,7 +61,7 @@
 	var linkItems = navItemsA.concat(dropdownItemsA);
 	
 	for (var i = 0; i < linkItems.length; i++) {
-		if (location.pathname === (linkItems[i].pathname)) {
+		if (location.pathname.replace(/\.\w*/,"").toLowerCase() === (linkItems[i].pathname).toLowerCase()) {
 			linkItems[i].classList.add("active");
 			linkItems[i].setAttribute("aria-current", "active");
 		}
