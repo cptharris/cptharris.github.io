@@ -100,112 +100,97 @@
 			</div>
 		</div>
 		
-		<div class="container-fluid px-5">
-			
-			<!-- Quick Link -->
-			
-			<div class="row px-5 mx-5 align-items-center">
-				<div class="col px-5 mx-5 justify-content-center d-flex flex-column">
-					<form action="redirects/action.html" id="quick-link" target="link-iframe">
-						<div class="mb-3 text-center">
-							<label class="display-4">Quick Link<a class="hash" href="redirects/#quick-link">#</a></label>
+		<div class="row align-items-center">
+			<div class="col-sm"></div>
+			<div class="col-sm px-5 px-sm-0 d-flex flex-column justify-content-center">
+				<!-- Quick Link -->
+				
+				<form action="redirects/action.html" id="quick-link" target="link-iframe">
+					<div class="mb-3 text-center">
+						<label class="display-4">Quick Link<a class="hash" href="redirects/#quick-link">#</a></label>
+					</div>
+					<!-- URL to shorten -->
+					<div class="mb-3">
+						<label class="form-label" for="quick-link-input">URL</label>
+						<input class="form-control" type="url" name="quick-link-input" id="quick-link-input">
+						<div class="form-text">Enter the link to shorten.</div>
+					</div>
+					<!-- Expiration Days -->
+					<div class="mb-3">
+						<label class="form-label" for="quick-link-days">Expiration Days</label>
+						<input class="form-control" type="number" name="quick-link-days" id="quick-link-days"  value="0" min="0" max="100">
+						<div class="form-text">Enter days until expiration.</div>
+					</div>
+					<!-- Submit -->
+					<button class="btn btn-primary" type=submit>Submit</button>
+					<!-- Display Radio -->
+					<div class="invisible form-check">
+						<input type="radio" name="link" checked>
+					</div>
+				</form>
+				<iframe name="link-iframe"></iframe>
+				
+				<!-- Quick Hash -->
+				
+				<form action="redirects/action.html" id="quick-hash" target="hash-iframe">
+					<div class="mb-3 text-center">
+						<label class="display-4">Quick Hash<a href="redirects/#quick-hash">#</a></label>
+					</div>
+					<!-- Text to hash -->
+					<div class="mb-3">
+						<label class="form-label" for="quick-hash-input">Text</label>
+						<input class="form-control" type="text" name="quick-hash-input" id="quick-hash-input">
+						<div class="form-text">Enter the text to hash.</div>
+					</div>
+					<!-- Submit -->
+					<button class="btn btn-primary" type=submit>Submit</button>
+					<!-- Display Radio -->
+					<div class="invisible form-check">
+						<input type="radio" name="hash" checked>
+					</div>
+				</form>
+				<iframe name="hash-iframe"></iframe>
+				
+				<!-- Quick AES -->
+				
+				<form action="redirects/action.html" id="quick-aes" target="aes-iframe">
+					<div class="mb-3 text-center">
+						<label class="display-4">Quick AES<a href="redirects/#quick-aes">#</a></label>
+					</div>
+					<!-- Text to encrypt/decrypt -->
+					<div class="mb-3">
+						<label class="form-label" for="quick-aes-input">Text</label>
+						<input class="form-control" type="text" name="quick-aes-input" id="quick-aes-input">
+						<div class="form-text">Enter the text to encrypt/decrypt.</div>
+					</div>
+					<!-- Password -->
+					<div class="mb-3">
+						<label class="form-label" for="quick-aes-password">Password</label>
+						<input class="form-control" type="text" name="quick-aes-password" id="quick-aes-password">
+						<div class="form-text">Enter the encryption/decryption password.</div>
+					</div>
+					<!-- Radio Encrypt/Decrypt -->
+					<div class="mb-3">
+						<label class="form-label">Mode</label>
+						<div class="mb-3 form-check">
+							<input type="radio" name="aes-radio" class="form-check-input" id="aes-radio-1" value="1" checked>
+							<label class="form-check-label" for="aes-radio-1">Encrypt</label>
 						</div>
-						<!-- URL to shorten -->
-						<div class="mb-3">
-							<label class="form-label" for="quick-link-input">URL</label>
-							<input class="form-control" type="url" name="quick-link-input" id="quick-link-input">
-							<div class="form-text">Enter the link to shorten.</div>
+						<div class="mb-3 form-check">
+							<input type="radio" name="aes-radio" class="form-check-input" id="aes-radio-2" value="0">
+							<label class="form-check-label" for="aes-radio-2">Decrypt</label>
 						</div>
-						<!-- Expiration Days -->
-						<div class="mb-3">
-							<label class="form-label" for="quick-link-days">Expiration Days</label>
-							<input class="form-control" type="number" name="quick-link-days" id="quick-link-days"  value="0" min="0" max="100">
-							<div class="form-text">Enter days until expiration.</div>
-						</div>
-						<!-- Submit -->
-						<button class="btn btn-primary" type=submit>Submit</button>
-						<!-- Display Radio -->
-						<div class="invisible form-check">
-							<input type="radio" name="link" checked>
-						</div>
-					</form>
-					<iframe name="link-iframe"></iframe>
-				</div>
+					</div>
+					<!-- Submit -->
+					<button class="btn btn-primary" type=submit>Submit</button>
+					<!-- Display Radio -->
+					<div class="mb-3 invisible form-check">
+						<input type="radio" name="aes" checked>
+					</div>
+				</form>
+				<iframe name="aes-iframe"></iframe>
 			</div>
-			
-			<div class="row blankspace"></div>
-			
-			<!-- Quick Hash -->
-
-			<div class="row px-5 mx-5 align-items-center">
-				<div class="col px-5 mx-5 justify-content-center d-flex flex-column">
-					<form action="redirects/action.html" id="quick-hash" target="hash-iframe">
-						<div class="mb-3 text-center">
-							<label class="display-4">Quick Hash<a href="redirects/#quick-hash">#</a></label>
-						</div>
-						<!-- Text to hash -->
-						<div class="mb-3">
-							<label class="form-label" for="quick-hash-input">Text</label>
-							<input class="form-control" type="text" name="quick-hash-input" id="quick-hash-input">
-							<div class="form-text">Enter the text to hash.</div>
-						</div>
-						<!-- Submit -->
-						<button class="btn btn-primary" type=submit>Submit</button>
-						<!-- Display Radio -->
-						<div class="invisible form-check">
-							<input type="radio" name="hash" checked>
-						</div>
-					</form>
-					<iframe name="hash-iframe"></iframe>
-				</div>
-			</div>
-			
-			<div class="row blankspace"></div>
-			
-			<!-- Quick AES -->
-			
-			<div class="row px-5 mx-5 align-items-center">
-				<div class="col px-5 mx-5 justify-content-center d-flex flex-column">
-					<form action="redirects/action.html" id="quick-aes" target="aes-iframe">
-						<div class="mb-3 text-center">
-							<label class="display-4">Quick AES<a href="redirects/#quick-aes">#</a></label>
-						</div>
-						<!-- Text to encrypt/decrypt -->
-						<div class="mb-3">
-							<label class="form-label" for="quick-aes-input">Text</label>
-							<input class="form-control" type="text" name="quick-aes-input" id="quick-aes-input">
-							<div class="form-text">Enter the text to encrypt/decrypt.</div>
-						</div>
-						<!-- Password -->
-						<div class="mb-3">
-							<label class="form-label" for="quick-aes-password">Password</label>
-							<input class="form-control" type="text" name="quick-aes-password" id="quick-aes-password">
-							<div class="form-text">Enter the encryption/decryption password.</div>
-						</div>
-						<!-- Radio Encrypt/Decrypt -->
-						<div class="mb-3">
-							<label class="form-label">Mode</label>
-							<div class="mb-3 form-check">
-								<input type="radio" name="aes-radio" class="form-check-input" id="aes-radio-1" value="1" checked>
-								<label class="form-check-label" for="aes-radio-1">Encrypt</label>
-							</div>
-							<div class="mb-3 form-check">
-								<input type="radio" name="aes-radio" class="form-check-input" id="aes-radio-2" value="0">
-								<label class="form-check-label" for="aes-radio-2">Decrypt</label>
-							</div>
-						</div>
-						<!-- Submit -->
-						<button class="btn btn-primary" type=submit>Submit</button>
-						<!-- Display Radio -->
-						<div class="mb-3 invisible form-check">
-							<input type="radio" name="aes" checked>
-						</div>
-					</form>
-					<iframe name="aes-iframe"></iframe>
-				</div>
-			</div>
-			
-			<div class="row blankspace"></div>
+			<div class="col-sm"></div>
 		</div>
 	</div>
 	
