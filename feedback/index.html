@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+	<title>TechieCable - Feedback</title>
+	<!-- <base href="https://techiecable.github.io" target="_self"> -->
+	<base href="http://localhost:1000" target="_self">
+	<meta name="author" content="TechieCable">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="TechieCable's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="js/includes.js"></script>
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'G-QW9ZGL7K7W');
+	</script>
+	<!-- End Site Tag - Google Analytics -->
+</head>
+<style>
+	div.form-text {
+		color: rgb(200, 200, 200);
+	}
+
+	iframe {
+		border: none;
+		margin: 0px;
+		padding: 0px;
+	}
+</style>
+
+<body class="h-100">
+	<div class="container-fluid h-100">
+		<div class="row mb-auto">
+			<include src="headermenu.html">Loading menus...</include>
+		</div>
+
+		<div class="row align-items-center h-100 mb-5" style="background: rgb(28, 24, 42);">
+			<div class="col d-flex flex-column justify-content-center">
+				<main>
+					<h1 class="display-1 text-center">Feedback</h1>
+				</main>
+			</div>
+		</div>
+
+		<div class="row align-items-center">
+			<div class="col-sm"></div>
+			<div class="col-sm px-5 px-sm-0 d-flex flex-column justify-content-center">
+				<form action="feedback/action.html" id="feedback-form" target="feedback-iframe">
+					<div class="mb-3 text-center">
+						<label class="display-4">Submission<a class="hash" href="feedback/#feedback-form">#</a></label>
+					</div>
+
+					<!-- Name -->
+					<div class="mb-3">
+						<label for="name-input" class="form-label">Name</label>
+						<input class="form-control" type="text" name="name-input" id="name-input">
+						<div class="form-text">Enter your name (optional).</div>
+					</div>
+
+					<!-- Email -->
+					<div class="mb-3">
+						<label for="email-input" class="form-label">Email</label>
+						<input class="form-control" type="email" name="email-input" id="email-input">
+						<div class="form-text">Enter your email (optional, if clarification is needed).</div>
+					</div>
+
+					<!-- UserAgent/Platform -->
+					<div class="d-none invisible">
+						<input class="form-control" type="text" name="userAgent-input" id="userAgent-input">
+						<input class="form-control" type="text" name="platform-input" id="platform-input">
+						<script>
+							document.getElementById('userAgent-input').setAttribute('value', navigator.userAgent);
+							document.getElementById('platform-input').setAttribute('value', navigator.platform);
+						</script>
+					</div>
+
+					<!-- Device type -->
+					<div class="mb-3">
+						<label for="device-type" class="form-label">Device Type</label>
+						<input class="form-control" type="text" name="device-type" id="device-type">
+						<div class="form-text">What device are you using? (optional, but quite helpful).</div>
+					</div>
+
+					<!-- OS -->
+					<div class="mb-3">
+						<label for="operating-system" class="form-label">Operating System</label>
+						<input class="form-control" type="text" name="operating-system" id="operating-system">
+						<div class="form-text">What operating system (ex: Windows, Linux, iOS, Android, macOS, etc.) are you running, and what version (ex: 1.12, 10, etc.)? (optional, but very helpful).</div>
+					</div>
+
+					<!-- Browser -->
+					<div class="mb-3">
+						<label for="browser-input" class="form-label">Browser</label>
+						<input class="form-control" type="text" name="browser-input" id="browser-input">
+						<div class="form-text">What browser (ex: Chrome, Edge, Firefox, Safari, Opera) are you using, and what version? (optional, but extremely helpful).</div>
+					</div>
+
+					<!-- Specific page -->
+					<div class="mb-3">
+						<label class="form-label" for="specific-page">Specific page</label>
+						<input class="form-control" type="url" name="specific-page" id="specific-page" value="https://techiecable.github.io/">
+						<div class="form-text">Is there a specific page you would like to provide feedback on? (optional)</div>
+					</div>
+
+					<!-- Comments Box -->
+					<div class="mb-3">
+						<label class="form-label" for="comments-box">Comments</label>
+						<textarea class="form-control" name="comments-box" id="comments-box" rows="8" cols="80"></textarea>
+						<div class="form-text">Enter your comments. (required)</div>
+					</div>
+
+					<!-- Submissions Policy -->
+					<div class="modal fade" id="submissionPolicy" tabindex="-1" aria-labelledby="policyModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered text-dark">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="policyModalLabel">Submission Policy</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<p class="small">
+										TechieCable and its representatives do not accept, review, or consider any unrequested ideas, works, materials, proposals, suggestions, artwork, content or the like, for any products, services, enhancements,
+										processes, product names, content or creative materials, or the like. Please do not send, provide, or submit any of the above in any form to TechieCable or its representatives.<br><br>
+
+										This policy is designed to avoid any misunderstandings or disputes when any of TechieCable's products, services, content, or the like might seem similar to submissions provided to TechieCable. If, despite this
+										request that you not attempt to send us submissions like those listed above, you still submit them, then regardless of any instructions, references, or requested provided with them, the following terms will
+										apply to your submissions.<br><br>
+									</p>
+
+									<h6><strong>Terms of Idea Submission</strong></h6>
+
+									<p class="small">
+										If you choose to submit any of the above listed items, you agree that: (1) your submissions and their content, with all intellectual property rights will automatically become the property of TechieCable,
+										without any compensation given to you; (2) TechieCable may use, redistribute, or share the submissions and their content for any purpose and in any way without restriction; (3) TechieCable is not obligated to
+										review any submissions; and (4) TechieCable is not obligated to keep any submissions confidential.<br><br>
+									</p>
+
+									<h6><strong>Product Feedback</strong></h6>
+
+									<p class="small">
+										TechieCable does, however, appreciate your feedback regarding any areas of TechieCable's existing services. If you wish to feedback or comments, use the form located on this page. Please provide only specific
+										feedback on TechieCable's existing products, services, and content and using this form; and do not send or provide any submissions other than using this form.<br><br>
+									</p>
+
+									<h6><strong>Feedback and Information</strong></h6>
+
+									<p class="small">
+										Any feedback provided at this site will be automatically deemed non-confidential and not proprietary. TechieCable is free to use, redistribute, and share such information without restriction, without any
+										compensation given to you.
+									</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Submit -->
+					<button class="btn btn-primary" type=submit>Submit</button>
+
+					<!-- Submission Policy Button -->
+					<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#submissionPolicy">
+						Submission Policy
+					</button>
+				</form>
+
+				<div class="my-3"></div>
+
+				<iframe name="feedback-iframe"></iframe>
+
+				<div class="my-5"></div>
+				<div class="my-5"></div>
+			</div>
+			<div class="col-sm"></div>
+		</div>
+	</div>
+
+	<include src="footermenu.html">Loading footer...</include>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>

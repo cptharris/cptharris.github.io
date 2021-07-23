@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>TechieCable</title>
+	<base href="https://techiecable.github.io" target="_self">
+	<meta name="author" content="TechieCable">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="TechieCable's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'G-QW9ZGL7K7W');
+	</script>
+	<!-- End Site Tag - Google Analytics -->
+</head>
+<style>
+	#action-result {
+		word-wrap: break-word;
+		word-break: break-word;
+	}
+</style>
+
+<body>
+	<div id="action-result"></div>
+
+	<iframe src="" id="submit-iframe" width="0" height="0" style="border: none;"></iframe>
+</body>
+<script type="text/javascript">
+	var formSubmit = function(name, email, userAgent, platform, deviceType, OS, browser, page, comments) {
+		if (!comments) {
+			return "Comments are a required entry. I can't exactly accept feedback with no comments."
+		}
+
+		var submitFormURL = "https://docs.google.com/forms/d/e/" +
+			"1FAIpQLSfNTYS5LxIuc-LF0_lABIPnKHotCaEwqpWDJg1AeosQq801BQ" +
+			"/formResponse?usp=pp_url" +
+			"&entry.647926688=" + encodeURIComponent(name) +
+			"&entry.259832181=" + encodeURIComponent(email) +
+			"&entry.597880979=" + encodeURIComponent(userAgent) +
+			"&entry.59605928=" + encodeURIComponent(platform) +
+			"&entry.812124874=" + encodeURIComponent(deviceType) +
+			"&entry.1874858707=" + encodeURIComponent(OS) +
+			"&entry.818882128=" + encodeURIComponent(browser) +
+			"&entry.1306265290=" + encodeURIComponent(page) +
+			"&entry.392392855=" + encodeURIComponent(comments) +
+			"&submit=Submit";
+
+		document.getElementById('submit-iframe').setAttribute("src", submitFormURL);
+
+		return "Feedback sent. Thank you for your response.";
+	};
+
+	var thisURL = new URL(window.location);
+
+	function getQuery(query) {
+		return thisURL.searchParams.get(query)
+	}
+
+	document.getElementById('action-result').innerHTML = formSubmit(
+		getQuery('name-input'),
+		getQuery('email-input'),
+		getQuery('userAgent-input'),
+		getQuery('platform-input'),
+		getQuery('device-type'),
+		getQuery('operating-system'),
+		getQuery('browser-input'),
+		getQuery('specific-page'),
+		getQuery('comments-box')
+	);
+</script>
+
+</html>
