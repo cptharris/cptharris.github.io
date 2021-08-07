@@ -15,7 +15,10 @@
 				<span><a href="https://github.com/TechieCable/techiecable.github.io">Hosted on GitHub</a></span>
 			</div>
 			<div class="col-sm">
-				<span>Copyright © TechieCable 2020-2021</span>
+				<span>Copyright © TechieCable 2020-<span id="currentYear">2021</span></span>
+				<script>
+					document.getElementById("currentYear").innerHTML = new Date().getFullYear();
+				</script>
 			</div>
 			<div class="col-sm">
 				<span><a href="privacy_policy">Privacy Policy</a></span>

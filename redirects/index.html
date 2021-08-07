@@ -38,12 +38,9 @@
 <script src="js/program_library.js" charset="utf-8"></script>
 <script type="text/javascript">
 	/* Processes the URL query and creates the redirect */
-	var thisURL = new URL(window.location), hashRequest = "", eQuery = 0;
+	var thisURL = new URL(window.location), hashRequest = "";
 	if (thisURL.searchParams.has("q")) {
 		var hashRequest = thisURL.searchParams.get("q");
-		if (thisURL.searchParams.has("e")) {
-			eQuery = 1;
-		}
 	}
 	
 	var databaseKeys = [];
@@ -58,10 +55,8 @@
 			databaseKeys.push([entry_key.content.$t,entry_URL.content.$t]);
 
 			if (hashRequest) {
-				var comparisonHash = (eQuery) ? fastHash(hashRequest) : hashRequest;
-				if (entry_key.content.$t == comparisonHash) {
-					var requestedURL = (eQuery) ? fastAES(entry_URL.content.$t,hashRequest,0) : entry_URL.content.$t;
-					window.location = requestedURL;
+				if (entry_key.content.$t == fastHash(hashRequest)) {
+					window.location = fastAES(entry_URL.content.$t,hashRequest,0);
 					sleepJSCustom(2000);
 				}
 			}
@@ -131,7 +126,7 @@
 				
 				<form action="redirects/action.html" id="quick-hash" target="hash-iframe">
 					<div class="mb-3 text-center">
-						<label class="display-4">Quick Hash<a href="redirects/#quick-hash">#</a></label>
+						<label class="display-4">Quick Hash<a class="hash" href="redirects/#quick-hash">#</a></label>
 					</div>
 					<!-- Text to hash -->
 					<div class="mb-3">
@@ -152,7 +147,7 @@
 				
 				<form action="redirects/action.html" id="quick-aes" target="aes-iframe">
 					<div class="mb-3 text-center">
-						<label class="display-4">Quick AES<a href="redirects/#quick-aes">#</a></label>
+						<label class="display-4">Quick AES<a class="hash" href="redirects/#quick-aes">#</a></label>
 					</div>
 					<!-- Text to encrypt/decrypt -->
 					<div class="mb-3">
