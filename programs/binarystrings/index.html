@@ -80,14 +80,20 @@
 		return values.join("");
 	}
 
-	function submission(isAoB) {
+	function submission(buttonSel) {
 		var alphaText = document.querySelector("#alpha-text");
 		var binaryText = document.querySelector("#binary-text");
+		var asciiText = document.querySelector("#ascii-text");
 
-		if (document.activeElement.id == "alpha-text" || isAoB == "alpha") {
+		if (document.activeElement.id == "alpha-text" || buttonSel == "alpha") {
 			binaryText.value = string2binary(alphaText.value);
-		} else if (document.activeElement.id == "binary-text" || isAoB == "binary") {
+			asciiText.value = string2ascii(alphaText.value);
+		} else if (document.activeElement.id == "binary-text" || buttonSel == "binary") {
 			alphaText.value = binary2string(binaryText.value);
+			asciiText.value = string2ascii(binary2string(binaryText.value));
+		} else if (document.activeElement.id == "ascii-text" || buttonSel == "ascii") {
+			alphaText.value = ascii2string(asciiText.value);
+			binaryText.value = string2binary(ascii2string(asciiText.value));
 		}
 	}
 </script>
@@ -120,22 +126,42 @@
 					<div class="mb-3 text-center">
 						<label class="display-4">Alpha to Binary<a class="hash" href="programs/binarystrings#a2b2a">#</a></label>
 					</div>
+					<hr>
+
+					<div class="text-center">
+						<button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="button.btn-primary">
+							Show/Hide Buttons
+						</button>
+					</div>
+
 					<!-- Alpha Text -->
 					<div class="mb-3">
 						<label class="form-label" for="alpha-text">Alpha</label>
 						<textarea class="form-control" type="text" name="alpha-text" id="alpha-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
 						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the alpha string.</div>
+						<button class="btn btn-primary collapse multi-collapse" onclick="submission('alpha');" type="button">Convert</button>
 					</div>
-					<button class="btn btn-primary" onclick="submission('alpha');" type="button">Convert</button>
+					<hr>
+
 					<!-- Binary Text -->
 					<div class="mb-3">
 						<label class="form-label" for="binary-text">Binary</label>
 						<textarea class="form-control" type="text" name="binary-text" id="binary-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
 						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the binary string.</div>
+						<button class="btn btn-primary collapse multi-collapse" onclick="submission('binary');" type="button">Convert</button>
 					</div>
-					<button class="btn btn-primary" onclick="submission('binary');" type="button">Convert</button>
+					<hr>
+
+					<!-- ASCII Text -->
+					<div class="mb-3" id="ascii-section">
+						<label class="form-label" for="ascii-text">ASCII</label>
+						<textarea class="form-control" type="text" name="ascii-text" id="ascii-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
+						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
+						<div class="form-text">Enter the ASCII code string.</div>
+						<button class="btn btn-primary collapse multi-collapse" onclick="submission('ascii');" type="button">Convert</button>
+					</div>
 				</div>
 				<div class="my-5"></div>
 				<div class="my-5"></div>
