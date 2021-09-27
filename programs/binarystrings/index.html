@@ -80,13 +80,13 @@
 		return values.join("");
 	}
 
-	function submission(alphaText, binaryText) {
+	function submission(isAoB) {
 		var alphaText = document.querySelector("#alpha-text");
 		var binaryText = document.querySelector("#binary-text");
 
-		if (document.activeElement.id == "alpha-text") {
+		if (document.activeElement.id == "alpha-text" || isAoB == "alpha") {
 			binaryText.value = string2binary(alphaText.value);
-		} else if (document.activeElement.id == "binary-text") {
+		} else if (document.activeElement.id == "binary-text" || isAoB == "binary") {
 			alphaText.value = binary2string(binaryText.value);
 		}
 	}
@@ -127,6 +127,7 @@
 						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the alpha string.</div>
 					</div>
+					<button class="btn btn-primary" onclick="submission('alpha');" type="button">Convert</button>
 					<!-- Binary Text -->
 					<div class="mb-3">
 						<label class="form-label" for="binary-text">Binary</label>
@@ -134,7 +135,7 @@
 						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the binary string.</div>
 					</div>
-					<input type="submit" class="invisible">
+					<button class="btn btn-primary" onclick="submission('binary');" type="button">Convert</button>
 				</div>
 				<div class="my-5"></div>
 				<div class="my-5"></div>
