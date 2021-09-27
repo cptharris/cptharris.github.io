@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+	<title>TechieCable - Binary Strings</title>
+	<base href="https://techiecable.github.io" target="_self">
+	<meta name="author" content="TechieCable">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="TechieCable's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+	<script src="js/includes.js"></script>
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'G-QW9ZGL7K7W');
+	</script>
+	<!-- End Site Tag - Google Analytics -->
+</head>
+
+<script type="text/javascript">
+	var prevKeyCode = 0;
+
+	function string2ascii(input) {
+		// ab -> "97 98"
+		return input.split("").map(function(s) {
+			return s.charCodeAt(0);
+		}).join(" ");
+	}
+
+	function ascii2string(input) {
+		// "97 98" -> "ab"
+		return input.split(" ").map(function(s) {
+			return String.fromCharCode(s);
+		}).join("");
+	}
+
+	function dec2bin(input) {
+		// "97" -> "01100001"
+		return String(parseInt(input).toString(2)).padStart(8, "0");
+	}
+
+	function bin2dec(input) {
+		// "1100001" -> "97"
+		return String(parseInt(input, 2));
+	}
+
+	function string2binary(input) {
+		// "ab" -> "97 98" -> "0110000101100010"
+		return string2ascii(input).split(" ").map(function(s) {
+			return dec2bin(s);
+		}).join("");
+	}
+
+	function binary2string(input) {
+		// "0110000101100010" -> "97 98" -> "ab"
+		var values = [];
+		for (var i = 0; i < input.length; i += 8) {
+			var txt = input.substr(i, 8);
+			values.push(ascii2string(bin2dec(txt)));
+		}
+		return values.join("");
+	}
+
+	function submission(alphaText, binaryText) {
+		var alphaText = document.querySelector("#alpha-text");
+		var binaryText = document.querySelector("#binary-text");
+
+		if (document.activeElement.id == "alpha-text") {
+			binaryText.value = string2binary(alphaText.value);
+		} else if (document.activeElement.id == "binary-text") {
+			alphaText.value = binary2string(binaryText.value);
+		}
+	}
+</script>
+
+<style>
+	div.form-text {
+		color: rgb(200, 200, 200);
+	}
+</style>
+
+<body class="h-100">
+	<div class="container-fluid h-100">
+		<div class="row mb-auto">
+			<include src="headermenu.html">Loading menus...</include>
+		</div>
+
+		<div class="row align-items-center h-100 mb-5" style="background: rgb(28, 24, 42);">
+			<div class="col d-flex flex-column justify-content-center">
+				<main>
+					<h1 class="display-1 text-center">Binary Strings</h1>
+				</main>
+			</div>
+		</div>
+
+		<div class="row align-items-center">
+			<div class="col-sm"></div>
+			<div class="col-sm px-5 px-sm-0 d-flex flex-column justify-content-center">
+				<!-- Alpha to Binary -->
+				<div id="a2b2a">
+					<div class="mb-3 text-center">
+						<label class="display-4">Alpha to Binary<a class="hash" href="programs/binarystrings#a2b2a">#</a></label>
+					</div>
+					<!-- Alpha Text -->
+					<div class="mb-3">
+						<label class="form-label" for="alpha-text">Alpha</label>
+						<textarea class="form-control" type="text" name="alpha-text" id="alpha-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
+						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
+						<div class="form-text">Enter the alpha string.</div>
+					</div>
+					<!-- Binary Text -->
+					<div class="mb-3">
+						<label class="form-label" for="binary-text">Binary</label>
+						<textarea class="form-control" type="text" name="binary-text" id="binary-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
+						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
+						<div class="form-text">Enter the binary string.</div>
+					</div>
+					<input type="submit" class="invisible">
+				</div>
+				<div class="my-5"></div>
+				<div class="my-5"></div>
+			</div>
+			<div class="col-sm"></div>
+		</div>
+	</div>
+
+	<include src="footermenu.html">Loading footer...</include>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>
