@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
+
 <head>
 	<title>TechieCable - Redirects</title>
 	<base href="https://techiecable.github.io" target="_self">
@@ -10,23 +11,26 @@
 	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
 	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
-	
+
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
 	<script src="js/includes.js"></script>
-	
+
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	
+
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="css/style.css">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
 		gtag('js', new Date());
-		
+
 		gtag('config', 'G-QW9ZGL7K7W');
 	</script>
 	<!-- End Site Tag - Google Analytics -->
@@ -38,25 +42,27 @@
 <script src="js/program_library.js" charset="utf-8"></script>
 <script type="text/javascript">
 	/* Processes the URL query and creates the redirect */
-	var thisURL = new URL(window.location), hashRequest = "";
+	var thisURL = new URL(window.location),
+		hashRequest = "";
 	if (thisURL.searchParams.has("q")) {
 		var hashRequest = thisURL.searchParams.get("q");
 	}
-	
+
 	var databaseKeys = [];
+
 	function processEntries(input) {
 		console.time("time to process entries");
-		var entries = input.feed.entry; // get the GS feed
+		var rows = input.values; // get the GS feed
 
-		for (var i = 0; i < entries.length; i+=2) {
-			var entry_key = entries[i]; // key
-			var entry_URL = entries[i+1]; // URL
+		for (var i = 0; i < rows.length; i++) {
+			var entry_key = rows[i][0]; // key
+			var entry_URL = rows[i][1]; // URL
 
-			databaseKeys.push([entry_key.content.$t,entry_URL.content.$t]);
+			databaseKeys.push([entry_key, entry_URL]);
 
 			if (hashRequest) {
-				if (entry_key.content.$t == fastHash(hashRequest)) {
-					window.location = fastAES(entry_URL.content.$t,hashRequest,0);
+				if (entry_key == fastHash(hashRequest)) {
+					window.location = fastAES(entry_URL, hashRequest, 0);
 					sleepJSCustom(2000);
 				}
 			}
@@ -64,7 +70,7 @@
 		console.timeEnd("time to process entries");
 	}
 </script>
-<script src="https://spreadsheets.google.com/feeds/cells/1XJBOYua9V6WKiwLfE-0Yif0se7XW0nDKwXvxD1lQfD4/od6/public/values?alt=json-in-script&callback=processEntries"></script>
+<script src="https://sheets.googleapis.com/v4/spreadsheets/1XJBOYua9V6WKiwLfE-0Yif0se7XW0nDKwXvxD1lQfD4/values/Sheet1?key=AIzaSyDLeEQXNzj20G-rz2jJN3Sw_0eBbzqvc9c&callback=processEntries"></script>
 
 <!-- Redirection Functions, Processing, and Loading : END -->
 
@@ -72,18 +78,20 @@
 	div.form-text {
 		color: rgb(200, 200, 200);
 	}
+
 	iframe {
 		border: none;
 		margin: 0px;
 		padding: 0px;
 	}
 </style>
+
 <body class="h-100">
 	<div class="container-fluid h-100">
 		<div class="row mb-auto">
 			<include src="headermenu.html">Loading menus...</include>
 		</div>
-		
+
 		<div class="row align-items-center h-100 mb-5" style="background: rgb(28, 24, 42);">
 			<div class="col d-flex flex-column justify-content-center">
 				<main>
@@ -91,12 +99,12 @@
 				</main>
 			</div>
 		</div>
-		
+
 		<div class="row align-items-center">
 			<div class="col-sm"></div>
 			<div class="col-sm px-5 px-sm-0 d-flex flex-column justify-content-center">
 				<!-- Quick Link -->
-				
+
 				<form action="redirects/action.html" id="quick-link" target="link-iframe">
 					<div class="mb-3 text-center">
 						<label class="display-4">Quick Link<a class="hash" href="redirects/#quick-link">#</a></label>
@@ -110,7 +118,7 @@
 					<!-- Expiration Days -->
 					<div class="mb-3">
 						<label class="form-label" for="quick-link-days">Expiration Days</label>
-						<input class="form-control" type="number" name="quick-link-days" id="quick-link-days"  value="0" min="0" max="100">
+						<input class="form-control" type="number" name="quick-link-days" id="quick-link-days" value="0" min="0" max="100">
 						<div class="form-text">Enter days until expiration.</div>
 					</div>
 					<!-- Submit -->
@@ -121,9 +129,9 @@
 					</div>
 				</form>
 				<iframe name="link-iframe"></iframe>
-				
+
 				<!-- Quick Hash -->
-				
+
 				<form action="redirects/action.html" id="quick-hash" target="hash-iframe">
 					<div class="mb-3 text-center">
 						<label class="display-4">Quick Hash<a class="hash" href="redirects/#quick-hash">#</a></label>
@@ -142,9 +150,9 @@
 					</div>
 				</form>
 				<iframe name="hash-iframe"></iframe>
-				
+
 				<!-- Quick AES -->
-				
+
 				<form action="redirects/action.html" id="quick-aes" target="aes-iframe">
 					<div class="mb-3 text-center">
 						<label class="display-4">Quick AES<a class="hash" href="redirects/#quick-aes">#</a></label>
@@ -187,10 +195,11 @@
 			<div class="col-sm"></div>
 		</div>
 	</div>
-	
+
 	<include src="footermenu.html">Loading footer...</include>
-	
+
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
+
 </html>
