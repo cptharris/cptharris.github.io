@@ -1,9 +1,9 @@
 if (window.jQuery) { // for pages where jQuery is not loaded, but other functions are necessary
-	$(document).ready(function(){
-		$("#progCanvas").mouseenter(function(){
+	$(document).ready(function() {
+		$("#progCanvas").mouseenter(function() {
 			$("include[src='headermenu.html'],include[src='footermenu.html']").hide("slow");
 		});
-		$("#progCanvas").mouseleave(function(){
+		$("#progCanvas").mouseleave(function() {
 			$("include[src='headermenu.html'],include[src='footermenu.html']").show("slow");
 		});
 	});
@@ -28,7 +28,7 @@ var copyText = function(id, value) {
 	Ex: copyText("myInput","Hello World");
 	*/
 	var copyTextElement = document.getElementById(id);
-	
+
 	copyTextElement.setAttribute("value", value)
 	copyTextElement.setAttribute("style", "display:inline;")
 
