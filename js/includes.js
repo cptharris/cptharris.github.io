@@ -1,8 +1,8 @@
-$(document).ready(function(){
-	$.each($("include"), function () {
+$(document).ready(function() {
+	$.each($("include"), function() {
 		$(this).load('includes/' + $(this).attr('src'));
 	})
-	
+
 	if ($(window.location.hash).length) {
 		scrollTo(window.location.hash);
 	}
