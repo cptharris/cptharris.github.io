@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+	<title>TechieCable - form-submit</title>
+	<base href="https://techiecable.github.io" target="_self">
+	<meta name="author" content="TechieCable">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="TechieCable's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+	<script src="js/includes.js"></script>
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<style>
+		.card {
+			background-color: black;
+		}
+
+		textarea {
+			margin-bottom: 2%;
+			font-family: monospace;
+		}
+	</style>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'G-QW9ZGL7K7W');
+	</script>
+	<!-- End Site Tag - Google Analytics -->
+</head>
+
+<body class="h-100">
+	<div class="container-fluid h-100">
+		<div class="row mb-auto">
+			<include src="headermenu.html">Loading menus...</include>
+		</div>
+
+		<div class="row align-items-center h-100 mb-5" style="background: rgb(28, 24, 42);">
+			<div class="col d-flex flex-column justify-content-center">
+				<h1 class="display-1 text-center">form-submit</h1>
+				<p class="text-center">a WIP project from TechieCable</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col"></div>
+			<div class="col-md-8">
+				<main class="px-md-5 px-sm-4 px-xs-3">
+					<div id="intro">
+						<div class="display-6">
+							about form-submit
+						</div>
+						<p>
+							Use TechieCable's form-submit to easily submit custom-front forms to Google Forms, without the trouble of an API or JavaScript. It's simple!
+						</p>
+					</div>
+
+					<div class="my-5"></div>
+
+					<div id="step-one">
+						<div class="display-6">
+							step one
+						</div>
+
+						<p>
+							Make a custom-front form using HTML's <code>&lt;form&gt;</code> tag. Specify this site as your action. The form method should be "get".
+						</p>
+
+						<div class="card p-3">
+							<textarea id="textarea1"><form action="https://techiecable.github.io/form-submit/" method="get">&NewLine;</form></textarea>
+						</div>
+					</div>
+
+					<div class="my-5"></div>
+
+					<div id="step-two">
+						<div class="display-6">
+							step two
+						</div>
+
+						<p>
+							Add elements to your form. Specify the <code>name</code> attribute as the entry number for the Google Form element. To find the entry numbers, <a href="https://support.google.com/a/users/answer/9308781">get the pre-filled
+								link</a> for your form.
+						</p>
+
+						<div class="card p-3">
+							<textarea id="textarea2"
+							 onchange="setCode(textarea2, form2);"><form action="https://techiecable.github.io/form-submit/" method="get">&NewLine;&Tab;<label for="firstItem">First Item</label>&NewLine;&Tab;<input type="text" id="firstItem" name="entry.########" value="">&NewLine;&Tab;<input type="submit" value="Submit">&NewLine;</form></textarea>
+
+							<hr>
+							<div id="form2" class="text-center"></div>
+						</div>
+					</div>
+
+					<div class="my-5"></div>
+
+					<div id="step-three">
+						<div class="display-6">
+							step three
+						</div>
+
+						<p>
+							Add the form ID input element to your form. Copy the form ID from your form share link. Paste it as the value in an invisible text input section with the name "formID".
+						</p>
+
+						<div class="card p-3">
+							<textarea id="textarea3"
+							 onchange="setCode(textarea3, form3);"><form action="https://techiecable.github.io/form-submit/" method="get">&NewLine;&Tab;<label for="secondItem">Second Item</label>&NewLine;&Tab;<input type="text" id="secondItem" name="entry.########" value="">&NewLine;&NewLine;&Tab;<input style="display: none;" type="text" name="formID" value="formID#########" readonly>&NewLine;&NewLine;&Tab;<input type="submit" value="Submit">&NewLine;</form></textarea>
+
+							<hr>
+							<div class="text-center" id="form3"></div>
+						</div>
+					</div>
+
+					<!-- textarea script -->
+					<script>
+						function setCode(source, output) {
+							output.innerHTML = source.value;
+							source.rows = source.value.match(/\n/g).length + 1;
+						}
+						var textarea2 = document.querySelector("#textarea2");
+						var form2 = document.querySelector("#form2");
+						var textarea3 = document.querySelector("#textarea3");
+						var form3 = document.querySelector("#form3");
+						setCode(textarea2, form2);
+						setCode(textarea3, form3);
+					</script>
+				</main>
+			</div>
+			<div class="col"></div>
+		</div>
+		<div class="blankspace"></div>
+	</div>
+
+	<include src="footermenu.html">Loading footer...</include>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>

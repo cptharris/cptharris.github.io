@@ -1,33 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 
 <head>
-	<title>TechieCable - Form Submit</title>
+	<title>TechieCable - form-submit</title>
 	<base href="https://techiecable.github.io" target="_self">
 	<meta name="author" content="TechieCable">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
-	<meta name="description" content="TechieCable's Coding Website">
-	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
-	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
 </head>
 
 <body>
-	<iframe src="" id="submit-frame" width="0" height="0"></iframe>
+	<iframe src="" id="submit-frame" style="display: none;"></iframe>
+	<div id="message"></div>
 	<script type="text/javascript">
 		var thisURL = new URL(window.location);
-		var submitFormURL = "";
 		if (thisURL.searchParams.has("formID")) {
 			var formID = thisURL.searchParams.get("formID");
 			thisURL.searchParams.delete("formID");
 
-			submitFormURL = "https://docs.google.com/forms/d/e/" + formID + "/formResponse?" + thisURL.search.replace("?", "") + "&submit=Submit";
-
-			console.log("Submitting the URL with information:" + thisURL.search.replace("?", ""));
-			console.log(submitFormURL);
+			var submitFormURL = "https://docs.google.com/forms/d/e/" + formID + "/formResponse?" + thisURL.search.replace("?", "") + "&submit=Submit";
 
 			document.querySelector("#submit-frame").setAttribute("src", submitFormURL);
+			document.querySelector("#message").innerHTML = "Form submitted. <a href='/form-submit/about'>Go to about page</a>."
+		} else {
+			window.location.pathname = "/form-submit/about";
 		}
 	</script>
 </body>
