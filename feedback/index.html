@@ -64,7 +64,12 @@
 		<div class="row align-items-center">
 			<div class="col-sm"></div>
 			<div class="col-sm px-5 px-sm-0 d-flex flex-column justify-content-center">
-				<form action="feedback/action.html" id="feedback-form" target="feedback-iframe">
+				<form action="/form-submit/" id="feedback-form" target="feedback-iframe" onsubmit="this.submit();this.reset();return false;">
+					<span style="display:none;">
+						<input type="text" name="message" value="<link rel='stylesheet' href='css/style.css'>Form submitted successfully">
+						<input type="text" name="formID" value="1FAIpQLSfNTYS5LxIuc-LF0_lABIPnKHotCaEwqpWDJg1AeosQq801BQ" readonly>
+					</span>
+
 					<div class="mb-3 text-center">
 						<label class="display-4">Submission<a class="hash" href="feedback/#feedback-form">#</a></label>
 					</div>
@@ -72,21 +77,21 @@
 					<!-- Name -->
 					<div class="mb-3">
 						<label for="name-input" class="form-label">Name</label>
-						<input class="form-control" type="text" name="name-input" id="name-input">
+						<input class="form-control" type="text" name="entry.647926688" id="name-input">
 						<div class="form-text">Enter your name (optional).</div>
 					</div>
 
 					<!-- Email -->
 					<div class="mb-3">
 						<label for="email-input" class="form-label">Email</label>
-						<input class="form-control" type="email" name="email-input" id="email-input">
+						<input class="form-control" type="email" name="entry.259832181" id="email-input">
 						<div class="form-text">Enter your email (optional, if clarification is needed).</div>
 					</div>
 
 					<!-- UserAgent/Platform -->
 					<div class="d-none invisible">
-						<input class="form-control" type="text" name="userAgent-input" id="userAgent-input">
-						<input class="form-control" type="text" name="platform-input" id="platform-input">
+						<input class="form-control" type="text" name="entry.597880979" id="userAgent-input" readonly>
+						<input class="form-control" type="text" name="entry.59605928" id="platform-input" readonly>
 						<script>
 							document.getElementById('userAgent-input').setAttribute('value', navigator.userAgent);
 							document.getElementById('platform-input').setAttribute('value', navigator.platform);
@@ -96,35 +101,35 @@
 					<!-- Device type -->
 					<div class="mb-3">
 						<label for="device-type" class="form-label">Device Type</label>
-						<input class="form-control" type="text" name="device-type" id="device-type">
+						<input class="form-control" type="text" name="entry.812124874" id="device-type">
 						<div class="form-text">What device are you using? (optional, but quite helpful).</div>
 					</div>
 
 					<!-- OS -->
 					<div class="mb-3">
 						<label for="operating-system" class="form-label">Operating System</label>
-						<input class="form-control" type="text" name="operating-system" id="operating-system">
+						<input class="form-control" type="text" name="entry.1874858707" id="operating-system">
 						<div class="form-text">What operating system (ex: Windows, Linux, iOS, Android, macOS, etc.) are you running, and what version (ex: 1.12, 10, etc.)? (optional, but very helpful).</div>
 					</div>
 
 					<!-- Browser -->
 					<div class="mb-3">
 						<label for="browser-input" class="form-label">Browser</label>
-						<input class="form-control" type="text" name="browser-input" id="browser-input">
+						<input class="form-control" type="text" name="entry.818882128" id="browser-input">
 						<div class="form-text">What browser (ex: Chrome, Edge, Firefox, Safari, Opera) are you using, and what version? (optional, but extremely helpful).</div>
 					</div>
 
 					<!-- Specific page -->
 					<div class="mb-3">
 						<label class="form-label" for="specific-page">Specific page</label>
-						<input class="form-control" type="url" name="specific-page" id="specific-page" value="https://techiecable.github.io/">
+						<input class="form-control" type="url" name="entry.1306265290" id="specific-page" placeholder="https://techiecable.github.io/">
 						<div class="form-text">Is there a specific page you would like to provide feedback on? (optional)</div>
 					</div>
 
 					<!-- Comments Box -->
 					<div class="mb-3">
 						<label class="form-label" for="comments-box">Comments</label>
-						<textarea class="form-control" name="comments-box" id="comments-box" rows="8" cols="80"></textarea>
+						<textarea class="form-control" name="entry.392392855" id="comments-box" rows="8" cols="80" required></textarea>
 						<div class="form-text">Enter your comments. (required)</div>
 					</div>
 
@@ -157,7 +162,7 @@
 									<h6><strong>Product Feedback</strong></h6>
 
 									<p class="small">
-										TechieCable does, however, appreciate your feedback regarding any areas of TechieCable's existing services. If you wish to provide  feedback or comments, use the form located on this page. Please provide only specific
+										TechieCable does, however, appreciate your feedback regarding any areas of TechieCable's existing services. If you wish to provide feedback or comments, use the form located on this page. Please provide
 										feedback on TechieCable's existing products, services, and content and using this form; and do not send or provide any submissions other than using this form.<br><br>
 									</p>
 
@@ -186,7 +191,7 @@
 
 				<div class="my-3"></div>
 
-				<iframe name="feedback-iframe"></iframe>
+				<iframe src="" name="feedback-iframe"></iframe>
 
 				<div class="my-5"></div>
 				<div class="my-5"></div>

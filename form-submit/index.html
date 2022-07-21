@@ -14,26 +14,44 @@
 
 	<script type="text/javascript">
 		var thisURL = new URL(window.location);
-		if (thisURL.searchParams.has("formID")) {
+		// capture message div
+		var msgBx = document.querySelector("#message");
+		var completeMsg = "Form submitted successfully.";
+
+		// if the query contains "list", list all query values in a table
+		if (thisURL.searchParams.has("list")) {
+			completeMsg = "<table>";
+			completeMsg += "<tr><th>Key</th><th>Values</th></tr>";
+			thisURL.searchParams.forEach((item, i) => {
+				completeMsg += "<tr><td>" + i + "</td><td>" + item + "</td></tr>";
+			});
+			msgBx.innerHTML = completeMsg + "</table>";
+			// if the query has a form ID
+		} else if (thisURL.searchParams.has("formID")) {
+			// store the form ID and remove it from the query
 			var formID = thisURL.searchParams.get("formID");
 			thisURL.searchParams.delete("formID");
 
-			var completeMsg = "Form submitted successfully.";
-
+			// if there is a custom message, store it and remove it from query
 			if (thisURL.searchParams.has("message")) {
 				completeMsg = thisURL.searchParams.get("message");
 				thisURL.searchParams.delete("message");
 			}
 
+			// craft submission URL
 			var submitFormURL = "https://docs.google.com/forms/d/e/" + formID + "/formResponse?" + thisURL.search.replace("?", "") + "&submit=Submit";
 
+			// attempt submitting form URL
 			try {
 				document.querySelector("#submit-frame").setAttribute("src", submitFormURL);
-				document.querySelector("#message").innerHTML = completeMsg;
+				// if successful, display success message
+				msgBx.innerHTML = completeMsg;
 			} catch (e) {
-				document.querySelector("#message").innerHTML = "There was an error filing the form. Please try again.";
+				// error
+				msgBx.innerHTML = "There was an error submitting the form. Please try again.";
 			}
 		} else {
+			// redirect to about page
 			window.location.pathname = "/form-submit/about";
 		}
 	</script>
