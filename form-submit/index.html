@@ -8,19 +8,31 @@
 	<meta charset="UTF-8">
 </head>
 
-<body>
+<body style="text-align:center;font-family:sans-serif;">
 	<iframe src="" id="submit-frame" style="display: none;"></iframe>
 	<div id="message"></div>
+
 	<script type="text/javascript">
 		var thisURL = new URL(window.location);
 		if (thisURL.searchParams.has("formID")) {
 			var formID = thisURL.searchParams.get("formID");
 			thisURL.searchParams.delete("formID");
 
+			var completeMsg = "Form submitted successfully.";
+
+			if (thisURL.searchParams.has("message")) {
+				completeMsg = thisURL.searchParams.get("message");
+				thisURL.searchParams.delete("message");
+			}
+
 			var submitFormURL = "https://docs.google.com/forms/d/e/" + formID + "/formResponse?" + thisURL.search.replace("?", "") + "&submit=Submit";
 
-			document.querySelector("#submit-frame").setAttribute("src", submitFormURL);
-			document.querySelector("#message").innerHTML = "Form submitted. <a href='/form-submit/about'>Go to about page</a>."
+			try {
+				document.querySelector("#submit-frame").setAttribute("src", submitFormURL);
+				document.querySelector("#message").innerHTML = completeMsg;
+			} catch (e) {
+				document.querySelector("#message").innerHTML = "There was an error filing the form. Please try again.";
+			}
 		} else {
 			window.location.pathname = "/form-submit/about";
 		}
