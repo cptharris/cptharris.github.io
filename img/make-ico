@@ -1,0 +1,1 @@
+inkscape favicon.svg -w 32 -h 32 -o 32.png && convert 32.png -compress jpeg favicon.ico && rm 32.png

@@ -5,4 +5,4 @@ Disallow: /404.html
 Disallow: /google90a6c2630c8e62ad.html
 Disallow: */action.html
 
-Sitemap: https://techiecable.github.io/sitemap.xml
+Sitemap: https://cptharris.github.io/sitemap.xml

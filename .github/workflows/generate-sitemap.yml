@@ -1,40 +1,38 @@
-name : Generates Sitemap
+name :                       Generates Sitemap
 on:
     push:
         paths:
             - '**.html'
 jobs:
   do_sitemap:
-    runs-on: ubuntu-latest
-    
+    runs-on:                 ubuntu-latest
     steps:
-    - name: checkout repo
-      uses: actions/checkout@v2
+    - name:                  checkout repo
+      uses:                  actions/checkout@v2
       with:
-        fetch-depth: 0
-      
-    - name: generate sitemap
-      id: sitemap
-      uses: cicirello/generate-sitemap@v1
+        fetch-depth:         0
+
+    - name:                  generate sitemap
+      id:                    sitemap
+      uses:                  cicirello/generate-sitemap@v1
       with:
-        base-url-path: https://techiecable.github.io
-        include-pdf: false
+        base-url-path:       https://cptharris.github.io
+        include-pdf:         false
         drop-html-extension: true
-    
-    - name: output stats
-      run: |
+
+    - name:                  output stats
+      run:                   |
         echo "sitemap-path = ${{ steps.sitemap.outputs.sitemap-path }}"
         echo "url-count = ${{ steps.sitemap.outputs.url-count }}"
         echo "excluded-count = ${{ steps.sitemap.outputs.excluded-count }}"
-    
-    - name: Git Commit and Push
-      id: commit
-      run: |
+    - name:                  Git Commit and Push
+      id:                    commit
+      run:                   |
         git config --local user.name "github-actions[bot]"
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git add ${{ steps.sitemap.outputs.sitemap-path }}
         git commit -m "actions: generate-sitemap"
-        git push "https://$USERNAME:$REPO_KEY@github.com/TechieCable/techiecable.github.io.git"
+        git push "https://$USERNAME:$REPO_KEY@github.com/cptharris/cptharris.github.io.git"
       env:
-        REPO_KEY: ${{ secrets.GITHUB_TOKEN }}
-        USERNAME: github-actions[bot]
+        REPO_KEY:            ${{ secrets.GITHUB_TOKEN }}
+        USERNAME:            github-actions[bot]

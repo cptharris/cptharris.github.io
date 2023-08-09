@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 <head>
-	<title>TechieCable - Wake Calculator</title>
-	<base href="https://techiecable.github.io" target="_self">
-	<meta name="author" content="TechieCable">
+	<title>Captain Harris - Wake Calculator</title>
+	<base href="https://cptharris.github.io" target="_self">
+	<meta name="author" content="cptharris">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
-	<meta name="description" content="TechieCable's Coding Website">
-	<meta name="keywords" content="HTML,CSS,Processing JavaScript,TechieCable">
+	<meta name="description" content="Captain Harris's Coding Website">
+	<meta name="keywords" content="HTML,CSS,Processing JavaScript,cptharris">
 	<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
-	
+
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
 	<script src="js/includes.js"></script>
-	
+
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	
+
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="css/style.css">
 	<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -26,7 +26,7 @@
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
-		
+
 		gtag('config', 'G-QW9ZGL7K7W');
 	</script>
 	<!-- End Site Tag - Google Analytics -->
@@ -36,7 +36,7 @@
 		<div class="row mb-auto">
 			<include src="headermenu.html">Loading menus...</include>
 		</div>
-		
+
 		<div class="row align-items-center h-100 mb-5" style="background: rgb(28, 24, 42);">
 			<div class="col d-flex flex-column justify-content-center">
 				<main>
@@ -44,7 +44,7 @@
 				</main>
 			</div>
 		</div>
-		
+
 		<div class="row text-center">
 			<div class="col mx-0 px-0">
 				<canvas id="progCanvas"></canvas>
@@ -70,9 +70,9 @@
 		</div>
 		<div class="blankspace"></div>
 	</div>
-	
+
 	<include src="footermenu.html">Loading footer...</include>
-	
+
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
@@ -80,7 +80,7 @@
 <script src="js/program_library.js" charset="utf-8"></script>
 <script>
 	var screenSizeAvail = Math.min(window.screen.availWidth, window.screen.availHeight) * 0.95;
-	
+
 	var programCode = function(processingInstance) {
 		with (processingInstance) {size(screenSizeAvail, screenSizeAvail);frameRate(60);
 			/************************************************************
@@ -101,7 +101,7 @@ var checkQuery = function() {
 		userMinute = url.searchParams.get("m");
 		scene = 2;
 	}
-	
+
 };
 var restart = function() {
 	location.reload();
@@ -155,7 +155,7 @@ button.prototype.go = function() {
 	noStroke();
 	textSize(this.textSize);
 	fill(this.color_r, this.color_g, this.color_b);
-	
+
 	//What happens when you click inside the button
 	if (mouseX >= this.x - this.w/2 && mouseY >= this.y - this.h/2 && mouseX <= this.x + this.w/2 && mouseY <= this.y + this.h/2) {
 		fill(this.color_r + 40, this.color_g + 40, this.color_b + 40);
@@ -168,7 +168,7 @@ button.prototype.go = function() {
 	rect(this.x, this.y, this.w, this.h, this.radius);
 	fill(this.textColor);
 	text(this.text, this.x, this.y);
-	
+
 	//If defined, this can be used to call actions after the button has happened
 	this.reset();
 };
@@ -417,7 +417,7 @@ var linkButton = new button({
 	text:"Link",
 	onClick:function() {
 		setURLParams("h",userHour,"m",userMinute);
-		// alert("Copy the link from your address bar, or copy this link:\ntechiecable.github.io/programs/wake_calculator?h="+userHour+"&m="+userMinute);
+		// alert("Copy the link from your address bar, or copy this link:\ncptharris.github.io/programs/wake_calculator?h="+userHour+"&m="+userMinute);
 		linkNotifyCounter = 1;
 		isMousePressed=false;
 	},
@@ -449,7 +449,7 @@ var checkValues = function() {
 
 draw = function() {
 	background(82, 82, 82);
-	
+
 	// Call buttons
 	nowButton.go();
 	soonButton.go();
@@ -462,10 +462,10 @@ draw = function() {
 	restartButton.go();
 	linkButton.go();
 	scrubberButton.go();
-	
+
 	// Displays scrubber ON/OFF
 	text(scrubberText(),100*gblscr,320*gblscr);
-	
+
 	// Displays link help text
 	if (linkNotifyCounter < 200 && linkNotifyCounter > 0) {
 		linkNotifyCounter++;
@@ -473,7 +473,7 @@ draw = function() {
 	} else {
 		linkNotifyCounter = 0;
 	}
-	
+
 	// Forces a refresh of the displayed values
 	nowhourArray=[];
 	nowminuteArray=[];
@@ -481,7 +481,7 @@ draw = function() {
 	soonminuteArray=[];
 	userhourArray=[];
 	userminuteArray=[];
-	
+
 	// Recalculates values
 	nowSleep = new sleepTime({
 		startFunc:function() {
@@ -520,25 +520,25 @@ draw = function() {
 			userminuteArray.push(min);
 		}
 	});
-	
+
 	// Set formatting
 	textAlign(CENTER, CENTER);
 	rectMode(CENTER);
 	textSize(10*gblscr);
 	fill(255, 255, 255);
 	noStroke();
-	
+
 	// User input
 	textSize(30*gblscr);
 	text(zeroPad(userHour)+"  :  "+zeroPad(userMinute), 100*gblscr, 100*gblscr);
-	
+
 	/***** SCENES *****/
 	// Now
 	if (scene === 0) {
 		textSize(20*gblscr);
 		text("Go to bed now", 300*gblscr, (topRightCol)*gblscr);
 		text("to wake up at:", 300*gblscr, (topRightCol+25)*gblscr);
-		
+
 		textSize(15*gblscr);
 		nowSleep.go();
 		for (var h = 0; h < 6; h++) {
@@ -549,13 +549,13 @@ draw = function() {
 			}
 		}
 	}
-	
+
 	// Soon
 	if (scene === 1) {
 		textSize(20*gblscr);
 		text("Go to bed in 15 mins", 300*gblscr, (topRightCol)*gblscr);
 		text("to wake up at:", 300*gblscr, (topRightCol+25)*gblscr);
-		
+
 		textSize(15*gblscr);
 		soonSleep.go();
 		for (var h = 0; h < 6; h++) {
@@ -566,13 +566,13 @@ draw = function() {
 			}
 		}
 	}
-	
+
 	// User
 	if (scene === 2) {
 		textSize(20*gblscr);
 		text("Go to bed at "+zeroPad(userHour)+":"+zeroPad(userMinute), 300*gblscr, (topRightCol)*gblscr);
 		text("to wake up at:", 300*gblscr, (topRightCol+25)*gblscr);
-		
+
 		textSize(15*gblscr);
 		userSleep.go();
 		for (var h = 0; h < 6; h++) {
@@ -583,7 +583,7 @@ draw = function() {
 			}
 		}
 	}
-	
+
 	// Check user-modified values
 	checkValues();
 };

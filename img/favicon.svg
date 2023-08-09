@@ -1,18 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-	<defs>
-		<path id="a" d="M50.05706 83.740318h58.740349v50.860905H50.05706z"/>
-	</defs>
-	<g transform="translate(-32.958853 -67.684837)">
-		<rect style="font-variation-settings:normal" width="15.056464" height="1.9291658" x="33.430622" y="81.449158" ry=".96458292" fill="gray" fill-rule="evenodd" stroke="#000" stroke-width=".298692" stroke-linejoin="round"/>
-		<rect style="font-variation-settings:normal" width="1.8110909" height="2.2227027" x="40.053307" y="79.849083" rx="0" ry="0" fill="gray" fill-rule="evenodd" stroke="#000" stroke-width=".298694"/>
-		<rect style="font-variation-settings:normal" width="14.808207" height="12.378637" x="33.554749" y="67.933754" ry="2.0177767" rx="1.3144162" fill-rule="evenodd" stroke="#000" stroke-width=".497823" stroke-linecap="round" stroke-linejoin="round"/>
-		<rect style="font-variation-settings:normal" width="13.642248" height="11.231503" x="34.13773" y="68.520195" ry="1.1349661" rx=".75610918" fill="none" stroke="gray" stroke-width=".675198" stroke-linecap="round" stroke-linejoin="round"/>
-		<rect style="font-variation-settings:normal" width="12.494761" height="10.128188" x="34.711472" y="69.089272" rx=".16710962" ry=".19469041" fill="#d2efff" fill-rule="evenodd" stroke="#000" stroke-width=".460648" stroke-linejoin="round"/>
-		<rect style="font-variation-settings:normal" width="15.049067" height="1.0656221" x="33.434319" y="82.471046" ry="0" fill="gray" fill-rule="evenodd" stroke="#000" stroke-width=".296337"/>
-		<rect style="font-variation-settings:normal" width="14.748955" height=".97732741" x="33.584377" y="82.32235" ry="0" fill="gray" fill-rule="evenodd"/>
-		<text style="line-height:1.25" x="36.547749" y="76.707069" font-weight="400" font-size="1.05372" font-family="sans-serif" stroke-width=".0263431">
-			<tspan x="36.547749" y="76.707069" style="-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" font-size="7.02484">TC</tspan>
+	<g>
+		<rect width="15.056464" height="1.9291658" x="0.47" y="13.76" ry=".96458292" fill="gray" fill-rule="evenodd" stroke="#000" stroke-width=".298692"/>
+		<rect width="1.8110909" height="2.2227027" x="7.09" y="12.16" rx="0" ry="0" fill="gray" fill-rule="evenodd" stroke="#000" stroke-width=".298694"/>
+		<rect width="14.808207" height="12.378637" x="0.6" y="0.25" ry="2.0177767" rx="1.3144162" fill-rule="evenodd" stroke="#000" stroke-width=".497823" stroke-linecap="round"/>
+		<rect width="13.642248" height="11.231503" x="1.18" y="0.84" ry="1.1349661" rx=".75610918" fill="none" stroke="gray" stroke-width=".675198" stroke-linecap="round"/>
+		<rect width="12.494761" height="10.128188" x="1.75" y="1.4" rx=".16710962" ry=".19469041" fill="#d2efff" fill-rule="evenodd" stroke="#000" stroke-width=".460648"/>
+		<rect width="15.049067" height="1.0656221" x="0.48" y="14.79" ry="0" fill="gray" fill-rule="evenodd" stroke="#000" stroke-width=".296337"/>
+		<rect width="14.748955" height=".97732741" x="0.63" y="14.64" ry="0" fill="gray" fill-rule="evenodd"/>
+		<text style="line-height:1.25" x="3.05" y="9.02" font-weight="400" font-size="1.05372" font-family="sans-serif" stroke-width=".0263431">
+			<tspan x="3.05" y="9.02" style="-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" font-size="7.02484">CH</tspan>
 		</text>
-		<rect style="font-variation-settings:normal" width="14.700286" height=".97732741" x="33.608711" y="82.269653" ry="0" fill="gray" fill-rule="evenodd"/>
+		<rect width="14.700286" height=".97732741" x="0.65" y="14.58" ry="0" fill="gray" fill-rule="evenodd"/>
 	</g>
 </svg>
