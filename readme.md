@@ -1,5 +1,5 @@
 [![Last Updated](https://img.shields.io/github/last-commit/cptharris/cptharris.github.io?color=%23584b85&label=Last%20updated%3A&style=flat-square)](https://github.com/cptharris/cptharris.github.io/commits)
-[![Generates Sitemap](https://github.com/cptharris/cptharris.github.io/actions/workflows/generate-sitemap.yml/badge.svg)](https://github.com/cptharris/cptharris.github.io/actions/workflows/generate-sitemap.yml)
+[![Generate Sitemap and Deploy Pages](https://github.com/cptharris/cptharris.github.io/actions/workflows/gen-map-build-page.yml/badge.svg)](https://github.com/cptharris/cptharris.github.io/actions/workflows/gen-map-build-page.yml)
 
 # Captain Harris GitHub Website Project
 
