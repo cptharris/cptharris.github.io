@@ -21,19 +21,6 @@
 
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="css/style.css">
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-QW9ZGL7K7W"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-
-		gtag('config', 'G-QW9ZGL7K7W');
-	</script>
-	<!-- End Site Tag - Google Analytics -->
 </head>
 
 <script type="text/javascript">
@@ -138,7 +125,7 @@
 					<div class="mb-3">
 						<label class="form-label" for="alpha-text">Alpha</label>
 						<textarea class="form-control" type="text" name="alpha-text" id="alpha-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
-						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
+							onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the alpha string.</div>
 						<button class="btn btn-primary collapse multi-collapse" onclick="submission('alpha');" type="button">Convert</button>
 					</div>
@@ -148,7 +135,7 @@
 					<div class="mb-3">
 						<label class="form-label" for="binary-text">Binary</label>
 						<textarea class="form-control" type="text" name="binary-text" id="binary-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
-						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
+							onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the binary string.</div>
 						<button class="btn btn-primary collapse multi-collapse" onclick="submission('binary');" type="button">Convert</button>
 					</div>
@@ -158,7 +145,7 @@
 					<div class="mb-3" id="ascii-section">
 						<label class="form-label" for="ascii-text">ASCII</label>
 						<textarea class="form-control" type="text" name="ascii-text" id="ascii-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
-						 onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
+							onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the ASCII code string.</div>
 						<button class="btn btn-primary collapse multi-collapse" onclick="submission('ascii');" type="button">Convert</button>
 					</div>
