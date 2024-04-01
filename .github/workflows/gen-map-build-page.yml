@@ -48,7 +48,7 @@ jobs:
           echo "url-count = ${{ steps.sitemap.outputs.url-count }}"
           echo "excluded-count = ${{ steps.sitemap.outputs.excluded-count }}"
       - name:                  Setup Pages
-        uses:                  actions/configure-pages@v4
+        uses:                  actions/configure-pages@v5
       - name:                  Upload Artifact
         uses:                  actions/upload-pages-artifact@v3
         with:
