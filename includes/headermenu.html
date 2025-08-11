@@ -28,8 +28,11 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/">Home</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/blog/">Blog</a>
+				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="programsDropdown" href="programs/" data-bs-toggle="dropdown" aria-expanded="false">Programs</a>
+					<a class="nav-link dropdown-toggle" id="programsDropdown" href="programs/" data-bs-toggle="dropdown" aria-expanded="false">PJS</a>
 					<ul class="dropdown-menu" aria-labelledby="programsDropdown">
 						<!-- <li><a class="dropdown-item" href="XXXXXX">XXXXXXX</a></li> -->
 						<li><a class="dropdown-item" href="/programs/binarystrings/">Binary Strings</a></li>
@@ -43,9 +46,6 @@
 						</li>
 						<li><a class="dropdown-item" href="/programs/">Programs Index</a></li>
 					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/redirects/">Redirects</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/form-submit/about">form-submit</a>
@@ -74,11 +74,12 @@
 </nav>
 
 <script type="text/javascript">
-	var navItems = document.getElementsByClassName("nav-link");
-	var navItemsA = Array.from(navItems);
-	var dropdownItems = document.getElementsByClassName("dropdown-item");
-	var dropdownItemsA = Array.from(dropdownItems);
-	var linkItems = navItemsA.concat(dropdownItemsA);
+	// var navItems = document.getElementsByClassName("nav-link");
+	// var navItemsA = Array.from(navItems);
+	// var dropdownItems = document.getElementsByClassName("dropdown-item");
+	// var dropdownItemsA = Array.from(dropdownItems);
+	// var linkItems = navItemsA.concat(dropdownItemsA);
+	var linkItems = document.querySelectorAll(".nav-link, .dropdown-item")
 
 	for (var i = 0; i < linkItems.length; i++) {
 		if (location.pathname.replace(/\.\w*/, "").toLowerCase() === (linkItems[i].pathname).toLowerCase()) {

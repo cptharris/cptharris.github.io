@@ -61,7 +61,7 @@ a.hash {
 	background: rgb(50, 43, 76);
 }
 
-#tc-footer {
+footer {
 	position: fixed;
 	left: 0;
 	bottom: 0;
@@ -82,7 +82,7 @@ a.hash {
 	height: 40%;
 }
 
-.tc_letter_header {
+.letter-header {
 	text-align: center;
 	color: rgb(52, 201, 235);
 	font-size: 200%;

@@ -44,9 +44,14 @@
 				<div id="site-notice"></div>
 				<main class="px-md-5 px-sm-4 px-xs-3">
 					<h2 class="display-6 text-center" id="blog">Blog<a class="hash" href="#blog">#</a></h2>
-					<div id="letters">
+					<div id="latest-post">
 						Loading blogs from source...
 					</div>
+					<script>
+						$(function () {
+							$("#latest-post").load("blog/store.html div:first p:first");
+						});
+					</script>
 
 					<br><br>
 					<p>View my previous blogs <a href="blog_archive">here</a>.</p>
@@ -61,15 +66,4 @@
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-<!-- Loads blogs -->
-<script src="js/loadblogs.js"></script>
-<script src="https://sheets.googleapis.com/v4/spreadsheets/1eyWldvly_I5UMHb3bEZDFEkifbCRsgRbDTRNu4NOVRY/values/Sheet1?key=AIzaSyDLeEQXNzj20G-rz2jJN3Sw_0eBbzqvc9c&callback=listEntries" charset="utf-8"></script>
-<!-- Loads site notice -->
-<script type="text/javascript">
-	function displayNotice(input) {
-		document.getElementById("site-notice").innerHTML = input.values[0][0];
-	}
-</script>
-<script src="https://sheets.googleapis.com/v4/spreadsheets/1LIFrZXjK03kqhnMu81GFLI6xdj9S1RUOMyCBtx23AXI/values/Sheet1!A1?key=AIzaSyDLeEQXNzj20G-rz2jJN3Sw_0eBbzqvc9c&callback=displayNotice" charset="utf-8"></script>
-
 </html>
