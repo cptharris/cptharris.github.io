@@ -77,8 +77,8 @@
 						</p>
 
 						<div class="card p-3">
-							<textarea
-								id="textarea1"><form action="https://cptharris.github.io/form-submit/" method="get">&NewLine;</form></textarea>
+							<textarea id="textarea1"
+								rows="4"><form action="https://cptharris.github.io/form-submit/" method="get">&NewLine;&ThickSpace;&NewLine;</form></textarea>
 						</div>
 					</div>
 
@@ -97,8 +97,7 @@
 						</p>
 
 						<div class="card p-3">
-							<textarea id="textarea2"
-								onchange="setCode(textarea2, form2);"><form action="https://cptharris.github.io/form-submit/" method="get">&NewLine;&Tab;<label for="firstItem">First Item</label>&NewLine;&Tab;<input type="text" id="firstItem" name="entry.########" value="">&NewLine;&Tab;<input type="submit" value="Submit">&NewLine;</form></textarea>
+							<textarea id="textarea2" onchange="setCode(textarea2, form2);"><form action="https://cptharris.github.io/form-submit/" method="get">&NewLine;&ThickSpace;<label for="firstItem">First Item</label>&NewLine;&NewLine;&ThickSpace;<input type="text" id="firstItem" name="entry.###" value="">&NewLine;&ThickSpace;<br>&NewLine;&NewLine;&ThickSpace;<input type="submit" value="Submit">&NewLine;</form></textarea>
 
 							<hr>
 							<div id="form2" class="text-center"></div>
@@ -119,10 +118,10 @@
 
 						<div class="card p-3">
 							<textarea id="textarea3"
-								onchange="setCode(textarea3, form3);"><form action="https://cptharris.github.io/form-submit/" method="get">&NewLine;&Tab;<label for="secondItem">Second Item</label>&NewLine;&Tab;<input type="text" id="secondItem" name="entry.########" value="">&NewLine;&NewLine;&Tab;<input style="display: none;" type="text" name="formID" value="formID#########" readonly>&NewLine;&NewLine;&Tab;<input type="submit" value="Submit">&NewLine;</form></textarea>
+								onchange="setCode(textarea3, form3);"><form action="https://cptharris.github.io/form-submit/" method="get">&NewLine;&ThickSpace;<label for="firstItem">First Item</label>&NewLine;&NewLine;&ThickSpace;<input type="text" id="firstItem" name="entry.###" value="">&NewLine;&ThickSpace;<br>&NewLine;&NewLine;&ThickSpace;<label for="secondItem">Second Item</label>&NewLine;&NewLine;&ThickSpace;<input type="text" id="secondItem" name="entry.###" value="">&NewLine;&ThickSpace;<br>&NewLine;&NewLine;&ThickSpace;<input style="display: none;" type="text" name="formID" value="###" readonly>&NewLine;&NewLine;&ThickSpace;<input type="submit" value="Submit">&NewLine;</form></textarea>
 
 							<hr>
-							<div class="text-center" id="form3"></div>
+							<div id="form3" class="text-center"></div>
 						</div>
 					</div>
 
@@ -130,7 +129,7 @@
 					<script>
 						function setCode(source, output) {
 							output.innerHTML = source.value;
-							source.rows = source.value.match(/\n/g).length + 1;
+							source.rows = source.value.match(/\n/g).length + 4;
 						}
 						var textarea2 = document.querySelector("#textarea2");
 						var form2 = document.querySelector("#form2");
