@@ -1,15 +1,15 @@
 if (window.jQuery) { // for pages where jQuery is not loaded, but other functions are necessary
-	$(document).ready(function() {
-		$("#progCanvas").mouseenter(function() {
+	$(document).ready(function () {
+		$("#progCanvas").mouseenter(function () {
 			$("include[src='headermenu.html'],include[src='footermenu.html']").hide("slow");
 		});
-		$("#progCanvas").mouseleave(function() {
+		$("#progCanvas").mouseleave(function () {
 			$("include[src='headermenu.html'],include[src='footermenu.html']").show("slow");
 		});
 	});
 }
 
-var setURLParams = function() {
+var setURLParams = function () {
 	/*
 	Sets the URL parameters. Pass key, value, key, value, etc.
 	Ex: setURLParams("userName","John","age",30,"favFruit","apple");
@@ -22,7 +22,7 @@ var setURLParams = function() {
 	copyText("queryURL", url);
 };
 
-var copyText = function(id, value) {
+var copyText = function (id, value) {
 	/*
 	Copies text to clipboard. Pass the id of an input element and clipboard value
 	Ex: copyText("myInput","Hello World");
@@ -39,7 +39,7 @@ var copyText = function(id, value) {
 	copyTextElement.setAttribute("style", "display:none;")
 }
 
-var fastAES = function(entry, password, method = 1) {
+var fastAES = function (entry, password, method = 1) {
 	/**
 	 * @desc Uses CryptoJS AES function (defined at js/aes.js) to encrypt/decrypt a string
 	 * @param {string} entry plain text OR encrypted plain text
@@ -59,11 +59,11 @@ var fastAES = function(entry, password, method = 1) {
 	}
 };
 
-var fastHash = function(str, seed = 0) { // returns the hash of the hashes of the halves of the string
+var fastHash = function (str, seed = 0) { // returns the hash of the hashes of the halves of the string
 	return cyrb53(cyrb53(str.substring(0, str.length / 2), seed) + cyrb53(str.substring(str.length / 2), seed));
 };
 
-var cyrb53 = function(str, seed = 0) { // https://stackoverflow.com/a/52171480
+var cyrb53 = function (str, seed = 0) { // https://stackoverflow.com/a/52171480
 	var h1 = 0xdeadbeef ^ seed,
 		h2 = 0x41c6ce57 ^ seed;
 	for (var i = 0, ch; i < str.length; i++) {
@@ -76,7 +76,7 @@ var cyrb53 = function(str, seed = 0) { // https://stackoverflow.com/a/52171480
 	return (h2 >>> 0).toString(16).padStart(8, 0) + (h1 >>> 0).toString(16).padStart(8, 0);
 };
 
-var sleepJSCustom = function(milliseconds) {
+var sleepJSCustom = function (milliseconds) {
 	var date = Date.now();
 	var currentDate = null;
 	while (currentDate - date < milliseconds) {
@@ -84,7 +84,7 @@ var sleepJSCustom = function(milliseconds) {
 	}
 };
 
-var validURL = function(url) {
+var validURL = function (url) {
 	console.groupCollapsed("URL Test");
 	console.count("Test #")
 	console.log("Testing: '" + url + "'");

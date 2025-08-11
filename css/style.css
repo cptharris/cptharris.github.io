@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
 	background: rgb(71, 57, 116);
 	color: white;
 	font-family: "Times New Roman", Times, serif;
@@ -47,12 +48,14 @@ a.hash {
 	background: rgb(50, 43, 76);
 }
 
-.dropdown-item, .dropdown-item:visited {
+.dropdown-item,
+.dropdown-item:visited {
 	background: rgb(50, 43, 76);
 	color: rgba(255, 255, 255, .55);
 }
 
-.dropdown-item:hover, .dropdown-item:active {
+.dropdown-item:hover,
+.dropdown-item:active {
 	background: rgb(50, 43, 76);
 	color: rgba(255, 255, 255, .75);
 }

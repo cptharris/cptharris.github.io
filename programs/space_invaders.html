@@ -13,11 +13,13 @@
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
 
 	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="js/includes.js"></script>
 
 	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="css/style.css">
@@ -55,7 +57,8 @@
 			<div class="col mx-0 px-0">
 				<canvas id="progCanvas"></canvas>
 
-				<br><button class="btn btn-outline-primary" onclick="fullScreen(document.getElementById('progCanvas'));">Go Fullscreen (WIP)</button>
+				<br><button class="btn btn-outline-primary"
+					onclick="fullScreen(document.getElementById('progCanvas'));">Go Fullscreen (WIP)</button>
 				<dl>
 					<dt>V1.1</dt>
 					<dd>NEW FEATURE ADDED: TURRET ROTATION!</dd>
@@ -70,16 +73,20 @@
 	<include src="footermenu.html">Loading footer...</include>
 
 	<!-- Bootstrap JS -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js" integrity="sha384-IFMQ3jsa1T5/PsytPaLGxwQ6Z0c2fEjduoYZoD9BWJBFcdGpqX+tqdMYIDGS8yWY" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"
+	integrity="sha384-IFMQ3jsa1T5/PsytPaLGxwQ6Z0c2fEjduoYZoD9BWJBFcdGpqX+tqdMYIDGS8yWY"
+	crossorigin="anonymous"></script>
 <script src="js/program_library.js" charset="utf-8"></script>
 <script>
 	// document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight
 	var screenSizeAvail = Math.min(window.screen.availWidth, window.screen.availHeight) * 0.95;
 
-	var programCode = function(processingInstance) {
-		with(processingInstance) {
+	var programCode = function (processingInstance) {
+		with (processingInstance) {
 			size(screenSizeAvail, screenSizeAvail);
 			frameRate(30);
 			/************************************************************
@@ -99,18 +106,18 @@
 			var isShooting = false; //defines whether the player is shooting
 			var isMousePressed = false; //defines whether the mouse is pressed
 			var isKeyClicked = false; //defines whether the mouse is pressed
-			mousePressed = function() {
+			mousePressed = function () {
 				isShooting = true;
 				isMousePressed = true;
 			}; //isShooting is true when the player presses the mouse
-			keyPressed = function() {
+			keyPressed = function () {
 				isShooting = true;
 				isKeyClicked = true;
 			}; //isShooting is true when the player is pressing a key
 
 			/** BUTTON OBJECTS **/
 			var pageNum = 0; //sets the starting page number
-			var Button = function(text, x, y, w, h, pageNum) {
+			var Button = function (text, x, y, w, h, pageNum) {
 				this.text = text;
 				this.x = x * sFactor.cor;
 				this.y = y * sFactor.cor;
@@ -118,7 +125,7 @@
 				this.h = h * sFactor.obj;
 				this.pageNum = pageNum;
 			}; //button constructor function
-			Button.prototype.draw = function() {
+			Button.prototype.draw = function () {
 				fill(0, 0, 0); //button fill color
 				rect(this.x, this.y, this.w, this.h, 10); //button shape
 				fill(255, 255, 255); //button text fill color
@@ -126,12 +133,12 @@
 				textAlign(CENTER, CENTER); //button text align
 				text(this.text, this.w / 2 + this.x, this.h / 2 + this.y); //button text
 			}; //draws buttons
-			Button.prototype.click = function() {
+			Button.prototype.click = function () {
 				if (mouseX >= this.x && mouseY >= this.y && mouseX <= this.x + this.w && mouseY <= this.y + this.h && isMousePressed === true) {
 					pageNum = this.pageNum; //redirects the page number to the button setting
 				}
 			}; //defines what happens when a button is pressed
-			Button.prototype.function = function(funcName) {
+			Button.prototype.function = function (funcName) {
 				if (mouseX >= this.x && mouseY >= this.y && mouseX <= this.x + this.w && mouseY <= this.y + this.h && isMousePressed === true) {
 					funcName();
 				}
@@ -189,7 +196,7 @@
 			var backupLevel = []; //creates the array that backs up the player's level
 
 			/** DRAW FUNCTIONS **/
-			var drawInvader = function(x, y) {
+			var drawInvader = function (x, y) {
 				noFill();
 				stroke(0, 0, 0);
 				ellipse(x, y - 5 * sFactor.cor, 30 * sFactor.obj, 15 * sFactor.obj);
@@ -203,7 +210,7 @@
 				fill(255, 234, 0);
 				ellipse(x, y, 50 * sFactor.obj, 14 * sFactor.obj);
 			}; //invader draw function
-			var drawAlien = function(x, y) {
+			var drawAlien = function (x, y) {
 				stroke(0, 0, 0);
 				strokeWeight(2 * sFactor.txt);
 				line(x, y - 8 * sFactor.cor, x - 3 * sFactor.cor, y + 5 * sFactor.cor);
@@ -216,7 +223,7 @@
 				ellipse(x - 2 * sFactor.cor, y - 8 * sFactor.cor, 2 * sFactor.obj, 2 * sFactor.obj);
 				ellipse(x + 2 * sFactor.cor, y - 8 * sFactor.cor, 2 * sFactor.obj, 2 * sFactor.obj);
 			}; //alien draw function
-			var drawTurret = function() {
+			var drawTurret = function () {
 				angleMode = "degrees";
 				turret.t = atan((400 * sFactor.cor - mouseY) / abs(mouseX - 200 * sFactor.cor));
 				turret.y = 400 * sFactor.cor - (turret.r * sin(turret.t));
@@ -236,7 +243,7 @@
 				}
 				ellipse(200 * sFactor.cor, 400 * sFactor.cor, 20 * sFactor.obj, 20 * sFactor.obj);
 			}; //turret draw function
-			var drawBrackets = function() {
+			var drawBrackets = function () {
 				stroke(240, 17, 62);
 				strokeWeight(2.5 * sFactor.txt);
 				line(mouseX - 10 * sFactor.cor, mouseY, mouseX + 10 * sFactor.cor, mouseY);
@@ -244,7 +251,7 @@
 				cursor("none");
 			}; //mouse bracket draw function
 
-			var drawPlanet = function(x, y) {
+			var drawPlanet = function (x, y) {
 				fill(0, 102, 133);
 				ellipse(x * sFactor.cor, y * sFactor.cor, planetSize, planetSize); //planet
 				fill(22, 171, 22);
@@ -263,7 +270,7 @@
 				ellipse((x) * sFactor.cor, (y - 45) * sFactor.cor, planetSize / 2, planetSize / 10);
 				ellipse((x) * sFactor.cor, (y + 45) * sFactor.cor, planetSize / 2, planetSize / 10);
 			}; //planet draw function
-			var drawPlanetAura = function() {
+			var drawPlanetAura = function () {
 				noFill();
 				stroke(99, 178, 230);
 				strokeWeight(2 * sFactor.txt);
@@ -272,7 +279,7 @@
 			};
 
 			/** REPEATED FUNCTIONS **/
-			var restartCode = function() {
+			var restartCode = function () {
 				timer2 = {
 					startTime: 0,
 					remainingTime: 0
@@ -295,7 +302,7 @@
 				keyCode = 32;
 				pageNum = 0;
 			}; //restarts necessary variables
-			var InvaderCode = function() {
+			var InvaderCode = function () {
 				for (var i = 0; i < Invader.length; i += 2) {
 					drawAlien(Invader[i], Invader[i + 1]);
 					drawInvader(Invader[i], Invader[i + 1]); //draws invaders
@@ -320,7 +327,7 @@
 					Invader.push((round(random(20, 380))) * sFactor.cor, (round(random(0, -1000))) * sFactor.cor);
 				} //randomly spawns invaders
 			}; //calculates invaders
-			var AlienCode = function() {
+			var AlienCode = function () {
 				for (var a = 0; a < Alien.length; a += 2) {
 					drawAlien(Alien[a], Alien[a + 1]);
 					Alien[a + 1] += alienSpeed + stats.level * 0.3;
@@ -331,7 +338,7 @@
 					}
 				}
 			}; //calculates aliens
-			var PlanetCode = function() {
+			var PlanetCode = function () {
 				//planet.x = 200; planet.y = 80;
 				planet.x += 0.29 * sFactor.spd;
 				planet.y += 0.3 * sFactor.spd;
@@ -343,7 +350,7 @@
 				drawPlanet(planet.x, planet.y);
 				drawPlanetAura();
 			}; //calulates planet rotation
-			var StatsCode = function() {
+			var StatsCode = function () {
 				stats.level = floor(stats.aliensKilled / 25); //calculate level
 
 				fill(0, 0, 0);
@@ -362,7 +369,7 @@
 					pageNum = 4;
 				} //game over
 			}; //calculates stats
-			var StarCode = function() {
+			var StarCode = function () {
 				for (var s = 0; s < shootingStar.length; s += 2) {
 					fill(255, 255, 255);
 					textSize(10 * sFactor.txt);
@@ -381,7 +388,7 @@
 					shootingStar.push((round(random(0, -400)) * sFactor.cor), (round(random(-100, 350))) * sFactor.cor);
 				}
 			}; //calculates stars
-			var ModeCode = function() {
+			var ModeCode = function () {
 				if (keyCode === 32) {
 					currentKeyCode = 32;
 					cursor("none");
@@ -423,7 +430,7 @@
 			textAlign(CENTER, CENTER); //align the text
 			cursor(ARROW); //set the cursor display
 
-			draw = function() {
+			draw = function () {
 				currentTime = millis() / 1000; //update the time since start
 				if (pageNum === 0) {
 					background(99, 178, 230); //set the background

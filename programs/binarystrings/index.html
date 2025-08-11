@@ -13,11 +13,13 @@
 	<link rel='alternate icon' href='img/favicon.ico' type='image/x-icon'>
 
 	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="js/includes.js"></script>
 
 	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="css/style.css">
@@ -28,14 +30,14 @@
 
 	function string2ascii(input) {
 		// ab -> "97 98"
-		return input.split("").map(function(s) {
+		return input.split("").map(function (s) {
 			return s.charCodeAt(0);
 		}).join(" ");
 	}
 
 	function ascii2string(input) {
 		// "97 98" -> "ab"
-		return input.split(" ").map(function(s) {
+		return input.split(" ").map(function (s) {
 			return String.fromCharCode(s);
 		}).join("");
 	}
@@ -52,7 +54,7 @@
 
 	function string2binary(input) {
 		// "ab" -> "97 98" -> "0110000101100010"
-		return string2ascii(input).split(" ").map(function(s) {
+		return string2ascii(input).split(" ").map(function (s) {
 			return dec2bin(s);
 		}).join("");
 	}
@@ -111,12 +113,14 @@
 				<!-- Alpha to Binary -->
 				<div id="a2b2a">
 					<div class="mb-3 text-center">
-						<label class="display-4">Alpha to Binary<a class="hash" href="programs/binarystrings#a2b2a">#</a></label>
+						<label class="display-4">Alpha to Binary<a class="hash"
+								href="programs/binarystrings#a2b2a">#</a></label>
 					</div>
 					<hr>
 
 					<div class="text-center">
-						<button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="button.btn-primary">
+						<button class="btn btn-dark" type="button" data-bs-toggle="collapse"
+							data-bs-target="button.btn-primary">
 							Show/Hide Buttons
 						</button>
 					</div>
@@ -124,30 +128,36 @@
 					<!-- Alpha Text -->
 					<div class="mb-3">
 						<label class="form-label" for="alpha-text">Alpha</label>
-						<textarea class="form-control" type="text" name="alpha-text" id="alpha-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
+						<textarea class="form-control" type="text" name="alpha-text" id="alpha-text"
+							onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
 							onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the alpha string.</div>
-						<button class="btn btn-primary collapse multi-collapse" onclick="submission('alpha');" type="button">Convert</button>
+						<button class="btn btn-primary collapse multi-collapse" onclick="submission('alpha');"
+							type="button">Convert</button>
 					</div>
 					<hr>
 
 					<!-- Binary Text -->
 					<div class="mb-3">
 						<label class="form-label" for="binary-text">Binary</label>
-						<textarea class="form-control" type="text" name="binary-text" id="binary-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
+						<textarea class="form-control" type="text" name="binary-text" id="binary-text"
+							onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
 							onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the binary string.</div>
-						<button class="btn btn-primary collapse multi-collapse" onclick="submission('binary');" type="button">Convert</button>
+						<button class="btn btn-primary collapse multi-collapse" onclick="submission('binary');"
+							type="button">Convert</button>
 					</div>
 					<hr>
 
 					<!-- ASCII Text -->
 					<div class="mb-3" id="ascii-section">
 						<label class="form-label" for="ascii-text">ASCII</label>
-						<textarea class="form-control" type="text" name="ascii-text" id="ascii-text" onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
+						<textarea class="form-control" type="text" name="ascii-text" id="ascii-text"
+							onkeydown="prevKeyCode = (event.keyCode == 13) ? prevKeyCode : event.keyCode;"
 							onkeyup="if (event.keyCode == 13 && prevKeyCode == 17) {submission();}"></textarea>
 						<div class="form-text">Enter the ASCII code string.</div>
-						<button class="btn btn-primary collapse multi-collapse" onclick="submission('ascii');" type="button">Convert</button>
+						<button class="btn btn-primary collapse multi-collapse" onclick="submission('ascii');"
+							type="button">Convert</button>
 					</div>
 				</div>
 				<div class="my-5"></div>
@@ -160,7 +170,9 @@
 	<include src="footermenu.html">Loading footer...</include>
 
 	<!-- Bootstrap JS -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>
