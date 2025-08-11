@@ -37,6 +37,7 @@ jobs:
           # required for generate-sitemap to get accurate change times
           fetch-depth:         0
       - name:                  Generate Sitemap
+        id:                    sitemap
         uses:                  cicirello/generate-sitemap@v1
         with:
           base-url-path:       https://cptharris.github.io
