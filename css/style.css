@@ -1,6 +1,12 @@
+:root {
+	--main-background: rgb(71, 57, 116);
+	--hero-background: rgb(28, 24, 42);
+	--periphery-background: rgb(50, 43, 76);
+}
+
 html,
 body {
-	background: rgb(71, 57, 116);
+	background: var(--main-background);
 	color: white;
 	font-family: "Times New Roman", Times, serif;
 	font-size: 120%;
@@ -19,6 +25,10 @@ html::-webkit-scrollbar {
 	display: none;
 }
 
+.hero {
+	background: var(--hero-background);
+}
+
 /* Links */
 a {
 	color: rgb(236, 181, 53);
@@ -26,7 +36,6 @@ a {
 }
 
 a:visited {
-	/* color: rgb(176, 128, 16); */
 	color: rgb(226, 161, 43);
 }
 
@@ -45,23 +54,35 @@ a.hash {
 
 /* Menus */
 .dropdown-menu {
-	background: rgb(50, 43, 76);
+	background: var(--periphery-background);
+}
+
+.navbar-brand,
+.navbar-brand:visited,
+.navbar-brand:hover,
+.navbar-brand:active {
+	background: var(--periphery-background);
+	color: white;
 }
 
 .dropdown-item,
-.dropdown-item:visited {
-	background: rgb(50, 43, 76);
+.dropdown-item:visited,
+.nav-link,
+.nav-link:visited {
+	background: var(--periphery-background);
 	color: rgba(255, 255, 255, .55);
 }
 
 .dropdown-item:hover,
-.dropdown-item:active {
-	background: rgb(50, 43, 76);
+.dropdown-item:active,
+.nav-link:hover,
+.nav-link:active {
+	background: var(--periphery-background);
 	color: rgba(255, 255, 255, .75);
 }
 
 #headermenuNav {
-	background: rgb(50, 43, 76);
+	background: var(--periphery-background);
 }
 
 footer {
@@ -69,7 +90,7 @@ footer {
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	background: rgb(50, 43, 76);
+	background: var(--periphery-background);
 	color: #6c757d;
 	text-align: center;
 	font-size: 50%;
