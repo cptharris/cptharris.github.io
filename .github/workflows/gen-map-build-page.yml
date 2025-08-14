@@ -43,7 +43,7 @@ jobs:
           base-url-path:       https://cptharris.github.io
           include-pdf:         false
           drop-html-extension: true
-          path-to-root:        /public/
+          path-to-root:        ./public/
       - name:                  Output Stats from Sitemap Generation
         run:                   |
           echo "sitemap-path = ${{ steps.sitemap.outputs.sitemap-path }}"
@@ -54,7 +54,7 @@ jobs:
       - name:                  Upload Artifact
         uses:                  actions/upload-pages-artifact@v3
         with:
-          path:                '/public/'
+          path:                './public/'
       - name:                  Deploy to GitHub Pages
         id:                    deployment
         uses:                  actions/deploy-pages@v4
