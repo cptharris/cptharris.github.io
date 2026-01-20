@@ -4,10 +4,14 @@
   "description": "Captain Harris' static site toolkit",
   "scripts": {
     "start": "node server.js",
+    "build:html": "node build.js",
     "build:images": "node portfolio-gen.js",
     "build": "npm run build:images"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "chokidar": "^3.6.0",
+    "express": "^4.19.2",
+    "js-beautify": "^1.15.4",
+    "nunjucks": "^3.2.4"
   }
 }

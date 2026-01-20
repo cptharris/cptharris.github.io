@@ -1,0 +1,14 @@
+{% extends "template/_herolayout.njk" %}
+{% set title = "404" %}
+{% set hideBodyContent = true %}
+{% block titleContent %}
+<div class="text-center">
+	<h2>That's a problem...</h2>
+	<h3>It looks like the page you entered does not exist. Maybe we need to make a new
+		page.<br>Whatever
+		happened, you should verify the URL you entered or <a href="/">just head back home.</a></h3>
+	<p>You can also <a
+			href="https://github.com/cptharris/cptharris.github.io/issues/new/choose">create
+			an issue on GitHub</a> if you think a link is broken.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "template/_herolayout.njk" %}
+{% set title = "Captain Harris" %}
+{% block bodyContent %}
+<h2 class="display-6 text-center" id="blog">Blog<a class="hash" href="#blog">#</a></h2>
+<div id="latest-post">
+	Loading blogs from source...
+</div>
+<script>
+	$(function () {
+		$("#latest-post").load("blog/store.html div:first p:first");
+	});
+</script>
+
+<br><br>
+<p>View my previous blogs <a href="/blog/">here</a>.</p>
+{% endblock %}

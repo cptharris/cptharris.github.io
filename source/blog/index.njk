@@ -1,0 +1,12 @@
+{% extends "template/_herolayout.njk" %}
+{% set title = "Blog" %}
+{% block bodyContent %}
+<div id="letters">
+	Loading blogs from source...
+</div>
+<script>
+	$(function () {
+		$("#letters").load("blog/store.html");
+	});
+</script>
+{% endblock %}

@@ -10,6 +10,7 @@
 HOST_ENTRY='127.0.0.1 cptharris.github.io'
 HOSTS_MODIFIED=false
 SERVER_PID=""
+BUILDER_PID=""
 
 # 🧹 Cleanup function:
 # - Kills the background server if running.
@@ -18,8 +19,13 @@ SERVER_PID=""
 # This function is triggered on script exit or interruption (INT, TERM).
 cleanup() {
   echo "🧹 Cleaning up..."
+  if [ -n "${BUILDER_PID:-}" ] && kill -0 "$BUILDER_PID" 2>/dev/null; then
+    echo "Killing builder (PID $BUILDER_PID)"
+    kill "$BUILDER_PID" 2>/dev/null || true
+    wait "$BUILDER_PID" 2>/dev/null || true
+  fi
   if [ -n "${SERVER_PID:-}" ] && kill -0 "$SERVER_PID" 2>/dev/null; then
-    echo "Killing python (PID $SERVER_PID)"
+    echo "Killing server (PID $SERVER_PID)"
     kill "$SERVER_PID" 2>/dev/null || true
     wait "$SERVER_PID" 2>/dev/null || true
   fi
@@ -56,6 +62,12 @@ fi
 # Uncomment if you want to ensure Caddy's CA is trusted on your system.
 # echo "🔐 Ensuring Caddy trust (may prompt for sudo)..."
 # sudo caddy trust || echo "caddy trust failed or already trusted — continuing."
+
+# 🔨 Build .html public files in background:
+# Runs nunjucks builder
+node build.js &
+BUILDER_PID=$!
+echo "🔨 NJKs builder started (PID $BUILDER_PID)"
 
 # 🚀 Start HTTP server in background:
 # Runs a custom server bound to localhost:8000.

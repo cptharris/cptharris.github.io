@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+{% include "template/_head.njk" %}
+
+<body class="h-100">
+	<div class="container-fluid h-100">
+		<div class="row mb-auto">
+			<include src="headermenu.html">Loading menus...</include>
+		</div>
+
+		<div class="row align-items-center h-100 mb-5 hero">
+			<div class="col d-flex flex-column justify-content-center">
+				<main>
+					<h1 class="display-1 text-center">{{ title }}</h1>
+					{% block titleContent %}{% endblock %}
+				</main>
+			</div>
+		</div>
+		{% if not hideBodyContent %}
+
+		<div class="row">
+			<div class="col">
+				<main class="px-md-5 px-sm-4 px-xs-3">
+					{% block bodyContent %}{% endblock %}</main>
+			</div>
+		</div>
+		<div class="blankspace"></div>
+		{% endif %}
+	</div>
+
+	<include src="footermenu.html">Loading footer...</include>
+</body>
+
+</html>
