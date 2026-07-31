@@ -11,7 +11,7 @@
   "dependencies": {
     "chokidar": "^3.6.0",
     "express": "^4.22.2",
-    "js-beautify": "^1.15.4",
+    "js-beautify": "^2.0.3",
     "nunjucks": "^3.2.4"
   }
 }
